@@ -20,7 +20,8 @@ export class LoginComponent {
 
   login() {
     console.log(this.userLogin);
-    this.authService.login(this.userLogin);
-    return
+    this.authService.login(this.userLogin).subscribe((data) => {
+      console.log(data);
+    })
   }
 }
