@@ -13,6 +13,7 @@ import {AuthService} from '../../auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  title = 'Login';
   userLogin: Auth = {username: '', password: ''};
 
   constructor(private authService: AuthService) {

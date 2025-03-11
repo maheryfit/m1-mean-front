@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  API_URL: "http://locahost:5000/",
+  API_URL: "http://localhost:5000/",
   WEBSOCKET_URL: "ws://localhost:3000",
 };
