@@ -1,16 +1,13 @@
-import {CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
+import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
 import {AuthService} from '../core/auth/auth.service';
 import {lastValueFrom} from 'rxjs';
-import {HttpErrorResponse} from '@angular/common/http';
 
 export const isAuthConnected: CanActivateFn =  async (route, state) => {
   const router = inject(Router)
   const authService: AuthService = inject(AuthService);
   try {
-    const value = await lastValueFrom(authService.checkAuthConnected())
-    console.log(value)
-    return value
+    return await lastValueFrom(authService.checkAuthConnected())
   } catch (e) {
     console.error(e);
     await router.navigateByUrl("/login");
@@ -22,9 +19,7 @@ export const isAuthMecanicien: CanActivateFn =  async (route, state) => {
   const router = inject(Router)
   const authService: AuthService = inject(AuthService);
   try {
-    const value = await lastValueFrom(authService.checkAuthMecanicien())
-    console.log(value)
-    return value
+    return await lastValueFrom(authService.checkAuthMecanicien())
   } catch (e: any) {
     console.error(e);
     await router.navigateByUrl("/login");
@@ -36,9 +31,7 @@ export const isAuthManager: CanActivateFn =  async (route, state) => {
   const router = inject(Router)
   const authService: AuthService = inject(AuthService);
   try {
-    const value = await lastValueFrom(authService.checkAuthManager())
-    console.log(value)
-    return value
+    return await lastValueFrom(authService.checkAuthManager())
   } catch (e: any) {
     console.error(e);
     await router.navigateByUrl("/login");
