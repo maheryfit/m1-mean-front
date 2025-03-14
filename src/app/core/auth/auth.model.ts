@@ -5,4 +5,10 @@ export interface Auth {
   mot_de_passe: string
 }
 
+export interface User {
+  id: string;
+  nom_utilisateur: string,
+  profil: string
+}
+
 export interface AuthObjectModel extends ObjectModel, Auth {}

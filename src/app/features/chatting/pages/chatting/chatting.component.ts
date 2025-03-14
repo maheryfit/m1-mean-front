@@ -36,20 +36,12 @@ export class ChattingComponent {
 
   messageTyping(): void {
     console.log(`${this.username} typing...`)
-    this.chattingService.emit('typing', this.username)
-    this.chattingService.emit('typing', {
-      username: this.username,
-      target: this.username === "Mahery" ? "Fitahiana": this.username,
-    })
+    this.chattingService.emitTyping()
   }
 
   sendMessage() {
     console.log(`${this.username} send message ${this.message}`)
-    this.chattingService.emit('chat', {
-      message: this.message,
-      username: this.username,
-      target: this.username === "Mahery" ? "Fitahiana": this.username,
-    })
+    this.chattingService.emitChat(this.message)
     this.message = ''
   }
 

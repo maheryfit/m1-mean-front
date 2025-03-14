@@ -7,7 +7,7 @@ import {Socket} from 'socket.io-client';
   providedIn: 'root'
 })
 export class ChattingService {
-  private socket: Socket;
+  private readonly socket: Socket;
 
   constructor() {
     console.log(environment.API_URL)
@@ -26,7 +26,24 @@ export class ChattingService {
     })
   }
 
-  emit(eventName: string, data: any) {
-    this.socket.emit(eventName, data);
+  emitChat(message: string) {
+    const id = localStorage.getItem("id");
+    const nom_utilisateur = localStorage.getItem("nom_utilisateur");
+    this.socket.emit("chat", {
+      message: message,
+      id: id,
+      nom_utilisateur: nom_utilisateur,
+    });
+  }
+
+  emitTyping() {
+    const id = localStorage.getItem("id");
+    const nom_utilisateur = localStorage.getItem("nom_utilisateur");
+    setInterval(()=> {
+      this.socket.emit("typing", {
+        id: id,
+        nom_utilisateur: nom_utilisateur
+      });
+    }, 1000)
   }
 }
