@@ -6,6 +6,6 @@ export const chattingRoutes: Routes = [
   {
     path: '',
     component: ChattingComponent,
-    canActivate: [isAuthManager],
+    canActivate: [isAuthConnected],
   }
 ]

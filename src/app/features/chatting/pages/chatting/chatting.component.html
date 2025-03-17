@@ -13,9 +13,10 @@
         <p>No message</p>
       </div>
     }
+  <p>{{feedback}}</p>
   </div>
   <div class="chat-footer">
-    <input placeholder="username" name="username" [(ngModel)]="username" type="text">
+    <input placeholder="username" name="username" [(ngModel)]="destinateur_id" type="text">
     <input placeholder="Type your message" (ngModelChange)="messageTyping()" name="message" [(ngModel)]="message" type="text">
     <button type="submit">Send</button>
   </div>

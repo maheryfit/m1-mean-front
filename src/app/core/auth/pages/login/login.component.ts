@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import {Auth} from '../../auth.model';
+import {Auth, User} from '../../auth.model';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../auth.service';
+import {Router} from '@angular/router';
+import {ChattingService} from '../../../../features/chatting/chatting.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +18,19 @@ export class LoginComponent {
   title = 'Login';
   userLogin: Auth = {nom_utilisateur: '', mot_de_passe: ''};
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router, private chattingService: ChattingService) {
   }
 
   login() {
-    console.log(this.userLogin);
-    this.authService.login(this.userLogin).subscribe((data) => {
-      console.log(data);
+    this.authService.login(this.userLogin).subscribe( {
+      next: async (data: any) => {
+        this.authService.storeUserToLocalStorage(data as User)
+        this.chattingService.emitOnline()
+        await this.router.navigate(['/chatting']);
+      },
+      error: (e: any) => {
+        console.error(e);
+      }
     })
   }
 }
