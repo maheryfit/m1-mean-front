@@ -13,7 +13,6 @@ export class ChattingService {
     console.log(environment.API_URL)
     this.socket = io(environment.WEBSOCKET_URL, {
         reconnectionDelayMax: 10000,
-
     });
     console.log(this.socket)
   }
@@ -26,6 +25,28 @@ export class ChattingService {
     })
   }
 
+  emitOnline() {
+    const id = localStorage.getItem("id");
+    const nom_utilisateur = localStorage.getItem("nom_utilisateur");
+    setInterval(()=> {
+      this.socket.emit("online", {
+        id: id,
+        nom_utilisateur: nom_utilisateur
+      });
+    }, 5000)
+  }
+
+  emitOffline() {
+    const id = localStorage.getItem("id");
+    const nom_utilisateur = localStorage.getItem("nom_utilisateur");
+    setInterval(()=> {
+      this.socket.emit("offline", {
+        id: id,
+        nom_utilisateur: nom_utilisateur
+      });
+    }, 5000)
+  }
+
   emitChat(message: string) {
     const id = localStorage.getItem("id");
     const nom_utilisateur = localStorage.getItem("nom_utilisateur");
@@ -36,8 +57,8 @@ export class ChattingService {
     });
   }
 
-  emitTyping() {
-    const id = localStorage.getItem("id");
+  emitTyping(destinateur_id: string) {
+    const id = destinateur_id;
     const nom_utilisateur = localStorage.getItem("nom_utilisateur");
     setInterval(()=> {
       this.socket.emit("typing", {

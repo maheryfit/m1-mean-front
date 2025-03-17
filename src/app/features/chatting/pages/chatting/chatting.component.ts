@@ -15,7 +15,8 @@ export class ChattingComponent {
   title = 'Chatting';
   output: Array<Chatting> = []
   message: string = ""
-  username: string = ""
+  destinateur_id: string = ""
+  destinataire_id: string = ""
   feedback: string = ""
 
   constructor(private chattingService: ChattingService) {
@@ -31,16 +32,16 @@ export class ChattingComponent {
   }
 
   private updateFeedBack(data: any) {
-    this.feedback = `${data} is typing a message`
+    console.log(data)
+    this.feedback = `${data.id} is typing a message`
   }
 
   messageTyping(): void {
-    console.log(`${this.username} typing...`)
-    this.chattingService.emitTyping()
+    console.log(`${this.destinateur_id} typing...`)
+    this.chattingService.emitTyping(this.destinateur_id)
   }
 
   sendMessage() {
-    console.log(`${this.username} send message ${this.message}`)
     this.chattingService.emitChat(this.message)
     this.message = ''
   }

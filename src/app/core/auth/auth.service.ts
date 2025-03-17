@@ -3,19 +3,21 @@ import {HttpClient} from '@angular/common/http';
 import {Auth, User} from './auth.model';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+import {ChattingService} from '../../features/chatting/chatting.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private chattingService: ChattingService) { }
 
   login(user: Auth): Observable<Auth> {
     return this.http.post<Auth>(`${environment.API_URL}/user/login`, user);
   }
 
   logout(): Observable<any> {
+    this.chattingService.emitOffline();
     localStorage.removeItem("id")
     localStorage.removeItem("nom_utilisateur")
     localStorage.removeItem("profil")
