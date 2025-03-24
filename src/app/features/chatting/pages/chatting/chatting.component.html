@@ -1,0 +1,23 @@
+<!-- From Uiverse.io by ahmed150up -->
+<form (ngSubmit)="sendMessage()" class="chat-card">
+  <div class="chat-header">
+   <div class="h2">ChatGPT</div>
+  </div>
+  <div class="chat-body">
+    @for (chat of output; track chat) {
+      <div class="message {{chat.from}}">
+        <p><strong>{{ chat.username }}: </strong> {{ chat.message }}</p>
+      </div>
+    } @empty {
+      <div class="message">
+        <p>No message</p>
+      </div>
+    }
+  <p>{{feedback}}</p>
+  </div>
+  <div class="chat-footer">
+    <input placeholder="username" name="username" [(ngModel)]="destinateur_id" type="text">
+    <input placeholder="Type your message" (ngModelChange)="messageTyping()" name="message" [(ngModel)]="message" type="text">
+    <button type="submit">Send</button>
+  </div>
+</form>
