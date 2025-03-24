@@ -1,23 +1,48 @@
-<!-- From Uiverse.io by ahmed150up -->
-<form (ngSubmit)="sendMessage()" class="chat-card">
-  <div class="chat-header">
-   <div class="h2">ChatGPT</div>
-  </div>
-  <div class="chat-body">
-    @for (chat of output; track chat) {
-      <div class="message {{chat.from}}">
-        <p><strong>{{ chat.username }}: </strong> {{ chat.message }}</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>TpMeanFront</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <!-- From Uiverse.io by ahmed150up -->
+    <form (ngSubmit)="sendMessage()" class="chat-card">
+      <div class="chat-header">
+        <div class="h2">ChatGPT</div>
       </div>
-    } @empty {
-      <div class="message">
-        <p>No message</p>
+      <div class="chat-body">
+        @for (chat of output; track chat) {
+        <div class="message {{ chat.from }}">
+          <p>
+            <strong>{{ chat.username }}: </strong> {{ chat.message }}
+          </p>
+        </div>
+        } @empty {
+        <div class="message">
+          <p>No message</p>
+        </div>
+        }
+        <p>{{ feedback }}</p>
       </div>
-    }
-  <p>{{feedback}}</p>
-  </div>
-  <div class="chat-footer">
-    <input placeholder="username" name="username" [(ngModel)]="destinateur_id" type="text">
-    <input placeholder="Type your message" (ngModelChange)="messageTyping()" name="message" [(ngModel)]="message" type="text">
-    <button type="submit">Send</button>
-  </div>
-</form>
+      <div class="chat-footer">
+        <input
+          placeholder="username"
+          name="username"
+          [(ngModel)]="destinateur_id"
+          type="text"
+        />
+        <input
+          placeholder="Type your message"
+          (ngModelChange)="messageTyping()"
+          name="message"
+          [(ngModel)]="message"
+          type="text"
+        />
+        <button type="submit">Send</button>
+      </div>
+    </form>
+  </body>
+</html>

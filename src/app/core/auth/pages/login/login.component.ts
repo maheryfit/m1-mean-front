@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import {Auth, User} from '../../auth.model';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../auth.service';
 import {Router} from '@angular/router';
 import {ChattingService} from '../../../../features/chatting/chatting.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,11 @@ import {ChattingService} from '../../../../features/chatting/chatting.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  title = 'Login';
-  userLogin: Auth = {nom_utilisateur: '', mot_de_passe: ''};
-
   constructor(private authService: AuthService, private router: Router, private chattingService: ChattingService) {
   }
+  title = 'Login';
+  userLogin: Auth = {nom_utilisateur: '', mot_de_passe: ''};
+  footer= environment.FOOTER;
 
   login() {
     this.authService.login(this.userLogin).subscribe( {
