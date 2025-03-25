@@ -27,7 +27,8 @@ export class LoginComponent {
       next: async (data: any) => {
         this.authService.storeUserToLocalStorage(data as User)
         this.chattingService.emitOnline()
-        await this.router.navigate(['/chatting']);
+        // await this.router.navigate(['/chatting']);
+        await this.authService.filtreRedirection(data as User);
       },
       error: (e: any) => {
         console.error(e);

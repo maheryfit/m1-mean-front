@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import {logout} from './features/connect.guard';
 import {AppComponent} from './app.component';
+import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,10 @@ export const routes: Routes = [
     path: "",
     redirectTo:"login",
     pathMatch: "full",
+  },
+  {
+    path: "client",
+    component: DashboardClientComponent,
+    loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
   }
 ];
