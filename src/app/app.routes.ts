@@ -4,6 +4,7 @@ import {AppComponent} from './app.component';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
 import { SignupComponent } from './core/auth/pages/signup/signup.component';
+import { VoituresComponent } from './dashboard-client/voitures/voitures.component';
 
 export const routes: Routes = [
   {
@@ -25,17 +26,23 @@ export const routes: Routes = [
     component: SignupComponent
   },
   {
-    path: 'chatting',
-    loadChildren: () => import('./features/chatting/chatting.routes').then(r => r.chattingRoutes)
-  },
-  {
     path: 'logout',
-    component: AppComponent,
-    canActivate: [logout]
+    component: LoginComponent,
+    // canActivate: [logout]
   },
   {
     path: "client",
     component: DashboardClientComponent,
-    loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
-  }
+    children:[
+      {
+        path:"voitures",
+        component: VoituresComponent
+      }
+    ]
+    // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
+  },
+  {
+    path: 'chatting',
+    loadChildren: () => import('./features/chatting/chatting.routes').then(r => r.chattingRoutes)
+  },
 ];
