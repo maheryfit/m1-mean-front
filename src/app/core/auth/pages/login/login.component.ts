@@ -5,12 +5,14 @@ import {AuthService} from '../../auth.service';
 import {Router} from '@angular/router';
 import {ChattingService} from '../../../../features/chatting/chatting.service';
 import { environment } from '../../../../../environments/environment.development';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgOptimizedImage
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -21,6 +23,7 @@ export class LoginComponent {
   title = 'Login';
   userLogin: Auth = {nom_utilisateur: '', mot_de_passe: ''};
   footer= environment.FOOTER;
+  brand=environment.BRAND
 
   login() {
     this.authService.login(this.userLogin).subscribe( {
