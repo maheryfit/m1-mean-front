@@ -1,7 +1,15 @@
-<div class="row">
-  <app-voiture class="col-3"></app-voiture>
-  <app-voiture class="col-3"></app-voiture>
-  <app-voiture class="col-3"></app-voiture>
-  <app-voiture class="col-3"></app-voiture>
-  <app-voiture class="col-3"></app-voiture>
+<div class="row p-4 gx-4 gy-4">
+  @for(voiture of voitures;track voiture.id){
+    <app-voiture class="col-3"
+      [id]="voiture.id"
+      [description]="voiture.description"
+      [immatriculation]="voiture.immatriculation"
+      [modele]="voiture.modele"
+      [type]="voiture.type"
+      [moteur]="voiture.moteur"
+      [transmission]="voiture.transmission"
+      [traction]="voiture.traction"
+    >
+    </app-voiture>
+  }
 </div>

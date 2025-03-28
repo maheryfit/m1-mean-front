@@ -1,7 +1,55 @@
-<div class="card mt-3">
-  <img src="/favicon.ico" class="card-img-top" alt="image">
-  <div class="card-body vstack">
-    <h3 class="card-title">{{ 'VoitureVoitureVoiture' | textOverflow }}</h3>
-    <a href="#" class="btn btn-outline-success mt-3 ms-auto">Détails</a>
+<div class="card">
+  <img src="/favicon.ico" class="card-img-top border border-secondary" alt="image">
+  <div class="card-body border border-secondary vstack">
+    <h3 class="card-title">{{ description | textOverflow }}</h3>
+    <a href="#" class="btn btn-success mt-3 ms-auto" data-bs-toggle="modal" [attr.data-bs-target]="'#voiture'+id">Détails</a>
+  </div>
+  <div class="modal fade" [id]="'voiture'+id" tabindex="-1" [attr.aria-labelledby]="'voitureLabel'+id" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" [id]="'voitureLabel'+id">{{ description | textOverflow }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>Description</th>
+                <td>{{ description }}</td>
+              </tr>
+              <tr>
+                <th>Immatriculation</th>
+                <td>{{ immatriculation }}</td>
+              </tr>
+              <tr>
+                <th>Modèle</th>
+                <td>{{ modele }}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>{{ type }}</td>
+              </tr>
+              <tr>
+                <th>Moteur</th>
+                <td>{{ moteur }}</td>
+              </tr>
+              <tr>
+                <th>Transmission</th>
+                <td>{{ transmission }}</td>
+              </tr>
+              <tr>
+                <th>Traction</th>
+                <td>{{ traction }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning"><i class="bi-pencil me-2"></i>Modifier</button>
+          <button type="button" class="btn btn-danger"><i class="bi-trash me-2"></i>Retirer</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

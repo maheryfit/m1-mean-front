@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TextOverflowPipe } from '../../../utils/pipes/text-overflow.pipe';
 
 @Component({
@@ -8,5 +8,12 @@ import { TextOverflowPipe } from '../../../utils/pipes/text-overflow.pipe';
   styleUrl: './voiture.component.css'
 })
 export class VoitureComponent {
-
+  @Input() id='';
+  @Input() description='';
+  @Input() immatriculation='';
+  @Input() modele='';
+  @Input() type='';
+  @Input() moteur='';
+  @Input() transmission='';
+  @Input() traction='';
 }
