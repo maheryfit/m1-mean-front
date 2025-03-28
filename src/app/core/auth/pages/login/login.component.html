@@ -65,17 +65,19 @@
     <div class="col-4 border border-secondary p-5 bg-dark text-light">
       <p class="d-flex"><img ngSrc="/favicon.ico" alt="logo" width="64" height="64"><span class="ps-3 fs-1 fw-bold">{{brand}}</span></p>
       <hr>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="Nom d'utilisateur">
-        <label for="floatingInput">Nom d'utilisateur</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
-        <label for="floatingPassword">Mot de passe</label>
+      <div class="mt-5">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Nom d'utilisateur">
+          <label for="floatingInput"><i class="bi-person-circle me-2"></i>Nom d'utilisateur</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
+          <label for="floatingPassword"><i class="bi-lock me-2"></i>Mot de passe</label>
+        </div>
       </div>
       <div class="vstack mt-5">
-        <button class="btn btn-primary p-3 mx-auto">Se connecter</button>
-        <a href="#" class="link-primary mx-auto mt-3">S'inscrire</a>
+        <button class="btn btn-primary p-3 mx-auto"><i class="bi-box-arrow-right me-2"></i>Se connecter</button>
+        <a href="/sign-up" class="link-primary mx-auto mt-3">S'inscrire</a>
       </div>
     </div>
   </div>
