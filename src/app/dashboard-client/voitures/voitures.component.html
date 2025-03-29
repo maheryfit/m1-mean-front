@@ -1,15 +1,47 @@
-<div class="row p-4 gx-4 gy-4">
-  @for(voiture of voitures;track voiture.id){
-    <app-voiture class="col-3"
-      [id]="voiture.id"
-      [description]="voiture.description"
-      [immatriculation]="voiture.immatriculation"
-      [modele]="voiture.modele"
-      [type]="voiture.type"
-      [moteur]="voiture.moteur"
-      [transmission]="voiture.transmission"
-      [traction]="voiture.traction"
-    >
-    </app-voiture>
-  }
+<div class="container-fluid">
+  <div class="row px-5 pt-3 justify-content-between">
+    <div class="col-5">
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Recherche</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="inputEmail3">
+        </div>
+        <button class="btn btn-secondary col-1"><i class="bi-search"></i></button>
+      </div>
+    </div>
+    <div class="col-2">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item">
+            <a class="page-link link-light" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link link-light" href="#">1</a></li>
+          <li class="page-item"><a class="page-link link-light" href="#">2</a></li>
+          <li class="page-item"><a class="page-link link-light" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link link-light" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row px-5 gx-4 gy-4">
+    @for(voiture of voitures;track voiture.id){
+      <app-voiture class="col-3"
+        [id]="voiture.id"
+        [description]="voiture.description"
+        [immatriculation]="voiture.immatriculation"
+        [modele]="voiture.modele"
+        [type]="voiture.type"
+        [moteur]="voiture.moteur"
+        [transmission]="voiture.transmission"
+        [traction]="voiture.traction"
+      >
+      </app-voiture>
+    }
+  </div>
 </div>
