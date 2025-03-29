@@ -5,6 +5,7 @@ import { DashboardClientComponent } from './dashboard-client/dashboard-client.co
 import { LoginComponent } from './core/auth/pages/login/login.component';
 import { SignupComponent } from './core/auth/pages/signup/signup.component';
 import { VoituresComponent } from './dashboard-client/voitures/voitures.component';
+import { ProfilClientComponent } from './dashboard-client/profil-client/profil-client.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
       {
         path:"voitures",
         component: VoituresComponent
+      },
+      {
+        path:"profil",
+        component: ProfilClientComponent
       }
     ]
     // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
