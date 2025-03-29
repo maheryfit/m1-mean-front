@@ -29,9 +29,44 @@
       </table>
       <p class="fs-2 fw-bold mb-3 mt-5">Paramètres avancés</p>
       <ul class="vstack gap-3">
-        <li><a href="#"><i class="bi-lock me-2"></i>Changer le mot de passe</a></li>
+        <li><a href="#" data-bs-toggle="modal" data-bs-target="#motdepasseModal"><i class="bi-lock me-2"></i>Changer le mot de passe</a></li>
         <li><a href="#"><i class="bi-cash me-2"></i>Changer d'abonnement</a></li>
       </ul>
+      <div class="modal" id="motdepasseModal" tabindex="-1" aria-labelledby="motdepasseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="motdepasseModalLabel"><i class="bi-lock me-2"></i>Changer le mot de passe</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body vstack gap-3">
+              <div class="row align-items-center">
+                <label for="motdepasseActuel" class="col-5 col-form-label">Mot de passe actuel</label>
+                <div class="col-7">
+                  <input type="password" class="form-control" id="motdepasseActuel">
+                </div>
+              </div>
+              <hr>
+              <div class="row align-items-center">
+                <label for="nouveauMotdepasse" class="col-5 col-form-label">Nouveau mot de passe</label>
+                <div class="col-7">
+                  <input type="password" class="form-control" id="nouveauMotdepasse">
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <label for="confirmerMotdepasse" class="col-5 col-form-label fw-bold">Confirmer le nouveau mot de passe</label>
+                <div class="col-7">
+                  <input type="password" class="form-control" id="confirmerMotdepasse">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary">Confirmer</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
