@@ -11,8 +11,7 @@ import { NgOptimizedImage } from '@angular/common';
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule,
-    NgOptimizedImage
+    FormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
