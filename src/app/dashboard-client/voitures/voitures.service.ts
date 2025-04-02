@@ -14,4 +14,7 @@ export class VoituresService {
   getAllVoitures(index:number, pagelimit:number){
     return this.http.get<Voiture[]>(`${environment.API_URL}/voitures/${index}/${pagelimit}`);
   }
+  count(){
+    return this.http.get<number>(`${environment.API_URL}/voitures/compte`);
+  }
 }

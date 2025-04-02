@@ -7,6 +7,8 @@ import { SignupComponent } from './core/auth/pages/signup/signup.component';
 import { VoituresComponent } from './dashboard-client/voitures/voitures.component';
 import { ProfilClientComponent } from './dashboard-client/profil-client/profil-client.component';
 import { DetailsVoitureComponent } from './dashboard-client/details-voiture/details-voiture.component';
+import { inject } from '@angular/core';
+import {CookieService} from "ngx-cookie-service";
 
 export const routes: Routes = [
   {
@@ -17,10 +19,14 @@ export const routes: Routes = [
   },
   {
     path: "",
-    // redirectTo:"login",
-    // pathMatch: "full",,
-    title: "Connexion",
-    component: LoginComponent
+    redirectTo:()=>{
+      const cookie=inject(CookieService);
+      if(cookie.get("cookieKey")==null){
+        return "login";
+      }
+      return "client/voitures";
+    },
+    pathMatch: "full"
   },
   {
     path: "sign-up",

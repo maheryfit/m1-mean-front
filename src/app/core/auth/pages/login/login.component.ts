@@ -39,8 +39,8 @@ export class LoginComponent {
   // }
   loginService=inject(AuthService);
   loginForm=new FormGroup({
-    nomUtilisateur: new FormControl('', Validators.required),
-    motDePasse: new FormControl('', Validators.required)
+    nomUtilisateur: new FormControl('jdupont', Validators.required),
+    motDePasse: new FormControl('jdupont', Validators.required)
   });
   error=signal('');
   router=inject(Router);
