@@ -1,13 +1,15 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-voitures',
+  selector: 'app-details-voiture',
   imports: [],
-  templateUrl: './voitures.component.html',
-  styleUrl: './voitures.component.css'
+  templateUrl: './details-voiture.component.html',
+  styleUrl: './details-voiture.component.css'
 })
-export class VoituresComponent {
+export class DetailsVoitureComponent {
+  private readonly route=inject(ActivatedRoute);
+  idvoiture=this.route.snapshot.paramMap.get('id');
   voitures=[
     {
       id:"1",

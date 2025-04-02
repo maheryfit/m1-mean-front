@@ -6,6 +6,7 @@ import { LoginComponent } from './core/auth/pages/login/login.component';
 import { SignupComponent } from './core/auth/pages/signup/signup.component';
 import { VoituresComponent } from './dashboard-client/voitures/voitures.component';
 import { ProfilClientComponent } from './dashboard-client/profil-client/profil-client.component';
+import { DetailsVoitureComponent } from './dashboard-client/details-voiture/details-voiture.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,10 @@ export const routes: Routes = [
       {
         path:"voitures",
         component: VoituresComponent
+      },
+      {
+        path:"details-voiture/:id",
+        component: DetailsVoitureComponent
       },
       {
         path:"profil",

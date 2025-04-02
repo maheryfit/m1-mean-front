@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Auth, User} from './auth.model';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Auth, MyHttpError, User} from './auth.model';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {ChattingService} from '../../features/chatting/chatting.service';
@@ -13,8 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private chattingService: ChattingService, private router: Router) { }
 
-  login(user: Auth): Observable<Auth> {
-    return this.http.post<Auth>(`${environment.API_URL}/user/login`, user);
+  login(user: Auth): Observable<HttpResponse<User|MyHttpError>> {
+    return this.http.post<User>(`${environment.API_URL}/user/login`, user, {observe:'response'});
   }
 
   logout(): Observable<any> {
