@@ -2,7 +2,41 @@
   <div class="row g-4">
     <div class="col">
       <div class="bg-secondary rounded h-100 p-4">
-          <h4 class="mb-4">{{ idvoiture }}</h4>
+          <h4 class="mb-4">{{ voiture?.description }}</h4>
+          <table class="table-dark table">
+            <tbody>
+              <tr>
+                <th>Immatriculation</th>
+                <td>{{ voiture?.immatriculation }}</td>
+              </tr>
+              <tr>
+                <th>Modèle</th>
+                <td>{{ voiture?.specification?.modele }}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>{{ voiture?.specification?.type }}</td>
+              </tr>
+              <tr>
+                <th>Moteur</th>
+                <td>{{ voiture?.specification?.moteur }}</td>
+              </tr>
+              <tr>
+                <th>Transmission</th>
+                <td>{{ voiture?.specification?.transmission }}</td>
+              </tr>
+              <tr>
+                <th>Traction</th>
+                <td>{{ voiture?.specification?.traction }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <div class="d-flex justify-content-evenly">
+            <button class="btn btn-warning" type="button"><i class="bi-pencil me-2"></i>Modifier</button>
+            <button class="btn btn-danger" type="button"><i class="bi-trash me-2"></i>Retirer</button>
+            <button class="btn btn-light" type="button"><i class="bi-list-ul me-2"></i>Demander un devis</button>
+          </div>
       </div>
     </div>
   </div>

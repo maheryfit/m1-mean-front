@@ -43,6 +43,17 @@ export const routes: Routes = [
     component: DashboardClientComponent,
     children:[
       {
+        path:"",
+        redirectTo:()=>{
+          const cookie=inject(CookieService);
+          if(cookie.get("cookieKey")==null){
+            return "../login"
+          }
+          return "voitures"
+        },
+        pathMatch:"full"
+      },
+      {
         path:"voitures",
         component: VoituresComponent
       },

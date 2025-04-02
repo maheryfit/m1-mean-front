@@ -3,10 +3,11 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { VoituresService } from './voitures.service';
 import { User } from '../../core/auth/auth.model';
 import { Voiture } from '../../models/voiture.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-voitures',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './voitures.component.html',
   styleUrl: './voitures.component.css'
 })

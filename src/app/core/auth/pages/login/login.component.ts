@@ -53,7 +53,7 @@ export class LoginComponent {
     };
     this.loginService.login(user).subscribe(res => {
       this.loginService.storeUserToLocalStorage(res.body as User);
-      this.router.navigate(["client", "voitures"]);
+      this.router.navigate(["client"]);
     });
   }
 }

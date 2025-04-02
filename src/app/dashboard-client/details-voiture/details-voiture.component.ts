@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, effect, inject, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Voiture } from '../../models/voiture.model';
+import { VoituresService } from '../voitures/voitures.service';
 
 @Component({
   selector: 'app-details-voiture',
@@ -8,78 +10,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './details-voiture.component.css'
 })
 export class DetailsVoitureComponent {
-  private readonly route=inject(ActivatedRoute);
-  idvoiture=this.route.snapshot.paramMap.get('id');
-  voitures=[
-    {
-      id:"1",
-      description:"Ma voiture 1",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"2",
-      description:"Ma voiture 2",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"3",
-      description:"Ma voiture 3",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"4",
-      description:"Ma voiture 4",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"5",
-      description:"Ma voiture 5",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"6",
-      description:"Ma voiture 6",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"7",
-      description:"Ma voiture 7",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-  ]
+  route=inject(ActivatedRoute);
+  router=inject(Router);
+  idvoiture:string|null=this.route.snapshot.paramMap.get("id");
+  voitureService=inject(VoituresService);
+  voiture:Voiture|null=null;
+  constructor(){
+    this.voitureService.getVoiture(this.idvoiture).subscribe({
+      next: (data)=>{
+        this.voiture=data;
+      },
+      error: ()=>{
+        this.router.navigate([""])
+      }
+    })
+  }
 }

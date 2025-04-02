@@ -17,4 +17,7 @@ export class VoituresService {
   count(){
     return this.http.get<number>(`${environment.API_URL}/voitures/compte`);
   }
+  getVoiture(id:string|null){
+    return this.http.get<Voiture>(`${environment.API_URL}/voitures/${id}`);
+  }
 }
