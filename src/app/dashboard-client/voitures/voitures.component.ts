@@ -1,5 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
+import { VoituresService } from './voitures.service';
+import { User } from '../../core/auth/auth.model';
+import { Voiture } from '../../models/voiture.model';
 
 @Component({
   selector: 'app-voitures',
@@ -8,76 +11,25 @@ import { Component } from '@angular/core';
   styleUrl: './voitures.component.css'
 })
 export class VoituresComponent {
-  voitures=[
-    {
-      id:"1",
-      description:"Ma voiture 1",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"2",
-      description:"Ma voiture 2",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"3",
-      description:"Ma voiture 3",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"4",
-      description:"Ma voiture 4",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"5",
-      description:"Ma voiture 5",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"6",
-      description:"Ma voiture 6",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-    {
-      id:"7",
-      description:"Ma voiture 7",
-      immatriculation:"1111 TAV",
-      modele:"Toyota Corolla",
-      type:"SUV",
-      moteur:"diesel",
-      transmission:"manuelle",
-      traction:"avant"
-    },
-  ]
+  previousIndex=computed(()=>this.currentIndex()-1);
+  currentIndex=signal(1);
+  nextIndex=computed(()=>this.currentIndex()+1);
+  pageLimit=10;
+  voitureService=inject(VoituresService);
+  voitures=signal<Voiture[]>([]);
+  constructor(){
+    effect(()=>{
+      this.voitureService.getAllVoitures(this.currentIndex(), this.pageLimit)
+      .subscribe((data)=>{
+        console.log(data);
+        this.voitures.set(data);
+      })
+    });
+  }
+  changePage(index:number){
+    if(index<=0){
+      return;
+    }
+    this.currentIndex.set(index);
+  }
 }

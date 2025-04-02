@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {logout} from './features/connect.guard';
+import {isAuthClient, logout} from './features/connect.guard';
 import {AppComponent} from './app.component';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
@@ -48,7 +48,8 @@ export const routes: Routes = [
         path:"profil",
         component: ProfilClientComponent
       }
-    ]
+    ],
+    canActivate:[isAuthClient]
     // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
   },
   {
