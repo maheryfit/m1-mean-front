@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import * as L from "leaflet";
 
 @Component({
   selector: 'app-station',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './station.component.html',
   styleUrl: './station.component.css'
 })
@@ -14,6 +15,7 @@ export class StationComponent {
   @Input() latitude=0;
   @Input() longitude=0;
   @Input() checked=false;
+  @Output() selectedId=new EventEmitter<string>();
   map:any;
   marker:any;
   ngAfterViewInit(){
@@ -30,5 +32,8 @@ export class StationComponent {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
     this.marker=L.marker([this.latitude, this.longitude]).addTo(this.map);
+  }
+  selectStation(){
+    this.selectedId.emit(this._id);
   }
 }
