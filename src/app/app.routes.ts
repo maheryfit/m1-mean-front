@@ -10,6 +10,7 @@ import { DetailsVoitureComponent } from './dashboard-client/details-voiture/deta
 import { inject } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import { DemandeRdvComponent } from './dashboard-client/demande-rdv/demande-rdv.component';
+import { ListeDemandeRdvComponent } from './dashboard-client/liste-demande-rdv/liste-demande-rdv.component';
 
 export const routes: Routes = [
   {
@@ -65,6 +66,10 @@ export const routes: Routes = [
       {
         path:"demande-rdv/:idvoiture",
         component: DemandeRdvComponent
+      },
+      {
+        path:"demande-rdv",
+        component: ListeDemandeRdvComponent
       },
       {
         path:"profil",

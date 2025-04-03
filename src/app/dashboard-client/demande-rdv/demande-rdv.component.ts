@@ -8,6 +8,7 @@ import { StationComponent } from './station/station.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DemandeRdv } from '../../models/demande-rdv.model';
 import { DemandeRdvService } from '../../services/demande-rdv.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-demande-rdv',
@@ -48,6 +49,7 @@ export class DemandeRdvComponent {
               station:data[0]._id
             })
           }
+          console.log(this.rdvform.value)
         },
         error: ()=>{
           this.router.navigate([`../details-voiture/${this.idvoiture}`]);
@@ -100,8 +102,8 @@ export class DemandeRdvComponent {
       next: ()=>{
         this.router.navigate(["../.."])
       },
-      error: (error:Error)=>{
-        this.erreur.set(error.message);
+      error: (error:HttpErrorResponse)=>{
+        this.erreur.set(error.error.message);
         console.log(error)
       }
     });
