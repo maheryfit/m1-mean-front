@@ -1,5 +1,6 @@
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4">
+    <div class="col">
       <div class="bg-secondary rounded h-100 p-4">
         <p><a [routerLink]="'../../demande-rdv'" class="text-primary mb-3"><i class="bi-arrow-left me-2"></i>Retour</a></p>
         <p class="fs-4 fw-bold text-white">Diagnostic: {{ demande()?.etat }}</p>
@@ -59,5 +60,6 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
 </div>

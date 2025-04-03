@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {isAuthClient, logout} from './features/connect.guard';
+import {isAuthClient, isAuthMecanicien, logout} from './features/connect.guard';
 import {AppComponent} from './app.component';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
@@ -12,11 +12,13 @@ import {CookieService} from "ngx-cookie-service";
 import { DemandeRdvComponent } from './dashboard-client/demande-rdv/demande-rdv.component';
 import { ListeDemandeRdvComponent } from './dashboard-client/liste-demande-rdv/liste-demande-rdv.component';
 import { DetailDemandeRdvComponent } from './dashboard-client/detail-demande-rdv/detail-demande-rdv.component';
+import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-mecanicien.component';
+import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
 
 export const routes: Routes = [
   {
     path: 'login',
-    title: 'Connexion',
+    title: 'Connexion - Client',
     // loadChildren: () => import('./core/auth/auth.routes').then(r => r.authRoutes)
     component: LoginComponent
   },
@@ -33,17 +35,13 @@ export const routes: Routes = [
   },
   {
     path: "sign-up",
-    title: "Inscription",
+    title: "Inscription - Client",
     component: SignupComponent
-  },
-  {
-    path: 'logout',
-    component: LoginComponent,
-    // canActivate: [logout]
   },
   {
     path: "client",
     component: DashboardClientComponent,
+    title:"Tableau de bord - Client",
     children:[
       {
         path:"",
@@ -83,6 +81,18 @@ export const routes: Routes = [
     ],
     canActivate:[isAuthClient]
     // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
+  },
+  {
+    path:"login-mecanicien",
+    component:LoginMecanicienComponent,
+    title:"Connexion - Mécanicien"
+  },
+  {
+    path:"mecanicien",
+    component:DashboardMecanicienComponent,
+    title:"Tableau de bord - Mécanicien",
+    children:[],
+    canActivate:[isAuthMecanicien]
   },
   {
     path: 'chatting',

@@ -42,7 +42,7 @@ export class LoginComponent {
     nomUtilisateur: new FormControl('jdupont', Validators.required),
     motDePasse: new FormControl('jdupont', Validators.required)
   });
-  error=signal('');
+  erreur=signal('');
   router=inject(Router);
   login(){
     const nomUtilisateur:string=this.loginForm.value.nomUtilisateur?this.loginForm.value.nomUtilisateur:'';
@@ -51,9 +51,14 @@ export class LoginComponent {
       nom_utilisateur:nomUtilisateur,
       mot_de_passe:motDePasse
     };
-    this.loginService.login(user).subscribe(res => {
-      this.loginService.storeUserToLocalStorage(res.body as User);
-      this.router.navigate(["client"]);
+    this.loginService.login(user).subscribe({
+      next:(res) => {
+        this.loginService.storeUserToLocalStorage(res.body as User);
+        this.router.navigate(["client"]);
+      },
+      error: (error)=>{
+        this.erreur.set(error.error.message);
+      }
     });
   }
 }

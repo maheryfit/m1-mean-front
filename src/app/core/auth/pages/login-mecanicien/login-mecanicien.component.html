@@ -13,8 +13,8 @@
                 <i class="fa fa-user-edit me-2"></i>HandyMan
               </h3>
             </a>
-            <h3>Se connecter</h3>
           </div>
+          <h4 class="col-8 mb-3">Se connecter en tant que mécanicien</h4>
           <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-floating mb-3">
             <input
@@ -41,11 +41,8 @@
             class="btn btn-primary py-3 w-100 mb-4"
             >Se connecter</button
           >
-          <p style="color: red;">{{ erreur() }}</p>
+          <p style="color: red;">{{ error() }}</p>
           </form>
-          <p class="text-center mb-0">
-            Pas encore de compte? <a href="sign-up">S'inscrire</a>
-          </p>
         </div>
       </div>
     </div>
