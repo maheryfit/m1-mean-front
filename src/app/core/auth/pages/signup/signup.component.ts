@@ -4,9 +4,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
-  imports: [
-    NgOptimizedImage
-  ],
+  imports: [],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

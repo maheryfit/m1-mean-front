@@ -1,34 +1,39 @@
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4">
     <div class="bg-secondary rounded h-100 p-4">
-      <h4 class="mb-4">Demander un rendez-vous diagnostic</h4>
+      <h4 class="mb-5">Demander un rendez-vous diagnostic</h4>
       <h5>Stations</h5>
-      <table class="table-bordered table">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Lieu</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for(station of stations();track station._id;let first=$first){
-            @if(first){
-              <tr>
-                <td>{{ station.nom }}</td>
-                <td>{{ station.lieu }}</td>
-                <td class="bg-secondary"><input type="radio" name="station" class="form-check-input" checked></td>
-              </tr>
-            }@else {
-              <tr>
-                <td>{{ station.nom }}</td>
-                <td>{{ station.lieu }}</td>
-                <td class="bg-secondary"><input type="radio" name="station" class="form-check-input"></td>
-              </tr>
-            }
-          }
-        </tbody>
-      </table>
+      @for(station of stations();track station._id;let first=$first){
+        <!-- <tr>
+          <td><a href="javascript:void(0)" class="link-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#station'+station._id">{{ station.nom }}</a></td>
+          <td>{{ station.lieu }}</td>
+          <td class="bg-secondary"><input type="radio" name="station" class="form-check-input" [checked]="first"></td>
+          <div class="modal" [id]="'station'+station._id" tabindex="-1" [attr.aria-labelledby]="'stationLabel'+station._id" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-white">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" [id]="'stationLabel'+station._id">{{ station.nom }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="height: 50vh;" [id]="'mapStation'+station._id">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tr> -->
+        <app-station
+          [_id]="station._id"
+          [nom]="station.nom"
+          [lieu]="station.lieu"
+          [latitude]="station.coordonnees.coordinates[0]"
+          [longitude]="station.coordonnees.coordinates[1]"
+          [checked]="first"
+        ></app-station>
+      }
       <br>
       <div class="d-flex justify-content-around">
         <div class="btn-group" role="group">
@@ -39,6 +44,9 @@
           <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
         </div>
       </div>
+      <br>
+      <p class="fs-5"><span class="fw-bold text-decoration-underline me-2">Voiture:</span><span class="text-white">{{ voiture()?.description }}</span></p>
+
     </div>
   </div>
 </div>
