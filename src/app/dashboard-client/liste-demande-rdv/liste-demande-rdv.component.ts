@@ -1,10 +1,11 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { DemandeRdvService } from '../../services/demande-rdv.service';
 import { DemandeRdv, DemandeRdvDetails } from '../../models/demande-rdv.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-liste-demande-rdv',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './liste-demande-rdv.component.html',
   styleUrl: './liste-demande-rdv.component.css'
 })

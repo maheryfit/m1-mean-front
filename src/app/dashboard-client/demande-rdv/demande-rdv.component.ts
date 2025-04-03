@@ -49,7 +49,6 @@ export class DemandeRdvComponent {
               station:data[0]._id
             })
           }
-          console.log(this.rdvform.value)
         },
         error: ()=>{
           this.router.navigate([`../details-voiture/${this.idvoiture}`]);
@@ -97,14 +96,12 @@ export class DemandeRdvComponent {
       description:this.rdvform.value.description as string,
       date_favorable:this.rdvform.value.datefavorable as Date
     }
-    console.log(demande);
     this.demandeService.creerDemande(demande).subscribe({
       next: ()=>{
         this.router.navigate(["../.."])
       },
       error: (error:HttpErrorResponse)=>{
         this.erreur.set(error.error.message);
-        console.log(error)
       }
     });
   }
