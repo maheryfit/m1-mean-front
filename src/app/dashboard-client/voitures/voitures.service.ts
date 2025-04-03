@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Voiture } from '../../models/voiture.model';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/auth/auth.model';
+import { VoitureBase } from '../../models/voiture-base.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,8 @@ export class VoituresService {
   }
   getVoiture(id:string|null){
     return this.http.get<Voiture>(`${environment.API_URL}/voitures/${id}`);
+  }
+  modifierVoiture(id:string|null, voiture:VoitureBase){
+    return this.http.put<Voiture>(`${environment.API_URL}/voitures/${id}`, voiture);
   }
 }
