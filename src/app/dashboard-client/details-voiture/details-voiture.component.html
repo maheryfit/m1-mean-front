@@ -32,10 +32,10 @@
             </tbody>
           </table>
           <br>
-          <div class="d-flex justify-content-evenly">
+          <div class="d-flex justify-content-end hstack gap-3">
             <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#modifModal"><i class="bi-pencil me-2"></i>Modifier</button>
             <button class="btn btn-danger" type="button"><i class="bi-trash me-2"></i>Retirer</button>
-            <button class="btn btn-light" type="button"><i class="bi-list-ul me-2"></i>Demander un devis</button>
+            <a [routerLink]="'../../demande-rdv/'+voiture()?._id" class="btn btn-light"><i class="bi-list-ul me-2"></i>Demander un RDV</a>
           </div>
           <div class="modal fade" id="modifModal" tabindex="-1" aria-labelledby="modifModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">

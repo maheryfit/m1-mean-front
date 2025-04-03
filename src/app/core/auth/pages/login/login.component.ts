@@ -1,7 +1,7 @@
 import { Component, inject, Renderer2, signal } from '@angular/core';
 import {Auth, MyHttpError, User} from '../../auth.model';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../../../services/auth.service';
 import {Router} from '@angular/router';
 import {ChattingService} from '../../../../features/chatting/chatting.service';
 import { environment } from '../../../../../environments/environment.development';

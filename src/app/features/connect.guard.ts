@@ -1,6 +1,6 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
-import {AuthService} from '../core/auth/auth.service';
+import {AuthService} from '../services/auth.service';
 import {lastValueFrom} from 'rxjs';
 
 export const isAuthConnected: CanActivateFn =  async (route, state) => {

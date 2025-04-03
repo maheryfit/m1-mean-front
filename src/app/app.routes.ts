@@ -9,6 +9,7 @@ import { ProfilClientComponent } from './dashboard-client/profil-client/profil-c
 import { DetailsVoitureComponent } from './dashboard-client/details-voiture/details-voiture.component';
 import { inject } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
+import { DemandeRdvComponent } from './dashboard-client/demande-rdv/demande-rdv.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,10 @@ export const routes: Routes = [
       {
         path:"details-voiture/:id",
         component: DetailsVoitureComponent
+      },
+      {
+        path:"demande-rdv/:idvoiture",
+        component: DemandeRdvComponent
       },
       {
         path:"profil",

@@ -1,16 +1,16 @@
 import { Component, effect, inject, Input, signal, WritableSignal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Voiture } from '../../models/voiture.model';
-import { VoituresService } from '../voitures/voitures.service';
+import { VoituresService } from '../../services/voitures.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SpecificationService } from './specification.service';
+import { SpecificationService } from '../../services/specification.service';
 import { Specification } from '../../models/specification.model';
 import { ObjectModel } from '../../object-model.model';
 import { VoitureBase } from '../../models/voiture-base.model';
 
 @Component({
   selector: 'app-details-voiture',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './details-voiture.component.html',
   styleUrl: './details-voiture.component.css'
 })

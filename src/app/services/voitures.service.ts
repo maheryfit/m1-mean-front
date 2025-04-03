@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Voiture } from '../../models/voiture.model';
-import { environment } from '../../../environments/environment';
-import { User } from '../../core/auth/auth.model';
-import { VoitureBase } from '../../models/voiture-base.model';
+import { Voiture } from '../models/voiture.model';
+import { environment } from '../../environments/environment';
+import { User } from '../core/auth/auth.model';
+import { VoitureBase } from '../models/voiture-base.model';
 
 @Injectable({
   providedIn: 'root'

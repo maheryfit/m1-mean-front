@@ -1,0 +1,44 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="bg-secondary rounded h-100 p-4">
+      <h4 class="mb-4">Demander un rendez-vous diagnostic</h4>
+      <h5>Stations</h5>
+      <table class="table-bordered table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(station of stations();track station._id;let first=$first){
+            @if(first){
+              <tr>
+                <td>{{ station.nom }}</td>
+                <td>{{ station.lieu }}</td>
+                <td class="bg-secondary"><input type="radio" name="station" class="form-check-input" checked></td>
+              </tr>
+            }@else {
+              <tr>
+                <td>{{ station.nom }}</td>
+                <td>{{ station.lieu }}</td>
+                <td class="bg-secondary"><input type="radio" name="station" class="form-check-input"></td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+      <br>
+      <div class="d-flex justify-content-around">
+        <div class="btn-group" role="group">
+          <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
+          <button type="button" class="btn btn-secondary border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+          <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
+          <button type="button" class="btn btn-secondary border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+          <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

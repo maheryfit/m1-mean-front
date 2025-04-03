@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Auth, MyHttpError, User} from './auth.model';
-import {environment} from '../../../environments/environment';
+import {Auth, MyHttpError, User} from '../core/auth/auth.model';
+import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {ChattingService} from '../../features/chatting/chatting.service';
+import {ChattingService} from '../features/chatting/chatting.service';
 import { Router } from '@angular/router';
 
 @Injectable({

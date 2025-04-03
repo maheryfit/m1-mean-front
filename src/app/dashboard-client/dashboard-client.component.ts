@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { environment } from '../../environments/environment.development';
-import { AuthService } from '../core/auth/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-dashboard-client',
