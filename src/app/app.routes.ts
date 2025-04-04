@@ -14,6 +14,7 @@ import { ListeDemandeRdvComponent } from './dashboard-client/liste-demande-rdv/l
 import { DetailDemandeRdvComponent } from './dashboard-client/detail-demande-rdv/detail-demande-rdv.component';
 import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-mecanicien.component';
 import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
+import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste-demande-rdv/liste-demande-rdv.component';
 
 export const routes: Routes = [
   {
@@ -91,7 +92,23 @@ export const routes: Routes = [
     path:"mecanicien",
     component:DashboardMecanicienComponent,
     title:"Tableau de bord - Mécanicien",
-    children:[],
+    children:[
+      {
+        path:"",
+        redirectTo:()=>{
+          const cookie=inject(CookieService);
+          if(cookie.get("cookieKey")==null){
+            return "../login"
+          }
+          return "demande-rdv"
+        },
+        pathMatch:"full"
+      },
+      {
+        path:"demande-rdv",
+        component:ListeDemandeRdvMecanicienComponent
+      }
+    ],
     canActivate:[isAuthMecanicien]
   },
   {

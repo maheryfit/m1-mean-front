@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { DemandeRdv, DemandeRdvDetails } from '../models/demande-rdv.model';
+import { DemandeRdv, DemandeRdvDetails, DemandeRdvMecanicien } from '../models/demande-rdv.model';
 import { environment } from '../../environments/environment';
 import { Diagnostic } from '../models/diagnostic.model';
 
@@ -26,5 +26,8 @@ export class DemandeRdvService {
   }
   countDiagnostics(iddemande:string){
     return this.http.get<number>(`${environment.API_URL}/diagnostics/count/${iddemande}`);
+  }
+  getAllForMecanicien(index:number, pageLimit:number){
+    return this.http.get<DemandeRdvMecanicien[]>(`${environment.API_URL}/demandeRDVDiagnostics/${index}/${pageLimit}`);
   }
 }
