@@ -27,7 +27,12 @@ export class LoginMecanicienComponent {
     };
     this.loginService.login(user).subscribe(res => {
       this.loginService.storeUserToLocalStorage(res.body as User);
-      this.router.navigate(["mecanicien"]);
+      this.loginService.getMecanicien(res.body as User).subscribe({
+        next: (data)=>{
+          localStorage.setItem("idmecanicien", data._id);
+          this.router.navigate(["mecanicien"]);
+        }
+      })
     });
   }
 }

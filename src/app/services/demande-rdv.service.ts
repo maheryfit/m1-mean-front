@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DemandeRdv, DemandeRdvDetails, DemandeRdvMecanicien } from '../models/demande-rdv.model';
 import { environment } from '../../environments/environment';
-import { Diagnostic } from '../models/diagnostic.model';
+import { Diagnostic, DiagnosticAjout } from '../models/diagnostic.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,14 @@ export class DemandeRdvService {
   }
   getAllForMecanicien(index:number, pageLimit:number){
     return this.http.get<DemandeRdvMecanicien[]>(`${environment.API_URL}/demandeRDVDiagnostics/${index}/${pageLimit}`);
+  }
+  getForMecanicien(id:string){
+    return this.http.get<DemandeRdvMecanicien>(`${environment.API_URL}/demandeRDVDiagnostics/mecanicien/${id}`);
+  }
+  ajouterDiagnostic(iddemande:string, diagnostic:DiagnosticAjout){
+    return this.http.post<any>(`${environment.API_URL}/demandeRDVDiagnostics/ajout-diagnostic/${iddemande}`, diagnostic);
+  }
+  getDiagnostic(id:string){
+    return this.http.get<Diagnostic>(`${environment.API_URL}/diagnostics/${id}`);
   }
 }
