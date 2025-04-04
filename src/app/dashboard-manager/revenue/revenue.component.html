@@ -1,6 +1,6 @@
 <div class="row mt-5 px-4 px-md-4">
   <article class="col-8 col-md-8" id="chartRevenueAnnuel">
-    <h2>Revenue annuel</h2>
+    <h2>Revenue mensuel</h2>
     <canvas class="bg-secondary" id="canvasRevenue">{{chartRevenue}}</canvas>
   </article>
   <form [formGroup]="yearFormRevenue" (ngSubmit)="getRevenueFromYearForm()" class="col-2 col-md-2">
@@ -19,7 +19,7 @@
 </div>
 <div class="row mt-5 px-4 px-md-4">
   <article class="col-8 col-md-8" id="chartBeneficeAnnuel">
-      <h2>Bénéfice annuel</h2>
+      <h2>Bénéfice mensuel</h2>
       <canvas class="bg-secondary" id="canvasBenefice">{{chartBenefice}}</canvas>
   </article>
   <form [formGroup]="yearFormBenefice" (ngSubmit)="getBeneficeFromYearForm()" class="col-2 col-md-2">
