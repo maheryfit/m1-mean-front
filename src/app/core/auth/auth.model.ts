@@ -11,4 +11,8 @@ export interface User {
   profil: string
 }
 
+export interface MyHttpError{
+  message: string
+}
+
 export interface AuthObjectModel extends ObjectModel, Auth {}
