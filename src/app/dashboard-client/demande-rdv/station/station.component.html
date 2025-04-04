@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-between border-light border p-3 bg-dark text-white mb-3 w-75 mx-auto">
+  <p><a href="javascript:void(0)" data-bs-toggle="modal" [attr.data-bs-target]="'#station'+_id">{{ nom }}<i class="bi-geo-alt-fill ms-2"></i></a></p>
+  <p>{{ lieu }}</p>
+  <p class="bg-secondary"><input type="radio" name="station" (click)="selectStation()" [value]="_id" class="form-check-input" [checked]="checked"></p>
+  <div class="modal" [id]="'station'+_id" tabindex="-1" [attr.aria-labelledby]="'stationLabel'+_id" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-secondary text-white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" [id]="'stationLabel'+_id">{{ nom }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="height: 50vh;" [id]="'mapStation'+_id">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
-import {AuthService} from '../core/auth/auth.service';
+import {AuthService} from '../services/auth.service';
 import {lastValueFrom} from 'rxjs';
 
 export const isAuthConnected: CanActivateFn =  async (route, state) => {
@@ -8,6 +8,18 @@ export const isAuthConnected: CanActivateFn =  async (route, state) => {
   const authService: AuthService = inject(AuthService);
   try {
     return await lastValueFrom(authService.checkAuthConnected())
+  } catch (e) {
+    console.error(e);
+    await router.navigateByUrl("/login");
+    return false;
+  }
+};
+
+export const isAuthClient: CanActivateFn = async (route, state) => {
+  const router = inject(Router)
+  const authService: AuthService = inject(AuthService);
+  try {
+    return await lastValueFrom(authService.checkAuthClient());
   } catch (e) {
     console.error(e);
     await router.navigateByUrl("/login");

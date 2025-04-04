@@ -1,0 +1,90 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded h-100 p-4">
+        <p><a [routerLink]="'../../voitures'" class="text-primary mb-3"><i class="bi-arrow-left me-2"></i>Retour</a></p>
+          <h4 class="mb-4">{{ voiture()?.description }}</h4>
+          <table class="table-dark table">
+            <tbody>
+              <tr>
+                <th>Immatriculation</th>
+                <td>{{ voiture()?.immatriculation }}</td>
+              </tr>
+              <tr>
+                <th>Modèle</th>
+                <td>{{ voiture()?.specification?.modele }}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>{{ voiture()?.specification?.type }}</td>
+              </tr>
+              <tr>
+                <th>Moteur</th>
+                <td>{{ voiture()?.specification?.moteur }}</td>
+              </tr>
+              <tr>
+                <th>Transmission</th>
+                <td>{{ voiture()?.specification?.transmission }}</td>
+              </tr>
+              <tr>
+                <th>Traction</th>
+                <td>{{ voiture()?.specification?.traction }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <div class="d-flex justify-content-end hstack gap-3">
+            <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#modifModal"><i class="bi-pencil me-2"></i>Modifier</button>
+            <button class="btn btn-danger" type="button"><i class="bi-trash me-2"></i>Retirer</button>
+            <a [routerLink]="'../../demande-rdv/'+voiture()?._id" class="btn btn-light"><i class="bi-list-ul me-2"></i>Demander un RDV</a>
+          </div>
+          <div class="modal fade" id="modifModal" tabindex="-1" aria-labelledby="modifModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-light">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modifModalLabel">Modifier la voiture</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form [formGroup]="modifForm" (ngSubmit)="modifier()">
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description</label>
+                      <input type="text" class="form-control" id="description" formControlName="description">
+                    </div>
+                    <div class="mb-3">
+                      <label for="immatriculation" class="form-label">Immatriculation</label>
+                      <input type="text" class="form-control" id="immatriculation" formControlName="immatriculation">
+                    </div>
+                    <div class="mb-3">
+                      <label for="modele" class="form-label">Modèle</label>
+                      <input type="text" class="form-control" id="modele" formControlName="modele">
+                    </div>
+                    <div class="mb-3">
+                      <label for="type" class="form-label">Type</label>
+                      <input type="text" class="form-control" id="type" formControlName="type">
+                    </div>
+                    <div class="mb-3">
+                      <label for="moteur" class="form-label">Moteur</label>
+                      <input type="text" class="form-control" id="moteur" formControlName="moteur">
+                    </div>
+                    <div class="mb-3">
+                      <label for="transmission" class="form-label">Transmission</label>
+                      <input type="text" class="form-control" id="transmission" formControlName="transmission">
+                    </div>
+                    <div class="mb-3">
+                      <label for="traction" class="form-label">Traction</label>
+                      <input type="text" class="form-control" id="traction" formControlName="traction">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi-check me-2"></i>Modifier</button>
+                  </div>
+                </form>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

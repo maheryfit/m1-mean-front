@@ -1,0 +1,42 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h3>Voitures</h3>
+        <p class="fw-bold fs-4 text-white mt-4">Vos voitures: {{ countVoitures() }}</p>
+        <table class="table mt-4">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Immatriculation</th>
+              <th>Modèle</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(voiture of voitures();track voiture._id){
+              <tr>
+                <td>{{ voiture.description }}</td>
+                <td>{{ voiture.immatriculation }}</td>
+                <td>{{ voiture.specification.modele }}</td>
+                <td class="text-center"><a class="link-primary" [routerLink]="'../details-voiture/'+voiture._id"><i class="bi-list-ul me-2"></i>Détails</a></td>
+                <td class="text-center"><a class="link-primary" [routerLink]="'../demande-rdv/'+voiture._id"><i class="bi-wrench me-2"></i>Demander un RDV</a></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br>
+        <div class="d-flex justify-content-around">
+          <div class="btn-group" role="group">
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
+            <button type="button" class="btn btn-secondary border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+            <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
+            <button type="button" class="btn btn-secondary border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
