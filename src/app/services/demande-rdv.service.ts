@@ -34,7 +34,7 @@ export class DemandeRdvService {
     return this.http.get<DemandeRdvMecanicien>(`${environment.API_URL}/demandeRDVDiagnostics/mecanicien/${id}`);
   }
   ajouterDiagnostic(iddemande:string, diagnostic:DiagnosticAjout){
-    return this.http.post<any>(`${environment.API_URL}/demandeRDVDiagnostics/ajout-diagnostic/${iddemande}`, diagnostic);
+    return this.http.post<Diagnostic>(`${environment.API_URL}/demandeRDVDiagnostics/ajout-diagnostic/${iddemande}`, diagnostic);
   }
   getDiagnostic(id:string){
     return this.http.get<Diagnostic>(`${environment.API_URL}/diagnostics/${id}`);

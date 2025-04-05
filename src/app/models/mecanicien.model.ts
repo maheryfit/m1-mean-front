@@ -1,11 +1,8 @@
 import { ObjectModel } from "../object-model.model";
+import { Utilisateur } from "./utilisateur.model";
 
 export interface Mecanicien extends ObjectModel{
-  utilisateur:{
-    nom:string,
-    prenom:string,
-    nom_utilisateur:string
-  },
+  utilisateur:Utilisateur,
   telephone:string,
   role:string,
   niveau:string

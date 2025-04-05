@@ -48,6 +48,16 @@ export class DetailDemandeRdvMecanicienComponent {
       })
     });
     effect(()=>{
+      this.demandeService.getDiagnostics(this.iddemande, this.currentIndexDiags(), this.pageLimit).subscribe({
+        next: (data)=>{
+          this.diagnostics.set(data);
+        },
+        error: (error:HttpErrorResponse)=>{
+          alert(error.error.message)
+        }
+      })
+    })
+    effect(()=>{
       this.demandeService.countDiagnostics(this.iddemande).subscribe({
         next: (data)=>{
           this.countDiags.set(data)
@@ -77,8 +87,11 @@ export class DetailDemandeRdvMecanicienComponent {
       mecaniciens:[this.idmecanicien as string]
     }
     this.demandeService.ajouterDiagnostic(this.iddemande, diagnostic).subscribe({
-      next: ()=>{
-        window.location.reload();
+      next: (data)=>{
+        if(this.diagnostics().length<5){
+          this.diagnostics().push(data);
+        }
+        this.countDiags.set(this.countDiags()+1)
       },
       error: (error)=>{
         this.erreur.set(error.error.message);
