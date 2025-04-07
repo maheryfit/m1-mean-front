@@ -5,7 +5,7 @@
         <p><a [routerLink]="'../../demande-rdv'" class="text-primary mb-3"><i class="bi-arrow-left me-2"></i>Retour</a></p>
         <p class="fs-4 fw-bold text-white">Diagnostic: {{ demande()?.etat }}</p>
         <div class="justify-content-between d-flex col-2">
-          <button class="btn btn-success"><i class="bi-check me-2"></i>Accepter</button>
+          <a [routerLink]="'/mecanicien/creer-devis/'+iddemande" class="btn btn-success"><i class="bi-check me-2"></i>Accepter</a>
           <button class="btn btn-danger"><i class="bi-x me-2"></i>Rejeter</button>
         </div>
         <br>
@@ -96,9 +96,9 @@
           </div>
         </div>
         <br>
-        <div class="d-flex justify-content-around">
+        <!-- <div class="d-flex justify-content-around">
           <a [routerLink]="'/mecanicien/creer-devis/'+iddemande" class="btn btn-primary"><i class="bi-pencil me-2"></i>Créer un devis</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

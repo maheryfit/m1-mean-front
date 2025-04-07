@@ -9,6 +9,6 @@ import { environment } from '../../environments/environment';
 export class DevisService {
   http=inject(HttpClient)
   creerDevis(devis:DevisAjout){
-    return this.http.post<any>(`${environment.API_URL}/devis`, devis);
+    return this.http.post(`${environment.API_URL}/devis`, devis);
   }
 }

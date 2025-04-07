@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DemandeRdvMecanicien } from '../../models/demande-rdv.model';
 import { DemandeRdvService } from '../../services/demande-rdv.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { DevisService } from '../../services/devis.service';
 export class CreerDevisComponent {
   route=inject(ActivatedRoute);
   iddemande=this.route.snapshot.paramMap.get("iddemande") as string;
+  router=inject(Router)
 
   demandeService=inject(DemandeRdvService);
   serviceService=inject(ServicesService);
@@ -117,6 +118,9 @@ export class CreerDevisComponent {
       dateheure_debut_maintenance:this.devisForm.value.date_debut_maintenance as Date
     }
     this.devisService.creerDevis(devis).subscribe({
+      next: ()=>{
+        this.router.navigate(["details-demande-rdv", this.iddemande], {relativeTo: this.route.parent})
+      },
       error: (error)=>{
         this.erreur.set(error.error.message);
       }
