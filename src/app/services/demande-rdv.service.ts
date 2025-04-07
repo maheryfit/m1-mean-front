@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { DemandeRdv, DemandeRdvDetails, DemandeRdvMecanicien } from '../models/demande-rdv.model';
 import { environment } from '../../environments/environment';
 import { Diagnostic, DiagnosticAjout } from '../models/diagnostic.model';
+import { Devis } from '../models/devis.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,8 @@ export class DemandeRdvService {
   }
   getDiagnostic(id:string){
     return this.http.get<Diagnostic>(`${environment.API_URL}/diagnostics/${id}`);
+  }
+  getDevis(id:string){
+    return this.http.get<Devis>(`${environment.API_URL}/devis/par-demande-rdv/${id}`);
   }
 }

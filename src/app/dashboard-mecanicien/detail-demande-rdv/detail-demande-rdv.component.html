@@ -4,10 +4,13 @@
       <div class="bg-secondary rounded h-100 p-4">
         <p><a [routerLink]="'../../demande-rdv'" class="text-primary mb-3"><i class="bi-arrow-left me-2"></i>Retour</a></p>
         <p class="fs-4 fw-bold text-white">Diagnostic: {{ demande()?.etat }}</p>
-        <div class="justify-content-between d-flex col-2">
-          <a [routerLink]="'/mecanicien/creer-devis/'+iddemande" class="btn btn-success"><i class="bi-check me-2"></i>Accepter</a>
-          <button class="btn btn-danger"><i class="bi-x me-2"></i>Rejeter</button>
-        </div>
+        @if(demande()?.etat!=etatRdvAccepte){
+          <div class="justify-content-between d-flex col-2">
+            <a [routerLink]="'/mecanicien/creer-devis/'+iddemande" class="btn btn-success"><i class="bi-check me-2"></i>Accepter</a>
+            <button class="btn btn-danger"><i class="bi-x me-2"></i>Rejeter</button>
+          </div>
+          <br>
+        }
         <br>
         <table class="table table-dark table-bordered border-white">
           <tbody>
@@ -68,33 +71,106 @@
           </div>
         </div>
         <br>
-        <div class="d-flex justify-content-around">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#diagnostic"><i class="bi-plus me-2"></i>Insérer un diagnostic</button>
-          <div class="modal fade" id="diagnostic" tabindex="-1" aria-labelledby="diagnosticLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content bg-secondary text-white">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="diagnosticLabel">Ajouter un diagnostic</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form [formGroup]="diagForm" (ngSubmit)="ajouterDiagnostic()">
-                <div class="modal-body">
-                  <div class="form-floating">
-                    <textarea class="form-control" formControlName="evaluations" placeholder="Leave a comment here"
-                        id="floatingTextarea" style="height: 150px;"></textarea>
-                    <label for="floatingTextarea">Évaluation</label>
+        @switch(demande()?.etat){
+          @case(etatRdvAccepte){
+            <p class="fs-5 fw-bold text-white mb-3">Devis:</p>
+            <table class="table table-dark table-bordered border-white">
+              <tbody>
+                <tr>
+                  <th>Date du devis</th>
+                  <td colspan="3">{{ devis()?.dateheure_devis }}</td>
+                </tr>
+                <tr>
+                  <th>Date de début des maintenances</th>
+                  <td colspan="3">{{ devis()?.dateheure_debut_maintenance }}</td>
+                </tr>
+                <tr>
+                  <th>Durée estimée</th>
+                  <td colspan="3">{{ devis()?.duree_estimee }}</td>
+                </tr>
+                <tr>
+                  <th colspan="4">Services</th>
+                </tr>
+                @for(service of devis()?.services;track service._id){
+                  <tr>
+                    <td colspan="2">{{ service.nom }}</td>
+                    <td>{{ service.duree_estimee }}</td>
+                    <td>{{ service.tarif.$numberDecimal }}</td>
+                  </tr>
+                }
+                <tr>
+                  <th colspan="3" class="text-end">Total services</th>
+                  <th>{{ totalServicesDevis() }}</th>
+                </tr>
+                <tr>
+                  <th colspan="4">Articles</th>
+                </tr>
+                @for(article of devis()?.articles_quantites;track article._id){
+                  <tr>
+                    <td>{{ article.article.nom }}</td>
+                    <td>{{ article.article.prix_unitaire.$numberDecimal }}</td>
+                    <td>{{ article.quantite }}</td>
+                    <td>{{ article.quantite*article.article.prix_unitaire.$numberDecimal }}</td>
+                  </tr>
+                }
+                <tr>
+                  <th colspan="3" class="text-end">Total articles</th>
+                  <th>{{ totalArticlesDevis() }}</th>
+                </tr>
+                <tr>
+                  <th colspan="4">Réductions</th>
+                </tr>
+                @for(reduction of devis()?.remises;track reduction._id){
+                  <tr>
+                    <td colspan="3">{{ reduction.nomRemise }}</td>
+                    <td>{{ reduction.valeurRemise }}</td>
+                  </tr>
+                }
+                <tr>
+                  <td colspan="3" class="text-end">Réduction finale</td>
+                  <td>{{ totalRemisePourcentage() }}</td>
+                </tr>
+                <tr>
+                  <th colspan="3" class="text-end">Montant déduit</th>
+                  <td>{{ remiseMontant() }}</td>
+                </tr>
+                <tr>
+                  <th colspan="3" class="text-end">Montant final</th>
+                  <th>{{ devis()?.montant?.$numberDecimal }}</th>
+                </tr>
+              </tbody>
+            </table>
+          }
+          @default {
+            <div class="d-flex justify-content-around">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#diagnostic"><i class="bi-plus me-2"></i>Insérer un diagnostic</button>
+              <div class="modal fade" id="diagnostic" tabindex="-1" aria-labelledby="diagnosticLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content bg-secondary text-white">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="diagnosticLabel">Ajouter un diagnostic</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form [formGroup]="diagForm" (ngSubmit)="ajouterDiagnostic()">
+                    <div class="modal-body">
+                      <div class="form-floating">
+                        <textarea class="form-control" formControlName="evaluations" placeholder="Leave a comment here"
+                            id="floatingTextarea" style="height: 150px;"></textarea>
+                        <label for="floatingTextarea">Évaluation</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                      <button type="submit" class="btn btn-primary"><i class="bi-plus me-2"></i>Ajouter</button>
+                    </div>
+                    <p class="text-danger mt-3">{{ erreur() }}</p>
+                    </form>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                  <button type="submit" class="btn btn-primary"><i class="bi-plus me-2"></i>Ajouter</button>
-                </div>
-                <p class="text-danger mt-3">{{ erreur() }}</p>
-                </form>
               </div>
             </div>
-          </div>
-        </div>
+          }
+        }
         <br>
         <!-- <div class="d-flex justify-content-around">
           <a [routerLink]="'/mecanicien/creer-devis/'+iddemande" class="btn btn-primary"><i class="bi-pencil me-2"></i>Créer un devis</a>
