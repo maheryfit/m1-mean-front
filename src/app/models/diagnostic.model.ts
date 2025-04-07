@@ -8,3 +8,8 @@ export interface Diagnostic extends ObjectModel{
   mecaniciens:Mecanicien[],
   etat:string
 }
+export interface DiagnosticAjout{
+  rdv:string,
+  evaluations:string,
+  mecaniciens:string[]
+}

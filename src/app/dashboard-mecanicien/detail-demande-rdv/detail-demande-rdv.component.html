@@ -1,0 +1,105 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded h-100 p-4">
+        <p><a [routerLink]="'../../demande-rdv'" class="text-primary mb-3"><i class="bi-arrow-left me-2"></i>Retour</a></p>
+        <p class="fs-4 fw-bold text-white">Diagnostic: {{ demande()?.etat }}</p>
+        <div class="justify-content-between d-flex col-2">
+          <button class="btn btn-success"><i class="bi-check me-2"></i>Accepter</button>
+          <button class="btn btn-danger"><i class="bi-x me-2"></i>Rejeter</button>
+        </div>
+        <br>
+        <table class="table table-dark table-bordered border-white">
+          <tbody>
+            <tr>
+              <th>Client</th>
+              <td>{{ demande()?.voiture?.proprietaire?.nom_utilisateur }}</td>
+            </tr>
+            <tr>
+              <th>Voiture</th>
+              <td>{{ demande()?.voiture?.description }}</td>
+            </tr>
+            <tr>
+              <th>Station</th>
+              <td>{{ demande()?.station?.nom }}</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>{{ demande()?.description }}</td>
+            </tr>
+            <tr>
+              <th>Date choisie</th>
+              <td>{{ demande()?.date_favorable }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <p class="fs-5 fw-bold text-white mb-3">Évaluations:</p>
+        <table class="table w-75 mx-auto">
+          <thead>
+            <tr>
+              <th>Évaluation</th>
+              <th>Mécaniciens</th>
+              <th>Date et heure</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(diagnostic of diagnostics();track diagnostic._id){
+              <tr>
+                <td>{{ diagnostic.evaluations }}</td>
+                <td><ul>
+                  @for(mecanicien of diagnostic.mecaniciens;track mecanicien._id){
+                    <li>{{ mecanicien.utilisateur.nom_utilisateur }}</li>
+                  }
+                </ul></td>
+                <td>{{ diagnostic.dateheure }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br>
+        <div class="d-flex justify-content-around">
+          <div class="btn-group" role="group">
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
+            <button type="button" class="btn btn-secondary border-light" (click)="changePageDiags(previousIndexDiags())">{{ previousIndexDiags() }}</button>
+            <button type="button" class="btn btn-primary border-light">{{ currentIndexDiags() }}</button>
+            <button type="button" class="btn btn-secondary border-light" (click)="changePageDiags(nextIndexDiags())">{{ nextIndexDiags() }}</button>
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
+          </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-around">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#diagnostic"><i class="bi-plus me-2"></i>Insérer un diagnostic</button>
+          <div class="modal fade" id="diagnostic" tabindex="-1" aria-labelledby="diagnosticLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-white">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="diagnosticLabel">Ajouter un diagnostic</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form [formGroup]="diagForm" (ngSubmit)="ajouterDiagnostic()">
+                <div class="modal-body">
+                  <div class="form-floating">
+                    <textarea class="form-control" formControlName="evaluations" placeholder="Leave a comment here"
+                        id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Évaluation</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                  <button type="submit" class="btn btn-primary"><i class="bi-plus me-2"></i>Ajouter</button>
+                </div>
+                <p class="text-danger mt-3">{{ erreur() }}</p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-around">
+          <a [routerLink]="'/mecanicien/creer-devis/'+iddemande" class="btn btn-primary"><i class="bi-pencil me-2"></i>Créer un devis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
