@@ -13,3 +13,13 @@ export interface Devis{
   dateheure_debut_maintenance:Date,
   remises:Remise[]
 }
+
+export interface DevisAjout{
+  voiture:string,
+  services:string[],
+  station:string,
+  diagnostic:string,
+  articles_quantites:QteArticle[],
+  mecanicien:string,
+  dateheure_debut_maintenance:Date
+}

@@ -7,8 +7,8 @@ import { Service } from '../../models/service.model';
 import { ServicesService } from '../../services/services.service';
 import { ArticleService } from '../../services/article.service';
 import { Article, QteArticle } from '../../models/article.model';
-import { Form, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Devis } from '../../models/devis.model';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DevisAjout } from '../../models/devis.model';
 
 @Component({
   selector: 'app-creer-devis',
@@ -88,7 +88,6 @@ export class CreerDevisComponent {
   }
   creerDevis(){
     const articlesChoisis=this.articlesForm.value;
-    let montant=0;
     const qteArticles:QteArticle[]=[];
     articlesChoisis.forEach((id:string)=>{
       const qte=document.getElementById("qteArticle"+id) as HTMLInputElement;
@@ -97,31 +96,20 @@ export class CreerDevisComponent {
       if(qteNb<=0){
         return;
       }
-      montant+=qteNb*Number(pu.value);
       qteArticles.push({
         article:id,
         quantite:qteNb
       })
     });
     const servicesChoisis=this.servicesForm.value;
-    let dureeEstimee=0;
-    servicesChoisis.forEach((id:string)=>{
-      const duree=document.getElementById("dureeService"+id) as HTMLInputElement;
-      const tarif=document.getElementById("tarifService"+id) as HTMLInputElement;
-      dureeEstimee+=Number(duree.value);
-      montant+=Number(tarif.value)*Number(duree.value);
-    });
-    const devis:Devis={
+    const devis:DevisAjout={
       voiture:this.demande()?.voiture._id as string,
       services:servicesChoisis,
       station:this.demande()?.station._id as string,
       diagnostic:this.iddemande,
       articles_quantites:qteArticles,
       mecanicien:this.idmecanicien as string,
-      duree_estimee:dureeEstimee,
-      montant:montant,
-      dateheure_debut_maintenance:this.devisForm.value.date_debut_maintenance as Date,
-      remises:[]
+      dateheure_debut_maintenance:this.devisForm.value.date_debut_maintenance as Date
     }
     console.log(devis);
   }

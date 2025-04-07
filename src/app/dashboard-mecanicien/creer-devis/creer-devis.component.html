@@ -42,8 +42,6 @@
                       <td>{{ service.duree_estimee }}</td>
                       <td>{{ service.tarif.$numberDecimal }}</td>
                       <td><input class="form-check-input" type="checkbox" [value]="service._id" (change)="choisirService($event)"></td>
-                      <input type="hidden" [id]="'dureeService'+service._id" [value]="service.duree_estimee">
-                      <input type="hidden" [id]="'tarifService'+service._id" [value]="service.tarif.$numberDecimal">
                     </tr>
                   }
                 </tbody>
@@ -62,7 +60,6 @@
                       <td>{{ article.prix_unitaire.$numberDecimal }}</td>
                       <td><input class="form-check-input" type="checkbox" [value]="article._id" (change)="choisirArticle($event)"></td>
                       <td><input class="form-control" type="number" min="0" [id]="'qteArticle'+article._id"></td>
-                      <input type="hidden" [id]="'puArticle'+article._id" [value]="article.prix_unitaire.$numberDecimal">
                     </tr>
                   }
                 </tbody>
