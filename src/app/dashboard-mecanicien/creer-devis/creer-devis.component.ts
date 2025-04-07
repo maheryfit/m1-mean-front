@@ -9,6 +9,7 @@ import { ArticleService } from '../../services/article.service';
 import { Article, QteArticle } from '../../models/article.model';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DevisAjout } from '../../models/devis.model';
+import { DevisService } from '../../services/devis.service';
 
 @Component({
   selector: 'app-creer-devis',
@@ -19,13 +20,17 @@ import { DevisAjout } from '../../models/devis.model';
 export class CreerDevisComponent {
   route=inject(ActivatedRoute);
   iddemande=this.route.snapshot.paramMap.get("iddemande") as string;
+
   demandeService=inject(DemandeRdvService);
   serviceService=inject(ServicesService);
   articleService=inject(ArticleService);
+  devisService=inject(DevisService);
+
   demande=signal<DemandeRdvMecanicien|null>(null);
   services=signal<Service[]>([]);
   articles=signal<Article[]>([]);
   idmecanicien=localStorage.getItem("idmecanicien");
+  erreur=signal('');
   constructor(){
       effect(()=>{
         this.demandeService.getForMecanicien(this.iddemande).subscribe({
@@ -111,6 +116,10 @@ export class CreerDevisComponent {
       mecanicien:this.idmecanicien as string,
       dateheure_debut_maintenance:this.devisForm.value.date_debut_maintenance as Date
     }
-    console.log(devis);
+    this.devisService.creerDevis(devis).subscribe({
+      error: (error)=>{
+        this.erreur.set(error.error.message);
+      }
+    });
   }
 }
