@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {isAuthClient, isAuthMecanicien, logout} from './features/connect.guard';
+import {isAuthClient, isAuthManager, isAuthMecanicien, logout} from './features/connect.guard';
 import {AppComponent} from './app.component';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
@@ -15,6 +15,9 @@ import { DetailDemandeRdvComponent } from './dashboard-client/detail-demande-rdv
 import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-mecanicien.component';
 import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
 import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste-demande-rdv/liste-demande-rdv.component';
+import {LoginManagerComponent} from './core/auth/pages/login-manager/login-manager.component';
+import {DashboardManagerComponent} from './dashboard-manager/dashboard-manager.component';
+import {RevenueComponent} from './dashboard-manager/revenue/revenue.component';
 import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
 
@@ -120,6 +123,25 @@ export const routes: Routes = [
       }
     ],
     canActivate:[isAuthMecanicien]
+  },
+  // Login manager
+  {
+    path:"login-manager",
+    component:LoginManagerComponent,
+    title:"Connexion - Manager"
+  },
+  {
+    path:"manager",
+    component:DashboardManagerComponent,
+    title:"Tableau de bord - Manager",
+    children:[
+      {
+        path:"",
+        component: RevenueComponent,
+        pathMatch:"full"
+      }
+    ],
+    canActivate:[isAuthManager]
   },
   {
     path: 'chatting',
