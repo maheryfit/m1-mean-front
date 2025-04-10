@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between border-light border p-3 bg-dark text-white mb-3 w-75 mx-auto">
-  <p><a href="javascript:void(0)" data-bs-toggle="modal" [attr.data-bs-target]="'#station'+_id">{{ nom }}<i class="bi-geo-alt-fill ms-2"></i></a></p>
+  <p><a href="javascript:void(0)" class="text-decoration-underline" data-bs-toggle="modal" [attr.data-bs-target]="'#station'+_id">{{ nom }}<i class="bi-geo-alt-fill ms-2"></i></a></p>
   <p>{{ lieu }}</p>
   <p class="bg-secondary"><input type="radio" name="station" (click)="selectStation()" [value]="_id" class="form-check-input" [checked]="checked"></p>
   <div class="modal" [id]="'station'+_id" tabindex="-1" [attr.aria-labelledby]="'stationLabel'+_id" aria-hidden="true">

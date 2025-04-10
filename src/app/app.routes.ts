@@ -18,6 +18,8 @@ import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste
 import {LoginManagerComponent} from './core/auth/pages/login-manager/login-manager.component';
 import {DashboardManagerComponent} from './dashboard-manager/dashboard-manager.component';
 import {RevenueComponent} from './dashboard-manager/revenue/revenue.component';
+import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
+import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
 
 export const routes: Routes = [
   {
@@ -110,6 +112,14 @@ export const routes: Routes = [
       {
         path:"demande-rdv",
         component:ListeDemandeRdvMecanicienComponent
+      },
+      {
+        path:"details-demande-rdv/:iddemande",
+        component:DetailDemandeRdvMecanicienComponent
+      },
+      {
+        path:"creer-devis/:iddemande",
+        component:CreerDevisComponent
       }
     ],
     canActivate:[isAuthMecanicien]

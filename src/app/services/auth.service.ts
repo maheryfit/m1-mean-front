@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {ChattingService} from '../features/chatting/chatting.service';
 import { Router } from '@angular/router';
+import { MecanicienDetails } from '../models/mecanicien.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,10 @@ export class AuthService {
       "manager" : "/manager"
     };
     await this.router.navigate([paths[user.profil]]);
+  }
+
+  getMecanicien(user:User){
+    return this.http.get<MecanicienDetails>(`${environment.API_URL}/mecaniciens/findByUser/${user.id}`);
   }
 
 }
