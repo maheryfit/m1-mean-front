@@ -7,8 +7,12 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ServicesService {
-  http=inject(HttpClient);
-  getAll(){
-    return this.http.get<Service[]>(`${environment.API_URL}/services`);
-  }
+    http=inject(HttpClient);
+    getAll(){
+        return this.http.get<Service[]>(`${environment.API_URL}/services`);
+    }
+
+    deleteById(id: string) {
+        return this.http.delete<void>(`${environment.API_URL}/services/${id}`)
+    }
 }

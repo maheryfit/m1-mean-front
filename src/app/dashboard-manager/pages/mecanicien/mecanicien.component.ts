@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MecanicienDetails} from '../../models/mecanicien.model';
-import {MecanicienService} from '../services/mecanicien.service';
+import {MecanicienDetails} from '../../../models/mecanicien.model';
+import {MecanicienService} from '../../services/mecanicien.service';
 
 @Component({
   selector: 'app-mecanicien',
@@ -23,8 +23,10 @@ export class MecanicienComponent implements OnInit{
     }
 
     async removeMecanicien(id: string) {
-        await this.mecanicienService.deleteById(id)
-        alert("Mécanicien supprimé")
-        await this.ngOnInit()
+        const resp = confirm("Voulez-vous supprimé ce mécanicien ?")
+        if(resp) {
+            await this.mecanicienService.deleteById(id)
+            await this.ngOnInit()
+        }
     }
 }

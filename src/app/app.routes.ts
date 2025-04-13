@@ -20,7 +20,7 @@ import {DashboardManagerComponent} from './dashboard-manager/dashboard-manager.c
 import {RevenueComponent} from './dashboard-manager/revenue/revenue.component';
 import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
-import {MecanicienComponent} from './dashboard-manager/mecanicien/mecanicien.component';
+import {MecanicienComponent} from './dashboard-manager/pages/mecanicien/mecanicien.component';
 
 export const routes: Routes = [
   {
