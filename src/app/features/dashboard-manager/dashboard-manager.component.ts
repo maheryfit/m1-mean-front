@@ -3,10 +3,11 @@ import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 import {RevenuService} from './services/revenu.service';
+import {FooterComponent} from '../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-dashboard-manager',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, FooterComponent],
   templateUrl: './dashboard-manager.component.html',
   styleUrl: './dashboard-manager.component.css'
 })
