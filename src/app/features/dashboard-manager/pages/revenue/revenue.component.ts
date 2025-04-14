@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RevenuService} from '../services/revenu.service';
+import {RevenuService} from '../../services/revenu.service';
 import { Chart } from 'chart.js';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 @Component({

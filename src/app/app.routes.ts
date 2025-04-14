@@ -16,11 +16,12 @@ import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-m
 import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
 import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste-demande-rdv/liste-demande-rdv.component';
 import {LoginManagerComponent} from './core/auth/pages/login-manager/login-manager.component';
-import {DashboardManagerComponent} from './dashboard-manager/dashboard-manager.component';
-import {RevenueComponent} from './dashboard-manager/revenue/revenue.component';
+import {DashboardManagerComponent} from './features/dashboard-manager/dashboard-manager.component';
+import {RevenueComponent} from './features/dashboard-manager/pages/revenue/revenue.component';
 import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
-import {MecanicienComponent} from './dashboard-manager/pages/mecanicien/mecanicien.component';
+import {MecanicienComponent} from './features/dashboard-manager/pages/mecanicien/mecanicien.component';
+import {ServiceComponent} from './features/dashboard-manager/pages/service/service.component';
 
 export const routes: Routes = [
   {
@@ -143,8 +144,11 @@ export const routes: Routes = [
       },
       {
         path:"mecanicien",
-        component: MecanicienComponent,
-        pathMatch:"full"
+        component: MecanicienComponent
+      },
+      {
+        path:"service",
+        component: ServiceComponent
       }
     ],
     canActivate:[isAuthManager]

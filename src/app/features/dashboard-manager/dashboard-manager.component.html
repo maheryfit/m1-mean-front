@@ -1,20 +1,16 @@
 <div class="container-fluid position-relative d-flex p-0">
-  <div class="sidebar pe-4 pb-3">
-    <nav class="navbar bg-secondary navbar-dark">
-      <a href="#" class="navbar-brand mx-4 mb-3">
-        <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>HandyMan</h3>
-      </a>
-      <div class="navbar-nav w-100">
-        <a routerLink="/manager" class="nav-item nav-link"><i class="bi bi-graph-down me-2"></i>Revenues</a>
-      </div>
-      <div class="navbar-nav w-100">
-        <a routerLink="/manager/mecanicien" class="nav-item nav-link"><i class="bi bi-person-badge"></i>Mécaniciens</a>
-      </div>
-      <div class="navbar-nav w-100">
-        <a routerLink="/manager/service" class="nav-item nav-link"><i class="bi bi-person-badge"></i>Services</a>
-      </div>
-    </nav>
-  </div>
+    <div class="sidebar pe-4 pb-3">
+        <nav class="navbar bg-secondary navbar-dark">
+            <a href="#" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>HandyMan</h3>
+            </a>
+            @for (navigation of navigations; track $index) {
+                <div class="navbar-nav w-100">
+                    <a routerLink="{{ navigation.url }}" class="nav-item nav-link"><i class="{{ navigation.icon }}"></i>{{ navigation.title }}</a>
+                </div>
+            }
+        </nav>
+    </div>
   <div class="content">
     <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
       <a href="#" class="navbar-brand d-flex d-lg-none me-4">
