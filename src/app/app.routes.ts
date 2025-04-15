@@ -134,24 +134,7 @@ export const routes: Routes = [
   },
   {
     path:"manager",
-    component:DashboardManagerComponent,
-    title:"Tableau de bord - Manager",
-    children:[
-      {
-        path:"",
-        component: RevenueComponent,
-        pathMatch:"full"
-      },
-      {
-        path:"mecanicien",
-        component: MecanicienComponent
-      },
-      {
-        path:"service",
-        component: ServiceComponent
-      }
-    ],
-    canActivate:[isAuthManager]
+    loadChildren: () => import("./features/dashboard-manager/dashboard-manager.routes").then(r => r.dashboardManagerRoutes)
   },
   {
     path: 'chatting',

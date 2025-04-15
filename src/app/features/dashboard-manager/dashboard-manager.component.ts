@@ -23,14 +23,17 @@ export class DashboardManagerComponent {
             title: "Revenues"
         },
         {
-            url: "/manager/mecanicien",
-            icon: "bi bi-person-badge me-2",
-            title: "Mécanicien"
-        },
-        {
             url: "/manager/service",
             icon: "bi-view-stacked me-2",
             title: "Service"
+        },        {
+            url: "/manager/roleMecanicien",
+            icon: "bi bi-person-badge me-2",
+            title: "Rôle mécanicien"
+        },        {
+            url: "/manager/mecanicien",
+            icon: "bi bi-person-badge me-2",
+            title: "Mécanicien"
         },
     ]
 
