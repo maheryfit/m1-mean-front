@@ -5,6 +5,7 @@ import {MecanicienComponent} from './pages/mecanicien/mecanicien.component';
 import {ServiceComponent} from './pages/service/service.component';
 import {isAuthManager} from '../connect.guard';
 import {RoleMecanicienComponent} from './pages/role-mecanicien/role-mecanicien.component';
+import {NiveauMecanicienComponent} from './pages/niveau-mecanicien/niveau-mecanicien.component';
 
 
 export const dashboardManagerRoutes: Routes = [
@@ -29,6 +30,10 @@ export const dashboardManagerRoutes: Routes = [
             {
                 path:"roleMecanicien",
                 component: RoleMecanicienComponent
+            },
+            {
+              path:"niveauMecanicien",
+              component: NiveauMecanicienComponent
             }
         ],
         canActivate:[isAuthManager]

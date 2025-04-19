@@ -1,0 +1,37 @@
+<article class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h3 class="mb-3">Niveaux mécanicien</h3>
+        <p class="fw-bold fs-4 text-white mt-4">Nombres de niveaux de mécanicien: {{ count() }}</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Coefficient salarial</th>
+            <th>Date d'ajout</th>
+            <th>Date de dernière modification</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (niveauMecanicien of niveauMecaniciens(); track $index) {
+              <tr>
+                <td>{{ niveauMecanicien.titre }}</td>
+                <td>{{ niveauMecanicien.coefficient_salarial }}</td>
+                <td>{{ niveauMecanicien.createdAt }}</td>
+                <td>{{ niveauMecanicien.updatedAt }}</td>
+                <td>
+                  <button (click)="removeNiveauMecanicien(niveauMecanicien._id)" class="btn btn-outline-primary m-2">Supprimer</button>
+                  <a class="btn btn-warning m-2">Modifier</a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br />
+        <app-pagination [count]="countSignal" [list]="niveauMecaniciensSignal" [getAllPaginate]="niveauMecanicienService.getAllPaginate.bind(niveauMecanicienService)" [getCount]="niveauMecanicienService.getCount.bind(niveauMecanicienService)" />
+      </div>
+    </div>
+  </div>
+</article>

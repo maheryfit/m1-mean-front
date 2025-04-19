@@ -30,7 +30,7 @@ export class RoleMecanicienComponent {
 
     @ViewChild(PaginationComponent) pagination: PaginationComponent | undefined;
     async removeRoleMecanicien(id: string) {
-        const resp = confirm("Voulez-vous supprimé ce mécanicien ?")
+        const resp = confirm("Voulez-vous supprimé ce role de mécanicien ?")
         if(resp) {
             this.roleMecanicienService.deleteById(id).subscribe({
                 next: resp => {
