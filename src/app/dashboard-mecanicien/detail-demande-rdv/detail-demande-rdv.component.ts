@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Diagnostic, DiagnosticAjout } from '../../models/diagnostic.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Devis } from '../../models/devis.model';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-detail-demande-rdv',

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -13,9 +13,9 @@ export class DashboardClientComponent {
   loginService=inject(AuthService);
   router=inject(Router);
   brand=environment.BRAND;
-  nomUtilisateur=localStorage.getItem("nom_utilisateur");
+  // nomUtilisateur=localStorage.getItem("nom_utilisateur");
   logout(){
-    this.loginService.logout().subscribe();
-    this.router.navigate(["login"]);
+    // this.loginService.logout().subscribe();
+    // this.router.navigate(["login"]);
   }
 }

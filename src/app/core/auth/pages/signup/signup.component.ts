@@ -1,8 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { environment } from '../../../../../environments/environment.development';
+import { environment } from '../../../../../environments/environment';
 import { NgOptimizedImage } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,6 +22,7 @@ export class SignupComponent {
     telephone:new FormControl("XXX",Validators.required)
   });
   erreur=signal("");
+  authService=inject(AuthService);
   inscription(){
     const utilisateurToSend={
       nom:this.signupForm.value.nom,
@@ -29,24 +31,6 @@ export class SignupComponent {
       motDePasse:this.signupForm.value.motDePasse,
       telephone:this.signupForm.value.telephone
     }
-    const erreur=this.erreur;
-    const router=this.router;
-    const url=environment.API_URL;
-    const xhr=new XMLHttpRequest();
-    xhr.onreadystatechange=function(){
-      if(this.readyState===4){
-        switch(this.status){
-          case 200:
-            router.navigate(["login"]);
-            break;
-          case 500:
-            erreur.set(JSON.parse(this.response).message);
-            break;
-        }
-      }
-    }
-    xhr.open("POST", `${url}/client/inscription`, true);
-    xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
-    xhr.send(JSON.stringify(utilisateurToSend));
+    this.authService.inscription(this.router,utilisateurToSend,this.erreur);
   }
 }

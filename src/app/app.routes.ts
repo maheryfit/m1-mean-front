@@ -29,7 +29,7 @@ export const routes: Routes = [
     path: "",
     redirectTo:()=>{
       const cookie=inject(CookieService);
-      if(cookie.get("cookieKey")==null){
+      if(cookie.get("cookieKey")===null){
         return "login";
       }
       return "client/voitures";
@@ -46,17 +46,6 @@ export const routes: Routes = [
     component: DashboardClientComponent,
     title:"Tableau de bord - Client",
     children:[
-      {
-        path:"",
-        redirectTo:()=>{
-          const cookie=inject(CookieService);
-          if(cookie.get("cookieKey")==null){
-            return "../login"
-          }
-          return "voitures"
-        },
-        pathMatch:"full"
-      },
       {
         path:"voitures",
         component: VoituresComponent
@@ -82,7 +71,7 @@ export const routes: Routes = [
         component: ProfilClientComponent
       }
     ],
-    canActivate:[isAuthClient]
+    // canActivate:[isAuthClient]
     // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
   },
   {
