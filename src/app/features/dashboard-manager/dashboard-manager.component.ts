@@ -42,6 +42,11 @@ export class DashboardManagerComponent {
             icon: "bi bi-person-badge me-2",
             title: "Mécanicien"
         },
+        {
+            url: "/manager/article",
+            icon: "bi bi-basket3-fill me-2",
+            title: "Article"
+        },
     ]
 
     logout(){
