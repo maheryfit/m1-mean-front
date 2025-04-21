@@ -12,14 +12,14 @@ import { MecanicienDetails } from '../models/mecanicien.model';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private chattingService: ChattingService, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(user: Auth): Observable<HttpResponse<User|MyHttpError>> {
     return this.http.post<User>(`${environment.API_URL}/user/login`, user, {observe:'response'});
   }
 
   logout(): Observable<any> {
-    this.chattingService.emitOffline();
+    // this.chattingService.emitOffline();
     localStorage.removeItem("id")
     localStorage.removeItem("nom_utilisateur")
     localStorage.removeItem("profil")
