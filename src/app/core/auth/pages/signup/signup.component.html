@@ -32,7 +32,8 @@
                       <label for="floatingPassword">Mot de passe</label>
                   </div>
                   <button type="submit" class="btn btn-primary py-3 w-100 mb-4" [disabled]="!signupForm.valid">S'inscrire</button>
-                  <p class="text-center mb-0"><a href="login">Se connecter</a></p>
+                  <p style="color: red;">{{ erreur() }}</p>
+                  <p class="text-center mb-0">Vous avez déjà un compte? <a href="login">Se connecter</a></p>
               </form>
               </div>
           </div>

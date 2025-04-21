@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { environment } from '../../../../../environments/environment.development';
 import { NgOptimizedImage } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -20,6 +20,7 @@ export class SignupComponent {
     motDePasse:new FormControl("root",Validators.required),
     telephone:new FormControl("XXX",Validators.required)
   });
+  erreur=signal("");
   inscription(){
     const utilisateurToSend={
       nom:this.signupForm.value.nom,
@@ -28,12 +29,20 @@ export class SignupComponent {
       motDePasse:this.signupForm.value.motDePasse,
       telephone:this.signupForm.value.telephone
     }
+    const erreur=this.erreur;
     const router=this.router;
     const url=environment.API_URL;
     const xhr=new XMLHttpRequest();
     xhr.onreadystatechange=function(){
-      if(this.readyState===4&&this.status===200){
-        router.navigate(["login"]);
+      if(this.readyState===4){
+        switch(this.status){
+          case 200:
+            router.navigate(["login"]);
+            break;
+          case 500:
+            erreur.set(JSON.parse(this.response).message);
+            break;
+        }
       }
     }
     xhr.open("POST", `${url}/client/inscription`, true);
