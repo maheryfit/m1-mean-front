@@ -1,10 +1,8 @@
 import { Component, inject, Renderer2, signal } from '@angular/core';
-import {Auth, MyHttpError, User} from '../../auth.model';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '../../../../services/auth.service';
 import {Router} from '@angular/router';
 import { environment } from '../../../../../environments/environment';
-import { NgOptimizedImage } from '@angular/common';
+import {ClientService} from '../../../../services/client.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +14,7 @@ import { NgOptimizedImage } from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginService=inject(AuthService);
+  clientService=inject(ClientService);
   loginForm=new FormGroup({
     nomUtilisateur: new FormControl('JBo', Validators.required),
     motDePasse: new FormControl('root', Validators.required)
@@ -29,7 +27,7 @@ export class LoginComponent {
       motDePasse:this.loginForm.value.motDePasse,
       profil:environment.PROFIL_CLIENT
     }
-    this.loginService.connexion(this.router,utilisateurToSend,this.erreur);
+    this.clientService.connexion(this.router,utilisateurToSend,this.erreur);
     // this.loginService.login(user).subscribe({
     //   next:(res) => {
     //     this.loginService.storeUserToLocalStorage(res.body as User);

@@ -1,9 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { NgOptimizedImage } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
+import {ClientService} from '../../../../services/client.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +21,7 @@ export class SignupComponent {
     telephone:new FormControl("XXX",Validators.required)
   });
   erreur=signal("");
-  authService=inject(AuthService);
+  clientService=inject(ClientService );
   inscription(){
     const utilisateurToSend={
       nom:this.signupForm.value.nom,
@@ -31,6 +30,6 @@ export class SignupComponent {
       motDePasse:this.signupForm.value.motDePasse,
       telephone:this.signupForm.value.telephone
     }
-    this.authService.inscription(this.router,utilisateurToSend,this.erreur);
+    this.clientService.inscription(this.router,utilisateurToSend,this.erreur);
   }
 }

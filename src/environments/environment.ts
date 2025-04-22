@@ -11,5 +11,5 @@ export const environment = {
   PROFIL_MECANICIEN:2,
   PROFIL_MANAGER:3,
 
-  CLIENT_STORAGE_KEY:"client"
+  UTILISATEUR_STORAGE_KEY:"utilisateur"
 };

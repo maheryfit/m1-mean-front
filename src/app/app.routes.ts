@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import {isAuthClient, isAuthMecanicien, logout} from './features/connect.guard';
-import {AppComponent} from './app.component';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
 import { SignupComponent } from './core/auth/pages/signup/signup.component';
@@ -17,6 +16,8 @@ import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/log
 import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste-demande-rdv/liste-demande-rdv.component';
 import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
+import {environment} from '../environments/environment';
+import {RouteService} from './services/utils/route.service';
 
 export const routes: Routes = [
   {
@@ -28,11 +29,8 @@ export const routes: Routes = [
   {
     path: "",
     redirectTo:()=>{
-      const cookie=inject(CookieService);
-      if(cookie.get("cookieKey")===null){
-        return "login";
-      }
-      return "client/voitures";
+      const routeService=inject(RouteService);
+      return routeService.filtrePathGeneral();
     },
     pathMatch: "full"
   },
@@ -46,6 +44,14 @@ export const routes: Routes = [
     component: DashboardClientComponent,
     title:"Tableau de bord - Client",
     children:[
+      {
+        path: "",
+        redirectTo:()=>{
+          const routeService=inject(RouteService);
+          return routeService.filtrePathClient();
+        },
+        pathMatch: "full"
+      },
       {
         path:"voitures",
         component: VoituresComponent
@@ -71,7 +77,7 @@ export const routes: Routes = [
         component: ProfilClientComponent
       }
     ],
-    // canActivate:[isAuthClient]
+    canActivate:[isAuthClient]
     // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
   },
   {

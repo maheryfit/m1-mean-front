@@ -30,9 +30,9 @@ export class AuthService {
     return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthConnected`);
   }
 
-  checkAuthClient(): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthClient`);
-  }
+  // checkAuthClient(): Observable<boolean> {
+  //   return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthClient`);
+  // }
 
   checkAuthMecanicien(): Observable<boolean> {
     return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthMecanicien`);
@@ -63,46 +63,26 @@ export class AuthService {
 
   // ========================================================================================================================
 
-  inscription(router:Router,utilisateurToSend:any,erreur:WritableSignal<string>){
-    const url=`${environment.API_URL}/client/inscription`;
-    const xhr=new XMLHttpRequest();
-    xhr.onreadystatechange=function(){
-      if(this.readyState===4){
-        switch(this.status){
-          case 200:
-            router.navigate(["login"]);
-            break;
-          case 500:
-            erreur.set(JSON.parse(this.response).message);
-            break;
+  checkAuthClient(){
+    const url=`${environment.API_URL}/utilisateur/checkAuthClient`;
+    const promise=new Promise<boolean>(function (resolve){
+      const xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function (){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve(JSON.parse(this.response));
+              break;
+            case 500:
+              throw new Error(JSON.parse(this.response).message);
+          }
         }
       }
-    }
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
-    xhr.send(JSON.stringify(utilisateurToSend));
-  }
-
-  connexion(router:Router,utilisateurToSend:any,erreur:WritableSignal<string>){
-    const url=`${environment.API_URL}/client/connexion`;
-    const xhr=new XMLHttpRequest();
-    xhr.onreadystatechange=function(){
-      if(this.readyState===4){
-        switch(this.status){
-          case 200:
-            localStorage.setItem(environment.CLIENT_STORAGE_KEY, this.response);
-            router.navigate(["client"]);
-            break;
-          case 500:
-            erreur.set(JSON.parse(this.response).message);
-            break;
-        }
-      }
-    }
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
-    xhr.withCredentials=true;
-    xhr.send(JSON.stringify(utilisateurToSend));
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
   }
 
 }
