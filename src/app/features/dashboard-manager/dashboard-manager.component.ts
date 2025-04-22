@@ -47,6 +47,11 @@ export class DashboardManagerComponent {
             icon: "bi bi-basket3-fill me-2",
             title: "Article"
         },
+        {
+            url: "/manager/station",
+            icon: "bi bi-tools me-2",
+            title: "Station"
+        },
     ]
 
     logout(){

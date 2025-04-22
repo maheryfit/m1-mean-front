@@ -11,6 +11,10 @@ export class StationService {
   getStations(index:number, pagelimit:number){
     return this.http.get<Station[]>(`${environment.API_URL}/stations/${index}/${pagelimit}`);
   }
+
+  getAll(){
+      return this.http.get<Station[]>(`${environment.API_URL}/stations`);
+  }
   count(){
     return this.http.get<number>(`${environment.API_URL}/stations/count`);
   }

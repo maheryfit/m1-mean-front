@@ -7,6 +7,7 @@ import {isAuthManager} from '../connect.guard';
 import {RoleMecanicienComponent} from './pages/role-mecanicien/role-mecanicien.component';
 import {NiveauMecanicienComponent} from './pages/niveau-mecanicien/niveau-mecanicien.component';
 import {ArticleComponent} from './pages/article/article.component';
+import {StationComponent} from './pages/station/station.component';
 
 
 export const dashboardManagerRoutes: Routes = [
@@ -39,6 +40,10 @@ export const dashboardManagerRoutes: Routes = [
             {
               path:"article",
               component: ArticleComponent
+            },
+            {
+              path:"station",
+              component: StationComponent
             }
         ],
         canActivate:[isAuthManager]
