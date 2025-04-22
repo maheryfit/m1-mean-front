@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {ClientService} from '../../../../services/client.service';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

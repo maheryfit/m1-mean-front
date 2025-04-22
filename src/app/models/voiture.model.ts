@@ -9,6 +9,41 @@ export interface Voiture extends ObjectModel{
   specification:Specification,
   images_name:string[]
 }
+export class ClasseVoiture{
+  private _id:string="";
+  private _description:string="";
+  private _immatriculation:string="";
+
+  get id(): string {
+    return this._id;
+  }
+
+  set id(value: string) {
+    this._id = value;
+  }
+
+  get description(): string {
+    return this._description;
+  }
+
+  set description(value: string) {
+    this._description = value;
+  }
+
+  get immatriculation(): string {
+    return this._immatriculation;
+  }
+
+  set immatriculation(value: string) {
+    this._immatriculation = value;
+  }
+
+  init(obj:any) {
+    this.id=obj._id;
+    this.description=obj.description;
+    this.immatriculation=obj.immatriculation;
+  }
+}
 export interface VoitureProprietaire extends ObjectModel{
   proprietaire:Utilisateur,
   description:string,

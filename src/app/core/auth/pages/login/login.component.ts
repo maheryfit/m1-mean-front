@@ -1,6 +1,6 @@
 import { Component, inject, Renderer2, signal } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import {ClientService} from '../../../../services/client.service';
 
@@ -8,7 +8,8 @@ import {ClientService} from '../../../../services/client.service';
   selector: 'app-login',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

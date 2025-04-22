@@ -10,12 +10,17 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './dashboard-client.component.css'
 })
 export class DashboardClientComponent {
-  loginService=inject(AuthService);
+  authService=inject(AuthService);
   router=inject(Router);
   brand=environment.BRAND;
-  // nomUtilisateur=localStorage.getItem("nom_utilisateur");
-  logout(){
-    // this.loginService.logout().subscribe();
-    // this.router.navigate(["login"]);
+  nomUtilisateur;
+
+  constructor() {
+    const utilisateur=localStorage.getItem('utilisateur');
+    this.nomUtilisateur = utilisateur===null?"Visiteur":JSON.parse(utilisateur).nom_utilisateur;
+  }
+
+  async logout(){
+    await this.authService.deconnexion(this.router);
   }
 }

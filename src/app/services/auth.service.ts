@@ -65,7 +65,7 @@ export class AuthService {
 
   checkAuthClient(){
     const url=`${environment.API_URL}/utilisateur/checkAuthClient`;
-    const promise=new Promise<boolean>(function (resolve){
+    const promise=new Promise<boolean>(function (resolve,reject){
       const xhr=new XMLHttpRequest();
       xhr.onreadystatechange=function (){
         if(this.readyState===4){
@@ -74,7 +74,29 @@ export class AuthService {
               resolve(JSON.parse(this.response));
               break;
             case 500:
-              throw new Error(JSON.parse(this.response).message);
+              reject(JSON.parse(this.response).message);
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
+  }
+  deconnexion(router:Router){
+    const url=`${environment.API_URL}/utilisateur/deconnexion`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<void>(function (){
+      xhr.onreadystatechange=async function (){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              localStorage.removeItem(environment.UTILISATEUR_STORAGE_KEY);
+              await router.navigate(["login"]);
+              break;
+            case 500:
+              alert(JSON.parse(this.response).message);
           }
         }
       }
