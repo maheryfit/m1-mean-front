@@ -18,8 +18,8 @@ export class StationComponent implements AfterViewInit, OnDestroy {
     private defaultIcon: L.Icon = L.icon({
         iconUrl: 'icon/garage.png',
         shadowUrl: '',
-        iconSize: [41, 51],
-        iconAnchor: [20, 51]
+        iconSize: [55, 51],
+        iconAnchor: [20, 25]
     });
 
     constructor(private stationService: StationService) {
@@ -37,7 +37,7 @@ export class StationComponent implements AfterViewInit, OnDestroy {
     }
 
     private initMap() {
-        this.map = L.map('map').setView([-18.914, 47.5539], 13);
+        this.map = L.map('map').setView([-18.935, 47.5239], 13);
         L.tileLayer(this.BASE_MAP_URL, {
             maxZoom: 19,
         }).addTo(this.map);
@@ -47,13 +47,27 @@ export class StationComponent implements AfterViewInit, OnDestroy {
         this.stations.forEach(station => {
             const latitude = station.coordonnees.coordinates[0]
             const longitude = station.coordonnees.coordinates[1]
-            console.log(latitude, longitude)
             L.marker([latitude, longitude], {
-                draggable: true,
+                draggable: false,
                 icon: this.defaultIcon
             }).addTo(this.map)
-                .bindPopup(`Station: <b>${station.nom} - ${station.lieu}</b>`)
+              .on("click", () => {
+                  this.getSidePanelStationDetail(station);
+              })
+                //.bindPopup(`Station: <b>${station.nom} - ${station.lieu}</b>`)
+                .bindPopup(this.getSidePanelStationDetail(station))
                 .openPopup();
         })
+    }
+
+    getSidePanelStationDetail(station: Station) {
+        return`
+            <div class="my-card">
+                <div class="my-card-details">
+                    <p class="my-text-title fs-6"><b>${station.nom} - ${station.lieu}</b></p>
+                </div>
+                <button class="card-button">Supprimer</button>
+            </div>
+        `
     }
 }
