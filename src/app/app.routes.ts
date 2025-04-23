@@ -19,6 +19,7 @@ import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-de
 import {environment} from '../environments/environment';
 import {RouteService} from './services/utils/route.service';
 import {CreerVoitureComponent} from './dashboard-client/voitures/creer-voiture/creer-voiture.component';
+import {ListeStationsComponent} from './dashboard-client/stations/liste-stations/liste-stations.component';
 
 export const routes: Routes = [
   {
@@ -49,7 +50,7 @@ export const routes: Routes = [
         path: "",
         redirectTo:()=>{
           const routeService=inject(RouteService);
-          return routeService.filtrePathClient();
+          return routeService.filtrePathClientVoiture();
         },
         pathMatch: "full"
       },
@@ -61,7 +62,7 @@ export const routes: Routes = [
             path: "",
             redirectTo:()=>{
               const routeService=inject(RouteService);
-              return routeService.filtrePathClient();
+              return routeService.filtrePathClientVoiture();
             },
             pathMatch: "full"
           },
@@ -72,6 +73,24 @@ export const routes: Routes = [
           {
             path:"creer/:page",
             component:CreerVoitureComponent
+          }
+        ]
+      },
+      {
+        path:"stations",
+        title:"Aperçu des stations",
+        children:[
+          {
+            path:"",
+            redirectTo:()=>{
+              const routeService=inject(RouteService);
+              return routeService.filtrePathClientStation();
+            },
+            pathMatch: "full"
+          },
+          {
+            path:"liste/:page",
+            component: ListeStationsComponent
           }
         ]
       },

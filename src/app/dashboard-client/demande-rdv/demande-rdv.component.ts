@@ -39,22 +39,22 @@ export class DemandeRdvComponent {
   });
   aucuneStation=signal(true);
   constructor(){
-    effect(()=>{
-      this.stationService.getStations(this.currentIndex(), this.pageLimit).subscribe({
-        next: (data)=>{
-          this.stations.set(data);
-          if(data.length>0){
-            this.aucuneStation.set(false)
-            this.rdvform.patchValue({
-              station:data[0]._id
-            })
-          }
-        },
-        error: ()=>{
-          this.router.navigate([`../details-voiture/${this.idvoiture}`]);
-        }
-      })
-    });
+    // effect(()=>{
+    //   this.stationService.getStations(this.currentIndex(), this.pageLimit).subscribe({
+    //     next: (data)=>{
+    //       this.stations.set(data);
+    //       if(data.length>0){
+    //         this.aucuneStation.set(false)
+    //         this.rdvform.patchValue({
+    //           station:data[0]._id
+    //         })
+    //       }
+    //     },
+    //     error: ()=>{
+    //       this.router.navigate([`../details-voiture/${this.idvoiture}`]);
+    //     }
+    //   })
+    // });
     effect(()=>{
       this.stationService.count().subscribe({
         next: (data)=>{

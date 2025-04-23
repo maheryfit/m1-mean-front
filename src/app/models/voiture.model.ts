@@ -11,7 +11,7 @@ export interface Voiture extends ObjectModel{
   images_name:string[]
 }
 export class ClasseVoiture{
-  private _id:string="";
+  private _idvoiture:string="";
   private _description:string="";
   private _immatriculation:string="";
   private _caracteristiques:Caracteristique[]=[];
@@ -24,12 +24,12 @@ export class ClasseVoiture{
     this._caracteristiques = value;
   }
 
-  get id(): string {
-    return this._id;
+  get idvoiture(): string {
+    return this._idvoiture;
   }
 
-  set id(value: string) {
-    this._id = value;
+  set idvoiture(value: string) {
+    this._idvoiture = value;
   }
 
   get description(): string {
@@ -49,7 +49,7 @@ export class ClasseVoiture{
   }
 
   init(obj:any) {
-    this.id=obj._id;
+    this.idvoiture=obj._id;
     this.description=obj.description;
     this.immatriculation=obj.immatriculation;
     this.caracteristiques=obj.caracteristiques;
