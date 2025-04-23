@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { VoituresComponent } from "./voitures/voitures.component";
+import { VoituresComponent } from "./voitures/liste/voitures.component";
 import { isAuthClient } from "../features/connect.guard";
 
 export const clientRoutes:Routes = [

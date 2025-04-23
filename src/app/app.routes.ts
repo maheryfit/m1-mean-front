@@ -3,7 +3,7 @@ import {isAuthClient, isAuthMecanicien, logout} from './features/connect.guard';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
 import { SignupComponent } from './core/auth/pages/signup/signup.component';
-import { VoituresComponent } from './dashboard-client/voitures/voitures.component';
+import { VoituresComponent } from './dashboard-client/voitures/liste/voitures.component';
 import { ProfilClientComponent } from './dashboard-client/profil-client/profil-client.component';
 import { DetailsVoitureComponent } from './dashboard-client/details-voiture/details-voiture.component';
 import { inject } from '@angular/core';
@@ -18,6 +18,7 @@ import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/deta
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
 import {environment} from '../environments/environment';
 import {RouteService} from './services/utils/route.service';
+import {CreerVoitureComponent} from './dashboard-client/voitures/creer-voiture/creer-voiture.component';
 
 export const routes: Routes = [
   {
@@ -54,7 +55,25 @@ export const routes: Routes = [
       },
       {
         path:"voitures",
-        component: VoituresComponent
+        title: "Gestion de voitures",
+        children:[
+          {
+            path: "",
+            redirectTo:()=>{
+              const routeService=inject(RouteService);
+              return routeService.filtrePathClient();
+            },
+            pathMatch: "full"
+          },
+          {
+            path:"liste/:page",
+            component:VoituresComponent
+          },
+          {
+            path:"creer/:page",
+            component:CreerVoitureComponent
+          }
+        ]
       },
       {
         path:"details-voiture/:id",

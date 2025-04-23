@@ -1,4 +1,5 @@
 import { ObjectModel } from "../object-model.model";
+import { Caracteristique } from "./caracteristique.model";
 import { Specification } from "./specification.model";
 import { Utilisateur } from "./utilisateur.model";
 
@@ -13,6 +14,15 @@ export class ClasseVoiture{
   private _id:string="";
   private _description:string="";
   private _immatriculation:string="";
+  private _caracteristiques:Caracteristique[]=[];
+
+  get caracteristiques(): Caracteristique[] {
+    return this._caracteristiques;
+  }
+
+  set caracteristiques(value: Caracteristique[]) {
+    this._caracteristiques = value;
+  }
 
   get id(): string {
     return this._id;
@@ -42,6 +52,7 @@ export class ClasseVoiture{
     this.id=obj._id;
     this.description=obj.description;
     this.immatriculation=obj.immatriculation;
+    this.caracteristiques=obj.caracteristiques;
   }
 }
 export interface VoitureProprietaire extends ObjectModel{

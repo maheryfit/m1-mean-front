@@ -75,6 +75,7 @@ export class AuthService {
               break;
             case 500:
               reject(JSON.parse(this.response).message);
+              break;
           }
         }
       }
@@ -97,6 +98,7 @@ export class AuthService {
               break;
             case 500:
               alert(JSON.parse(this.response).message);
+              break;
           }
         }
       }
