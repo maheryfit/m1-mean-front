@@ -3,29 +3,20 @@ import {isAuthClient, isAuthMecanicien, logout} from './features/connect.guard';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { LoginComponent } from './core/auth/pages/login/login.component';
 import { SignupComponent } from './core/auth/pages/signup/signup.component';
-import { VoituresComponent } from './dashboard-client/voitures/liste/voitures.component';
-import { ProfilClientComponent } from './dashboard-client/profil-client/profil-client.component';
-import { DetailsVoitureComponent } from './dashboard-client/details-voiture/details-voiture.component';
 import { inject } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
-import { DemandeRdvComponent } from './dashboard-client/demande-rdv/demande-rdv.component';
-import { ListeDemandeRdvComponent } from './dashboard-client/liste-demande-rdv/liste-demande-rdv.component';
-import { DetailDemandeRdvComponent } from './dashboard-client/detail-demande-rdv/detail-demande-rdv.component';
 import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-mecanicien.component';
 import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
 import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste-demande-rdv/liste-demande-rdv.component';
 import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
-import {environment} from '../environments/environment';
 import {RouteService} from './services/utils/route.service';
-import {CreerVoitureComponent} from './dashboard-client/voitures/creer-voiture/creer-voiture.component';
-import {ListeStationsComponent} from './dashboard-client/stations/liste-stations/liste-stations.component';
+import {clientRoutes} from './routes/client.routes';
 
 export const routes: Routes = [
   {
     path: 'login',
     title: 'Connexion - Client',
-    // loadChildren: () => import('./core/auth/auth.routes').then(r => r.authRoutes)
     component: LoginComponent
   },
   {
@@ -45,78 +36,8 @@ export const routes: Routes = [
     path: "client",
     component: DashboardClientComponent,
     title:"Tableau de bord - Client",
-    children:[
-      {
-        path: "",
-        redirectTo:()=>{
-          const routeService=inject(RouteService);
-          return routeService.filtrePathClientVoiture();
-        },
-        pathMatch: "full"
-      },
-      {
-        path:"voitures",
-        title: "Gestion de voitures",
-        children:[
-          {
-            path: "",
-            redirectTo:()=>{
-              const routeService=inject(RouteService);
-              return routeService.filtrePathClientVoiture();
-            },
-            pathMatch: "full"
-          },
-          {
-            path:"liste/:page",
-            component:VoituresComponent
-          },
-          {
-            path:"creer/:page",
-            component:CreerVoitureComponent
-          }
-        ]
-      },
-      {
-        path:"stations",
-        title:"Aperçu des stations",
-        children:[
-          {
-            path:"",
-            redirectTo:()=>{
-              const routeService=inject(RouteService);
-              return routeService.filtrePathClientStation();
-            },
-            pathMatch: "full"
-          },
-          {
-            path:"liste/:page",
-            component: ListeStationsComponent
-          }
-        ]
-      },
-      {
-        path:"details-voiture/:id",
-        component: DetailsVoitureComponent
-      },
-      {
-        path:"demande-rdv/:idvoiture",
-        component: DemandeRdvComponent
-      },
-      {
-        path:"demande-rdv",
-        component: ListeDemandeRdvComponent
-      },
-      {
-        path:"details-demande-rdv/:iddemande",
-        component: DetailDemandeRdvComponent
-      },
-      {
-        path:"profil",
-        component: ProfilClientComponent
-      }
-    ],
+    children:clientRoutes,
     canActivate:[isAuthClient]
-    // loadChildren: () => import("./dashboard-client/client.routes").then(r => r.clientRoutes)
   },
   {
     path:"login-mecanicien",

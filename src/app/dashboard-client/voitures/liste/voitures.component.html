@@ -1,7 +1,7 @@
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4">
     <div class="col">
-      <div class="bg-secondary rounded p-4" style="height: 75vh">
+      <div class="bg-secondary rounded p-4">
         <h3>Voitures</h3>
         <p class="fw-bold fs-4 text-white mt-4">Vos voitures: {{ countVoitures() }}</p>
         <a [routerLink]="'/client/voitures/creer/'+currentIndex()" class="btn-primary btn"><i class="bi-plus me-2"></i>Ajouter</a>
@@ -27,9 +27,9 @@
         <div class="d-flex justify-content-around">
           <div class="btn-group" role="group">
             <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
-            <button type="button" class="btn btn-secondary border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+            <button type="button" [disabled]="disabledPrevious()" class="btn btn-dark border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
             <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
-            <button type="button" class="btn btn-secondary border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+            <button type="button" [disabled]="disabledNext()" class="btn btn-dark border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
             <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
           </div>
         </div>

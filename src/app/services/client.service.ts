@@ -49,44 +49,24 @@ export class ClientService{
     xhr.send(JSON.stringify(utilisateurToSend));
   }
   getVoitures(page:number,limit:number){
-    const url=`${environment.API_URL}/client/voitures/${page}/${limit}`;
+    const url=`${environment.API_URL}/client/liste-voiture/${page}/${limit}`;
     const xhr=new XMLHttpRequest();
-    const promise=new Promise<ClasseVoiture[]>(function (resolve,reject){
+    const promise=new Promise<[ClasseVoiture[],number]>(function (resolve,reject){
       xhr.onreadystatechange=function(){
         if(this.readyState===4){
           switch(this.status){
             case 200:
               const response=JSON.parse(this.response);
+              const responseVoitures=response[0];
+              const countVoitures=response[1];
               const voitures:ClasseVoiture[]=[];
               let voiture;
-              for(let i=0;i<response.length;i++){
+              for(let i=0;i<responseVoitures.length;i++){
                 voiture=new ClasseVoiture();
-                voiture.init(response[i]);
+                voiture.init(responseVoitures[i]);
                 voitures.push(voiture);
               }
-              resolve(voitures);
-              break;
-            case 500:
-              reject(JSON.parse(this.response).message);
-              break;
-          }
-        }
-      }
-      xhr.open("GET", url, true);
-      xhr.withCredentials=true;
-      xhr.send();
-    });
-    return promise;
-  }
-  countVoitures(){
-    const url=`${environment.API_URL}/client/count-voitures`;
-    const xhr=new XMLHttpRequest();
-    const promise=new Promise<number>(function (resolve,reject){
-      xhr.onreadystatechange=function(){
-        if(this.readyState===4){
-          switch(this.status){
-            case 200:
-              resolve(JSON.parse(this.response));
+              resolve([voitures,countVoitures]);
               break;
             case 500:
               reject(JSON.parse(this.response).message);
@@ -101,7 +81,7 @@ export class ClientService{
     return promise;
   }
   creerVoiture(voiture:any){
-    const url=`${environment.API_URL}/client/voiture`;
+    const url=`${environment.API_URL}/client/creer-voiture`;
     const xhr=new XMLHttpRequest();
     const promise=new Promise<ClasseVoiture>(function (resolve,reject){
       xhr.onreadystatechange=function(){
@@ -127,7 +107,7 @@ export class ClientService{
     return promise;
   }
   supprimerVoiture(idvoiture:string){
-    const url=`${environment.API_URL}/client/voiture/${idvoiture}`;
+    const url=`${environment.API_URL}/client/supprimer-voiture/${idvoiture}`;
     const xhr=new XMLHttpRequest();
     const promise=new Promise<void>(function (resolve,reject){
       xhr.onreadystatechange=function(){

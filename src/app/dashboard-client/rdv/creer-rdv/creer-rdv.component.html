@@ -1,0 +1,129 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded p-4 vh-75 overflow-scroll">
+        <a class="link-primary" [routerLink]="'/client/stations/liste/'+lastPageStation"><i class="bi-arrow-left me-2"></i>Retour</a>
+        <h3>Demander un rendez-vous</h3>
+        <form [formGroup]="rdvForm" (ngSubmit)="creerRdv()">
+        <hr>
+          <h4>Station: {{ station.nom }}</h4>
+          <h4>Voitures</h4>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Description</th>
+              <th>Immatriculation</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(voiture of voitures();track voiture.idvoiture){
+              <tr>
+                <td>{{ voiture.description }}</td>
+                <td>{{ voiture.immatriculation }}</td>
+                <td><a href="" (click)="choisirVoiture($event,$index)" class="link-primary">Choisir</a></td>
+              </tr>
+            }
+            </tbody>
+          </table>
+          <br>
+          <div class="d-flex justify-content-around">
+            <div class="btn-group" role="group">
+              <button type="button" [disabled]="disabledPreviousVoiture()" class="btn btn-dark border-light" (click)="changePageVoiture(previousIndexVoiture())">{{ previousIndexVoiture() }}</button>
+              <button type="button" class="btn btn-primary border-light">{{ currentIndexVoiture() }}</button>
+              <button type="button" [disabled]="disabledNextVoiture()" class="btn btn-dark border-light" (click)="changePageVoiture(nextIndexVoiture())">{{ nextIndexVoiture() }}</button>
+            </div>
+          </div>
+          <br>
+          <h4>Voiture choisie</h4>
+          @if(voitureChoisie()===null){
+            <p>Vous n'avez encore enregistré aucune voiture à votre compte.</p>
+          }@else{
+            <table class="table table-dark">
+              <tbody>
+              <tr>
+                <th>Description</th>
+                <td>{{ voitureChoisie()?.description }}</td>
+              </tr>
+              <tr>
+                <th>Immatriculation</th>
+                <td>{{ voitureChoisie()?.immatriculation }}</td>
+              </tr>
+              </tbody>
+            </table>
+          }
+          <br>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here"
+                      id="description-rdv" style="height: 150px;" formControlName="descriptionRdv"></textarea>
+            <label for="description-rdv">Description du problème</label>
+          </div>
+          <div class="mb-3">
+            <label for="dateheure-rdv" class="form-label">Date et heure</label>
+            <input type="datetime-local" class="form-control" id="dateheure-rdv"
+                   aria-describedby="dateheure-rdv-help" formControlName="dateRdv">
+            <div id="dateheure-rdv-help" class="form-text">Date et heure du rendez-vous
+            </div>
+          </div>
+          <br>
+          <h4>Services</h4>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Tarif</th>
+              <th>Durée</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+              @for(service of services();track service.idservice){
+                <tr>
+                  <td>{{ service.nom }}</td>
+                  <td>{{ service.tarif }}</td>
+                  <td>{{ service.duree }}</td>
+                  <td><a href="" (click)="choisirService($event,$index)" class="link-primary">Choisir</a></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+          <br>
+          <div class="d-flex justify-content-around">
+            <div class="btn-group" role="group">
+              <button type="button" [disabled]="disabledPreviousService()" class="btn btn-dark border-light" (click)="changePageService(previousIndexService())">{{ previousIndexService() }}</button>
+              <button type="button" class="btn btn-primary border-light">{{ currentIndexService() }}</button>
+              <button type="button" [disabled]="disabledNextService()" class="btn btn-dark border-light" (click)="changePageService(nextIndexService())">{{ nextIndexService() }}</button>
+            </div>
+          </div>
+          <br>
+          <h4>Services choisis</h4>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Tarif</th>
+              <th>Durée</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+              @for(service of servicesChoisis();track $index){
+                <tr>
+                  <td>{{ service.nom }}</td>
+                  <td>{{ service.tarif }}</td>
+                  <td>{{ service.duree }}</td>
+                  <td><a href="" (click)="retirerService($event,service.idservice)" class="link-primary">Retirer</a></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+          <br>
+          <h5>Duree de la maintenance: {{ duree() }}</h5>
+          <h5>Montant total: {{ montant() }}</h5>
+          <button type="submit" class="btn-primary btn">Valider</button>
+          <p style="color: red">{{ erreur() }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

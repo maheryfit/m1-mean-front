@@ -94,12 +94,12 @@ export class AuthService {
           switch(this.status){
             case 200:
               localStorage.removeItem(environment.UTILISATEUR_STORAGE_KEY);
-              await router.navigate(["login"]);
               break;
             case 500:
               alert(JSON.parse(this.response).message);
               break;
           }
+          await router.navigate(["login"]);
         }
       }
       xhr.open("GET", url, true);

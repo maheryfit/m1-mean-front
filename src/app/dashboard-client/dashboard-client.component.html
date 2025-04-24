@@ -4,12 +4,11 @@
         <a href="index.html" class="navbar-brand mx-4 mb-3">
             <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>HandyMan</h3>
         </a>
-        <div class="navbar-nav w-100">
-          <a [routerLink]="'/client/voitures'" class="nav-item nav-link"><i class="fa fa-car-alt me-2"></i>Voitures</a>
-        </div>
-        <div class="navbar-nav w-100">
-          <a [routerLink]="'/client/stations'" class="nav-item nav-link"><i class="bi-map me-2"></i>Stations</a>
-      </div>
+        @for(item of menuItems();track $index){
+          <div class="navbar-nav w-100">
+            <a [routerLink]="item.lien" [class]="'nav-item nav-link'+item.active" (click)="navigateMenu($index)"><i [class]="item.icon"></i>{{ item.label }}</a>
+          </div>
+        }
     </nav>
   </div>
   <div class="content">

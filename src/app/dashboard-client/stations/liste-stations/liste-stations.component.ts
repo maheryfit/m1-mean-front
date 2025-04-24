@@ -1,13 +1,16 @@
 import {AfterViewInit, Component, computed, effect, inject, signal} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ClientService} from '../../../services/client.service';
 import {StationService} from '../../../services/station.service';
 import {ClasseStation} from '../../../models/station.model';
 import * as L from 'leaflet';
+import {marker} from 'leaflet';
 
 @Component({
   selector: 'app-liste-stations',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './liste-stations.component.html',
   styleUrl: './liste-stations.component.css'
 })
@@ -15,13 +18,16 @@ export class ListeStationsComponent implements AfterViewInit{
   route=inject(ActivatedRoute);
   countStation=signal(0);
   previousIndex=computed(()=>this.currentIndex()-1);
+  disabledPrevious=computed(()=>this.currentIndex()===1);
   currentIndex=signal(Number(this.route.snapshot.params['page']));
+  disabledNext=computed(()=>this.currentIndex()*this.pageLimit>=this.countStation());
   nextIndex=computed(()=>this.currentIndex()+1);
   pageLimit=5;
   clientService=inject(ClientService);
   stationService=inject(StationService);
   stations=signal<ClasseStation[]>([]);
-  private map:any;
+  private map:L.Map|null=null;
+  markers=signal<L.Marker[]>([]);
   private initMap(): void {
     this.map = L.map('map', {
       center: [-18.9864204,47.5319636],
@@ -38,42 +44,32 @@ export class ListeStationsComponent implements AfterViewInit{
   constructor() {
     effect(()=>{
       this.stationService.getStations(this.currentIndex(), this.pageLimit)
-        .then(stations => {
-          this.stations.set(stations);
-          let markers=[];
+        .then(data => {
+          this.stations.set(data[0]);
+          this.countStation.set(data[1])
           for(let i=0;i<this.stations().length;i++){
             if(i===0){
-              this.map.panTo([stations[i].coordonnees.coordinates[0],stations[i].coordonnees.coordinates[1]]);
+              this.map?.panTo([this.stations()[i].coordonnees.coordinates[0],this.stations()[i].coordonnees.coordinates[1]]);
             }
-            markers.push(L.marker([stations[i].coordonnees.coordinates[0],stations[i].coordonnees.coordinates[1]]).addTo(this.map));
+            this.markers().push(L.marker([this.stations()[i].coordonnees.coordinates[0],this.stations()[i].coordonnees.coordinates[1]]).addTo(this.map as L.Map));
           }
         }).catch((err)=>{
           alert(err);
         });
     });
-    effect(()=>{
-      this.stationService.countStations()
-        .then(data => {
-          this.countStation.set(data);
-        }).catch((err)=>{
-          alert(err);
-      })
-    })
   }
   ngAfterViewInit() {
     this.initMap();
   }
   changePage(index:number){
-    if(index<=0){
-      return;
+    for(let i=0;i<this.markers().length;i++){
+      this.map?.removeLayer(this.markers()[i]);
     }
-    if(this.countStation()<=((index-1)*this.pageLimit)){
-      return;
-    }
+    this.markers.set([]);
     this.currentIndex.set(index);
   }
   mapFocus(event:Event, latitude:number, longitude:number){
     event.preventDefault();
-    this.map.panTo([latitude, longitude]);
+    this.map?.panTo([latitude, longitude]);
   }
 }

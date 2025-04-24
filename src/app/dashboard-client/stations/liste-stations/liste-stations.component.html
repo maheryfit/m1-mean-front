@@ -1,7 +1,7 @@
 <div class="container-fluid pt-4 px-4">
   <div class="row g-4" style="height: 80vh">
     <div class="col">
-      <div class="bg-secondary rounded p-4 h-100">
+      <div class="bg-secondary rounded p-4 h-100 overflow-scroll">
         <h3>Stations</h3>
         <div id="map-frame" style="height: 47%">
           <div id="map" class="h-100"></div>
@@ -22,7 +22,7 @@
                 <td>{{ station.nom }}</td>
                 <td>{{ station.lieu }}</td>
                 <td><a class="link-primary" href="" (click)="mapFocus($event,station.coordonnees.coordinates[0],station.coordonnees.coordinates[1])">{{ station.coordonneString }}</a></td>
-                <td></td>
+                <td><a [routerLink]="'/client/rdv/creer/'+currentIndex()+'/'+station.idstation">Créer rendez-vous</a></td>
               </tr>
             }
           </tbody>
@@ -31,9 +31,9 @@
         <div class="d-flex justify-content-around">
           <div class="btn-group" role="group">
             <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
-            <button type="button" class="btn btn-secondary border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+            <button type="button" [disabled]="disabledPrevious()" class="btn btn-dark border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
             <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
-            <button type="button" class="btn btn-secondary border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+            <button type="button" [disabled]="disabledNext()" class="btn btn-dark border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
             <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
           </div>
         </div>

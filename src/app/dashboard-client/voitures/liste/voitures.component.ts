@@ -14,48 +14,25 @@ export class VoituresComponent {
   route=inject(ActivatedRoute);
   countVoitures=signal(0);
   previousIndex=computed(()=>this.currentIndex()-1);
+  disabledPrevious=computed(()=>this.currentIndex()===1);
   currentIndex=signal(Number(this.route.snapshot.params['page']));
   nextIndex=computed(()=>this.currentIndex()+1);
+  disabledNext=computed(()=>this.currentIndex()*this.pageLimit>=this.countVoitures());
   pageLimit=5;
   clientService=inject(ClientService);
-  voitureService=inject(VoituresService);
   voitures=signal<ClasseVoiture[]>([]);
   constructor(){
-    // effect(()=>{
-    //   this.voitureService.getAllVoitures(this.currentIndex(), this.pageLimit)
-    //   .subscribe((data)=>{
-    //     this.voitures.set(data);
-    //   });
-    // });
-    // effect(()=>{
-    //   this.voitureService.count().subscribe((data)=>{
-    //     this.countVoitures.set(data);
-    //   })
-    // })
     effect(()=>{
       this.clientService.getVoitures(this.currentIndex(),this.pageLimit)
         .then((data)=>{
-          this.voitures.set(data);
+          this.voitures.set(data[0]);
+          this.countVoitures.set(data[1]);
         }).catch((err)=>{
           alert(err);
       });
     });
-    effect(()=>{
-      this.clientService.countVoitures()
-        .then((data)=>{
-          this.countVoitures.set(data);
-        }).catch((err)=>{
-          alert(err);
-        });
-    })
   }
   changePage(index:number){
-    if(index<=0){
-      return;
-    }
-    if(this.countVoitures()<=((index-1)*this.pageLimit)){
-      return;
-    }
     this.currentIndex.set(index);
   }
   supprimer(event:Event,idvoiture:string){
@@ -67,7 +44,7 @@ export class VoituresComponent {
       })
       .then(()=>this.clientService.getVoitures(this.currentIndex(),this.pageLimit))
       .then((data)=>{
-        this.voitures.set(data);
+        this.voitures.set(data[0]);
       })
       .catch(err=>{
         alert(err);

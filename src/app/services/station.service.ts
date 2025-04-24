@@ -16,22 +16,24 @@ export class StationService {
     return this.http.get<number>(`${environment.API_URL}/stations/count`);
   }
   getStations(page:number,limit:number){
-    const url=`${environment.API_URL}/station/${page}/${limit}`;
+    const url=`${environment.API_URL}/station/liste-station/${page}/${limit}`;
     const xhr=new XMLHttpRequest();
-    const promise=new Promise<ClasseStation[]>(function (resolve,reject){
+    const promise=new Promise<[ClasseStation[],number]>(function (resolve,reject){
       xhr.onreadystatechange=function(){
         if(this.readyState===4){
           switch(this.status){
             case 200:
               const response=JSON.parse(this.response);
+              const responseStation=response[0];
+              const countStations=response[1];
               const stations:ClasseStation[]=[];
               let station;
-              for(let i=0;i<response.length;i++){
+              for(let i=0;i<responseStation.length;i++){
                 station=new ClasseStation();
-                station.init(response[i]);
+                station.init(responseStation[i]);
                 stations.push(station);
               }
-              resolve(stations);
+              resolve([stations,countStations]);
               break;
             case 500:
               reject(JSON.parse(this.response).message);
@@ -45,15 +47,18 @@ export class StationService {
     });
     return promise;
   }
-  countStations(){
-    const url=`${environment.API_URL}/station/count`;
+  getStation(id:string){
+    const url=`${environment.API_URL}/station/selection-station/${id}`;
     const xhr=new XMLHttpRequest();
-    const promise=new Promise<number>(function (resolve,reject){
+    const promise=new Promise<ClasseStation>(function (resolve,reject){
       xhr.onreadystatechange=function(){
         if(this.readyState===4){
           switch(this.status){
             case 200:
-              resolve(JSON.parse(this.response));
+              const response=JSON.parse(this.response);
+              const station=new ClasseStation();
+              station.init(response);
+              resolve(station);
               break;
             case 500:
               reject(JSON.parse(this.response).message);
