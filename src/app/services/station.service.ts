@@ -18,4 +18,9 @@ export class StationService {
   count(){
     return this.http.get<number>(`${environment.API_URL}/stations/count`);
   }
+
+  deleteById(id: string) {
+        return this.http.delete<any>(`${environment.API_URL}/stations/${id}`)
+  }
+
 }

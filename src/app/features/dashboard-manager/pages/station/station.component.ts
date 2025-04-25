@@ -60,13 +60,30 @@ export class StationComponent implements AfterViewInit, OnDestroy {
         })
     }
 
+    async removeStation(id: string) {
+        const resp = confirm("Voulez-vous supprimé ce station ?")
+        if(resp) {
+            this.stationService.deleteById(id).subscribe({
+                next: resp => {
+                    console.log(resp);
+                },
+                error: err => {
+                    alert(err.error.message)
+                }
+            })
+        }
+    }
+
     getSidePanelStationDetail(station: Station) {
         return`
-            <div class="my-card">
-                <div class="my-card-details">
+            <div class="row">
+                <div>
                     <p class="my-text-title fs-6"><b>${station.nom} - ${station.lieu}</b></p>
                 </div>
-                <button class="card-button">Supprimer</button>
+                <div class="d-flex flex-row justify-content-around">
+                    <button (click)="removeStation('${station._id}')" class="btn btn-outline-danger">Supprimer</button>
+                    <button class="btn btn-outline-light">Modifier</button>
+                </div>
             </div>
         `
     }
