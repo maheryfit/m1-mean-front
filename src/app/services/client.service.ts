@@ -2,6 +2,9 @@ import {Injectable, WritableSignal} from '@angular/core';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {ClasseVoiture, Voiture} from '../models/voiture.model';
+import {ClasseStation} from '../models/station.model';
+import {Abonnement} from '../models/abonnement.model';
+import {Statut} from '../models/statut.model';
 
 @Injectable({
   providedIn: "root",
@@ -125,6 +128,58 @@ export class ClientService{
       xhr.open("DELETE", url, true);
       xhr.withCredentials=true;
       xhr.send();
+    });
+    return promise;
+  }
+  interfaceCreerRdv(idstation:string){
+    const url=`${environment.API_URL}/client/interface-creer-rdv/${idstation}`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<[ClasseStation,Abonnement,Statut]>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              const response=JSON.parse(this.response);
+              const station=new ClasseStation();
+              station.init(response[0]);
+              const abonnement=new Abonnement();
+              abonnement.init(response[1]);
+              const statut=new Statut();
+              statut.init(response[2]);
+              resolve([station,abonnement,statut]);
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
+  }
+  creerRdv(rdvToSend:any){
+    const url=`${environment.API_URL}/client/creer-rdv`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<void>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve(JSON.parse(this.response));
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
+      xhr.withCredentials=true;
+      xhr.send(JSON.stringify(rdvToSend));
     });
     return promise;
   }

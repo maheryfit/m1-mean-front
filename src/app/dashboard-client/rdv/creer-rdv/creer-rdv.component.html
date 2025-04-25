@@ -117,9 +117,38 @@
               }
             </tbody>
           </table>
-          <br>
+          <hr>
+          <h4>Mon abonnement:</h4>
+          <table class="table-dark table">
+            <tbody>
+            <tr>
+              <th>Nom</th>
+              <td>{{ abonnement.nom }}</td>
+            </tr>
+            <tr>
+              <th>Pourcentage de réduction</th>
+              <td>{{ abonnement.pourcentage_reduction }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <h4>Mon statut client:</h4>
+          <table class="table-dark table">
+            <tbody>
+            <tr>
+              <th>Nom</th>
+              <td>{{ statut.nom }}</td>
+            </tr>
+            <tr>
+              <th>Pourcentage de réduction</th>
+              <td>{{ statut.pourcentage_reduction }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
           <h5>Duree de la maintenance: {{ duree() }}</h5>
-          <h5>Montant total: {{ montant() }}</h5>
+          <h5>Montant: {{ montant() }}</h5>
+          <h5>Montant réduit: {{ montantReduction() }}</h5>
+          <h5>Montant total: {{ montantFinal() }}</h5>
           <button type="submit" class="btn-primary btn">Valider</button>
           <p style="color: red">{{ erreur() }}</p>
         </form>

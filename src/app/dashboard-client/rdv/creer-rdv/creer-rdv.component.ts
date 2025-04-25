@@ -1,12 +1,13 @@
 import {Component, computed, effect, inject, signal} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
-import {StationService} from '../../../services/station.service';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {ClasseStation} from '../../../models/station.model';
 import {ClientService} from '../../../services/client.service';
 import {ClasseVoiture} from '../../../models/voiture.model';
 import {ServicesService} from '../../../services/services.service';
 import {ClasseService} from '../../../models/service.model';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Abonnement} from '../../../models/abonnement.model';
+import {Statut} from '../../../models/statut.model';
 
 @Component({
   selector: 'app-creer-rdv',
@@ -21,8 +22,9 @@ export class CreerRdvComponent {
   route=inject(ActivatedRoute);
   lastPageStation=this.route.snapshot.params['pageStation'];
   idstation=this.route.snapshot.params['idstation'];
-  stationService=inject(StationService);
   station=new ClasseStation();
+  abonnement=new Abonnement();
+  statut=new Statut();
   voitureChoisie=signal<ClasseVoiture|null>(null);
   servicesChoisis=signal<ClasseService[]>([]);
 
@@ -53,13 +55,19 @@ export class CreerRdvComponent {
   erreur=signal("");
   duree=signal(0);
   montant=signal(0);
+  montantReduction=computed(()=>this.montant()*(this.abonnement.pourcentage_reduction+this.statut.pourcentage_reduction));
+  montantFinal=computed(()=>this.montant()-this.montantReduction());
+
+  router=inject(Router);
   constructor() {
-    this.stationService.getStation(this.idstation)
-      .then(station => {
-        this.station = station
+    this.clientService.interfaceCreerRdv(this.idstation)
+      .then(data => {
+        this.station = data[0];
+        this.abonnement=data[1];
+        this.statut=data[2];
       }).catch(error => {
         alert(error);
-    });
+      });
     effect(()=>{
       this.clientService.getVoitures(this.currentIndexVoiture(),this.pageLimitVoiture)
         .then(data=>{
@@ -119,15 +127,36 @@ export class CreerRdvComponent {
       this.erreur.set("Au moins un service et une voiture sont requis pour demander un rendez-vous au garage.");
       return;
     }
-    const resteAPayer=this.montant();
+    const resteAPayer=this.montantFinal();
+    const remises=[];
+    if(this.abonnement.pourcentage_reduction>0){
+      remises.push({
+        nom:this.abonnement.nom,
+        pourcentage:this.abonnement.pourcentage_reduction,
+      })
+    }
+    if(this.statut.pourcentage_reduction>0){
+      remises.push({
+        nom:this.statut.nom,
+        pourcentage:this.statut.pourcentage_reduction,
+      })
+    }
     const rdvToSend={
       description:this.rdvForm.value.descriptionRdv,
       dateheure:this.rdvForm.value.dateRdv,
       services:this.servicesChoisis(),
       voiture:this.voitureChoisie(),
       duree:this.duree(),
-      montant:this.montant(),
-      reste_a_payer:resteAPayer
+      montant:this.montantFinal(),
+      reste_a_payer:resteAPayer,
+      remises:remises,
+      station:this.station
     }
+    this.clientService.creerRdv(rdvToSend)
+      .then(async (data)=>{
+        await this.router.navigate(["client","stations","liste",this.lastPageStation]);
+      }).catch(error => {
+        this.erreur.set(error);
+      })
   }
 }

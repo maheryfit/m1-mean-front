@@ -36,8 +36,7 @@ export const routes: Routes = [
     path: "client",
     component: DashboardClientComponent,
     title:"Tableau de bord - Client",
-    children:clientRoutes,
-    canActivate:[isAuthClient]
+    children:clientRoutes
   },
   {
     path:"login-mecanicien",

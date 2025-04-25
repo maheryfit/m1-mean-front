@@ -6,7 +6,7 @@
         </a>
         @for(item of menuItems();track $index){
           <div class="navbar-nav w-100">
-            <a [routerLink]="item.lien" [class]="'nav-item nav-link'+item.active" (click)="navigateMenu($index)"><i [class]="item.icon"></i>{{ item.label }}</a>
+            <a [routerLink]="item.lien" [class]="'nav-item nav-link '+item.active" (click)="navigateMenu($index)"><i [class]="item.icon"></i>{{ item.label }}</a>
           </div>
         }
     </nav>

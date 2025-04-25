@@ -10,6 +10,7 @@ import {DemandeRdvComponent} from '../dashboard-client/demande-rdv/demande-rdv.c
 import {ListeDemandeRdvComponent} from '../dashboard-client/liste-demande-rdv/liste-demande-rdv.component';
 import {DetailDemandeRdvComponent} from '../dashboard-client/detail-demande-rdv/detail-demande-rdv.component';
 import {ProfilClientComponent} from '../dashboard-client/profil-client/profil-client.component';
+import {isAuthClient} from '../features/connect.guard';
 
 export const clientRoutes:Routes=[
   {
@@ -34,11 +35,13 @@ export const clientRoutes:Routes=[
       },
       {
         path:"liste/:page",
-        component:VoituresComponent
+        component:VoituresComponent,
+        canActivate:[isAuthClient]
       },
       {
         path:"creer/:page",
-        component:CreerVoitureComponent
+        component:CreerVoitureComponent,
+        canActivate:[isAuthClient]
       }
     ]
   },
@@ -56,7 +59,8 @@ export const clientRoutes:Routes=[
       },
       {
         path:"liste/:page",
-        component: ListeStationsComponent
+        component: ListeStationsComponent,
+        canActivate:[isAuthClient]
       }
     ]
   },
@@ -74,28 +78,34 @@ export const clientRoutes:Routes=[
       },
       {
         path:"creer/:pageStation/:idstation",
-        component:CreerRdvComponent
+        component:CreerRdvComponent,
+        canActivate:[isAuthClient]
       }
     ]
   },
   {
     path:"details-voiture/:id",
-    component: DetailsVoitureComponent
+    component: DetailsVoitureComponent,
+    canActivate:[isAuthClient]
   },
   {
     path:"demande-rdv/:idvoiture",
-    component: DemandeRdvComponent
+    component: DemandeRdvComponent,
+    canActivate:[isAuthClient]
   },
   {
     path:"demande-rdv",
-    component: ListeDemandeRdvComponent
+    component: ListeDemandeRdvComponent,
+    canActivate:[isAuthClient]
   },
   {
     path:"details-demande-rdv/:iddemande",
-    component: DetailDemandeRdvComponent
+    component: DetailDemandeRdvComponent,
+    canActivate:[isAuthClient]
   },
   {
     path:"profil",
-    component: ProfilClientComponent
+    component: ProfilClientComponent,
+    canActivate:[isAuthClient]
   }
 ];

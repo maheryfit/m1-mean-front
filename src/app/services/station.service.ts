@@ -47,29 +47,4 @@ export class StationService {
     });
     return promise;
   }
-  getStation(id:string){
-    const url=`${environment.API_URL}/station/selection-station/${id}`;
-    const xhr=new XMLHttpRequest();
-    const promise=new Promise<ClasseStation>(function (resolve,reject){
-      xhr.onreadystatechange=function(){
-        if(this.readyState===4){
-          switch(this.status){
-            case 200:
-              const response=JSON.parse(this.response);
-              const station=new ClasseStation();
-              station.init(response);
-              resolve(station);
-              break;
-            case 500:
-              reject(JSON.parse(this.response).message);
-              break;
-          }
-        }
-      }
-      xhr.open("GET", url, true);
-      xhr.withCredentials=true;
-      xhr.send();
-    });
-    return promise;
-  }
 }
