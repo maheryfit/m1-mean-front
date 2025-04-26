@@ -54,6 +54,18 @@ export class ClasseVoiture{
     this.immatriculation=obj.immatriculation;
     this.caracteristiques=obj.caracteristiques;
   }
+  constructor(obj:any){
+    this.idvoiture=obj._idvoiture;
+    this.description=obj._description;
+    this.immatriculation=obj._immatriculation;
+    this.caracteristiques=[];
+    if(obj._caracteristiques===undefined){
+        return;
+    }
+    for(let i=0;i<obj._caracteristiques.length;i++){
+      this.caracteristiques.push(new Caracteristique(obj._caracteristiques[i]));
+    }
+  }
 }
 export interface VoitureProprietaire extends ObjectModel{
   proprietaire:Utilisateur,

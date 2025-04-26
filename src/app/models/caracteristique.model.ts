@@ -21,4 +21,8 @@ export class Caracteristique{
     this.nom=obj.nom;
     this.valeur=obj.valeur;
   }
+  constructor(obj:any){
+    this.nom = obj._nom;
+    this.valeur = obj._valeur;
+  }
 }

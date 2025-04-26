@@ -22,7 +22,7 @@ export class CreerRdvComponent {
   route=inject(ActivatedRoute);
   lastPageStation=this.route.snapshot.params['pageStation'];
   idstation=this.route.snapshot.params['idstation'];
-  station=new ClasseStation();
+  station=new ClasseStation({});
   abonnement=new Abonnement();
   statut=new Statut();
   voitureChoisie=signal<ClasseVoiture|null>(null);

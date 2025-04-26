@@ -26,6 +26,12 @@ export class DashboardClientComponent {
       icon:"bi-map me-2",
       active:"",
       label:"Stations",
+    },
+    {
+      lien:"/client/rdvs",
+      icon:"bi-list me-2",
+      active:"",
+      label:"Maintenances",
     }
   ]);
   activeMenuIndex=signal(0);

@@ -33,7 +33,7 @@ export class CreerVoitureComponent {
       this.erreurCaracteristique.set("Le libellé et la valeur de la caractéristique ne peuvent pas être vides.");
       return;
     }
-    const caracteristique=new Caracteristique();
+    const caracteristique=new Caracteristique({});
     caracteristique.init({
       nom:this.nomCaracteristique.value,
       valeur:this.valeurCaracteristique.value
@@ -54,7 +54,7 @@ export class CreerVoitureComponent {
       .then(async (data)=>{
         await this.router.navigate(['client',"voitures","liste",this.lastPageVisited]);
       }).catch((error)=>{
-        this.erreur.set(error.message);
+        this.erreur.set(error);
     })
   }
 }

@@ -29,7 +29,7 @@ export class StationService {
               const stations:ClasseStation[]=[];
               let station;
               for(let i=0;i<responseStation.length;i++){
-                station=new ClasseStation();
+                station=new ClasseStation({});
                 station.init(responseStation[i]);
                 stations.push(station);
               }

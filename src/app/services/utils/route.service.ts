@@ -20,25 +20,14 @@ export class RouteService{
           return "/login";
       }
     }
-    filtrePathClientVoiture(){
-      const utilisateur=localStorage.getItem(environment.UTILISATEUR_STORAGE_KEY);
-      if(utilisateur===null){
-        return "/login";
-      }
-      const utilisateurParsed=JSON.parse(utilisateur);
-      if(utilisateurParsed.profil===environment.PROFIL_CLIENT){
-        return "/client/voitures/liste/1";
-      }
-      return "/login";
-    }
-  filtrePathClientStation(){
+  filtrePathProfil(targetProfil:number,targetUrl:string){
     const utilisateur=localStorage.getItem(environment.UTILISATEUR_STORAGE_KEY);
     if(utilisateur===null){
       return "/login";
     }
     const utilisateurParsed=JSON.parse(utilisateur);
-    if(utilisateurParsed.profil===environment.PROFIL_CLIENT){
-      return "/client/stations/liste/1";
+    if(utilisateurParsed.profil===targetProfil){
+      return targetUrl;
     }
     return "/login";
   }

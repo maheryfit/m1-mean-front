@@ -45,6 +45,12 @@ export class ClasseService{
   set duree(value: number) {
     this._duree = value;
   }
+  constructor(obj:any){
+    this.idservice = obj._idservice;
+    this.nom = obj._nom;
+    this.tarif = obj._tarif;
+    this.duree = obj._duree;
+  }
 
   init(obj:any) {
     this.idservice = obj._id;

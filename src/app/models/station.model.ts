@@ -56,4 +56,10 @@ export class ClasseStation{
     this.lieu=obj.lieu;
     this.coordonnees=obj.coordonnees;
   }
+  constructor(obj:any) {
+    this.idstation=obj._idstation;
+    this.nom=obj._nom;
+    this.lieu=obj._lieu;
+    this.coordonnees=obj._coordonnees;
+  }
 }

@@ -11,13 +11,15 @@ import {ListeDemandeRdvComponent} from '../dashboard-client/liste-demande-rdv/li
 import {DetailDemandeRdvComponent} from '../dashboard-client/detail-demande-rdv/detail-demande-rdv.component';
 import {ProfilClientComponent} from '../dashboard-client/profil-client/profil-client.component';
 import {isAuthClient} from '../features/connect.guard';
+import {ListeRdvComponent} from '../dashboard-client/rdv/liste-rdv/liste-rdv.component';
+import {environment} from '../../environments/environment';
 
 export const clientRoutes:Routes=[
   {
     path: "",
     redirectTo:()=>{
       const routeService=inject(RouteService);
-      return routeService.filtrePathClientVoiture();
+      return routeService.filtrePathProfil(environment.PROFIL_CLIENT,"/client/voitures/liste/1");
     },
     pathMatch: "full"
   },
@@ -29,7 +31,7 @@ export const clientRoutes:Routes=[
         path: "",
         redirectTo:()=>{
           const routeService=inject(RouteService);
-          return routeService.filtrePathClientVoiture();
+          return routeService.filtrePathProfil(environment.PROFIL_CLIENT,"/client/voitures/liste/1");
         },
         pathMatch: "full"
       },
@@ -53,7 +55,7 @@ export const clientRoutes:Routes=[
         path:"",
         redirectTo:()=>{
           const routeService=inject(RouteService);
-          return routeService.filtrePathClientStation();
+          return routeService.filtrePathProfil(environment.PROFIL_CLIENT,"/client/stations/liste/1");
         },
         pathMatch: "full"
       },
@@ -65,20 +67,25 @@ export const clientRoutes:Routes=[
     ]
   },
   {
-    path:"rdv",
+    path:"rdvs",
     title:"Rdv - Client",
     children:[
       {
         path:"",
         redirectTo:()=>{
           const routeService=inject(RouteService);
-          return routeService.filtrePathClientStation();
+          return routeService.filtrePathProfil(environment.PROFIL_CLIENT,"/client/rdvs/liste/1");
         },
         pathMatch: "full"
       },
       {
         path:"creer/:pageStation/:idstation",
         component:CreerRdvComponent,
+        canActivate:[isAuthClient]
+      },
+      {
+        path:"liste/:page",
+        component:ListeRdvComponent,
         canActivate:[isAuthClient]
       }
     ]

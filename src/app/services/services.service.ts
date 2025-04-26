@@ -25,7 +25,7 @@ export class ServicesService {
               const services:ClasseService[]=[];
               let service;
               for(let i=0;i<responseService.length;i++){
-                service=new ClasseService();
+                service=new ClasseService({});
                 service.init(responseService[i]);
                 services.push(service);
               }

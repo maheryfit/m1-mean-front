@@ -5,6 +5,7 @@ import {ClasseVoiture, Voiture} from '../models/voiture.model';
 import {ClasseStation} from '../models/station.model';
 import {Abonnement} from '../models/abonnement.model';
 import {Statut} from '../models/statut.model';
+import {Rdv} from '../models/rdv.model';
 
 @Injectable({
   providedIn: "root",
@@ -65,7 +66,7 @@ export class ClientService{
               const voitures:ClasseVoiture[]=[];
               let voiture;
               for(let i=0;i<responseVoitures.length;i++){
-                voiture=new ClasseVoiture();
+                voiture=new ClasseVoiture({});
                 voiture.init(responseVoitures[i]);
                 voitures.push(voiture);
               }
@@ -92,7 +93,7 @@ export class ClientService{
           switch(this.status){
             case 200:
               const data=JSON.parse(this.response);
-              const voiture=new ClasseVoiture();
+              const voiture=new ClasseVoiture({});
               voiture.init(data);
               resolve(voiture);
               break;
@@ -140,7 +141,7 @@ export class ClientService{
           switch(this.status){
             case 200:
               const response=JSON.parse(this.response);
-              const station=new ClasseStation();
+              const station=new ClasseStation({});
               station.init(response[0]);
               const abonnement=new Abonnement();
               abonnement.init(response[1]);
@@ -180,6 +181,38 @@ export class ClientService{
       xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
       xhr.withCredentials=true;
       xhr.send(JSON.stringify(rdvToSend));
+    });
+    return promise;
+  }
+  getRdvEnCours(page:number,limit:number){
+    const url=`${environment.API_URL}/client/liste-rdv/${page}/${limit}`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<[Rdv[],number]>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              const response=JSON.parse(this.response);
+              const rdvs:Rdv[]=[];
+              const rdvsReceived=response[0];
+              const countRdv=response[1];
+              let rdv;
+              for(let i=0;i<rdvsReceived.length;i++){
+                rdv=new Rdv();
+                rdv.init(rdvsReceived[i]);
+                rdvs.push(rdv);
+              }
+              resolve([rdvs,countRdv]);
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
     });
     return promise;
   }
