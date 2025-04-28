@@ -34,7 +34,7 @@
               }
             ],
             "styles": [
-              "./css/leaflet.css"
+              "node_modules/leaflet/dist/css/leaflet.css"
             ],
             "scripts": [
             ]
