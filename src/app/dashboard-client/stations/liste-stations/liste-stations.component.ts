@@ -5,6 +5,7 @@ import {StationService} from '../../../services/station.service';
 import {ClasseStation} from '../../../models/station.model';
 import * as L from 'leaflet';
 import {marker} from 'leaflet';
+import { icon, Marker } from 'leaflet';
 
 @Component({
   selector: 'app-liste-stations',
@@ -39,12 +40,25 @@ export class ListeStationsComponent implements AfterViewInit{
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
     tiles.addTo(this.map);
-
   }
   constructor() {
     effect(()=>{
       this.stationService.getStations(this.currentIndex(), this.pageLimit)
         .then(data => {
+          const iconRetinaUrl = 'assets/marker-icon-2x.png';
+          const iconUrl = 'assets/marker-icon.png';
+          const shadowUrl = 'assets/marker-shadow.png';
+          const iconDefault = icon({
+            iconRetinaUrl,
+            iconUrl,
+            shadowUrl,
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            tooltipAnchor: [16, -28],
+            shadowSize: [41, 41]
+          });
+          Marker.prototype.options.icon = iconDefault;
           this.stations.set(data[0]);
           this.countStation.set(data[1])
           for(let i=0;i<this.stations().length;i++){
