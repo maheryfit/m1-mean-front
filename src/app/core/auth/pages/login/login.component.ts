@@ -29,14 +29,5 @@ export class LoginComponent {
       profil:environment.PROFIL_CLIENT
     }
     this.clientService.connexion(this.router,utilisateurToSend,this.erreur);
-    // this.loginService.login(user).subscribe({
-    //   next:(res) => {
-    //     this.loginService.storeUserToLocalStorage(res.body as User);
-    //     this.router.navigate(["client"]);
-    //   },
-    //   error: (error)=>{
-    //     this.erreur.set(error.error.message);
-    //   }
-    // });
   }
 }

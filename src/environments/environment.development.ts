@@ -8,8 +8,8 @@ export const environment = {
   ETAT_DEMANDE_RDV_DIAG: ["en attente de confirmation", "accepté", "rejeté"],
 
   PROFIL_CLIENT:1,
-  PROFIL_MECANICIEN:2,
-  PROFIL_MANAGER:3,
+  PROFIL_MECANICIEN:5,
+  PROFIL_MANAGER:10,
 
   UTILISATEUR_STORAGE_KEY:"utilisateur"
 };

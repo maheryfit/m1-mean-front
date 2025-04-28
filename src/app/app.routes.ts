@@ -12,6 +12,7 @@ import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/deta
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
 import {RouteService} from './services/utils/route.service';
 import {clientRoutes} from './routes/client.routes';
+import {mecanicienRoutes} from './routes/mecanicien.routes';
 
 export const routes: Routes = [
   {
@@ -47,32 +48,33 @@ export const routes: Routes = [
     path:"mecanicien",
     component:DashboardMecanicienComponent,
     title:"Tableau de bord - Mécanicien",
-    children:[
-      {
-        path:"",
-        redirectTo:()=>{
-          const cookie=inject(CookieService);
-          if(cookie.get("cookieKey")==null){
-            return "../login"
-          }
-          return "demande-rdv"
-        },
-        pathMatch:"full"
-      },
-      {
-        path:"demande-rdv",
-        component:ListeDemandeRdvMecanicienComponent
-      },
-      {
-        path:"details-demande-rdv/:iddemande",
-        component:DetailDemandeRdvMecanicienComponent
-      },
-      {
-        path:"creer-devis/:iddemande",
-        component:CreerDevisComponent
-      }
-    ],
-    canActivate:[isAuthMecanicien]
+    children:mecanicienRoutes
+      // [
+      // {
+      //   path:"",
+      //   redirectTo:()=>{
+      //     const cookie=inject(CookieService);
+      //     if(cookie.get("cookieKey")==null){
+      //       return "../login"
+      //     }
+      //     return "demande-rdv"
+      //   },
+      //   pathMatch:"full"
+      // },
+      // {
+      //   path:"demande-rdv",
+      //   component:ListeDemandeRdvMecanicienComponent
+      // },
+      // {
+      //   path:"details-demande-rdv/:iddemande",
+      //   component:DetailDemandeRdvMecanicienComponent
+      // },
+      // {
+      //   path:"creer-devis/:iddemande",
+      //   component:CreerDevisComponent
+      // }
+    // ],
+    // canActivate:[isAuthMecanicien]
   },
   {
     path: 'chatting',

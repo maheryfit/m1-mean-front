@@ -13,35 +13,35 @@
                 <i class="fa fa-user-edit me-2"></i>HandyMan
               </h3>
             </a>
+            <h3>Se connecter en tant que mécanicien</h3>
           </div>
-          <h4 class="col-8 mb-3">Se connecter en tant que mécanicien</h4>
           <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-              formControlName="nomUtilisateur"
-            />
-            <label for="floatingInput">Nom d'utilisateur</label>
-          </div>
-          <div class="form-floating mb-4">
-            <input
-              type="password"
-              class="form-control"
-              id="floatingPassword"
-              placeholder="Password"
-              formControlName="motDePasse"
-            />
-            <label for="floatingPassword">Mot de passe</label>
-          </div>
-          <button
-            type="submit"
-            class="btn btn-primary py-3 w-100 mb-4"
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                formControlName="nomUtilisateur"
+              />
+              <label for="floatingInput">Nom d'utilisateur</label>
+            </div>
+            <div class="form-floating mb-4">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+                formControlName="motDePasse"
+              />
+              <label for="floatingPassword">Mot de passe</label>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary py-3 w-100 mb-4"
             >Se connecter</button
-          >
-          <p style="color: red;">{{ error() }}</p>
+            >
+            <p style="color: red;">{{ erreur() }}</p>
           </form>
         </div>
       </div>

@@ -1,38 +1,33 @@
-import { Component, inject, signal } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Auth, User } from '../../auth.model';
+import { Component, inject, Renderer2, signal } from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router, RouterLink} from '@angular/router';
+import { environment } from '../../../../../environments/environment';
+import {MecanicienService} from '../../../../services/mecanicien.service';
 
 @Component({
-  selector: 'app-login-mecanicien',
-  imports: [ReactiveFormsModule],
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    RouterLink
+  ],
   templateUrl: './login-mecanicien.component.html',
   styleUrl: './login-mecanicien.component.css'
 })
 export class LoginMecanicienComponent {
-  loginService=inject(AuthService);
+  mecanicienService=inject(MecanicienService);
   loginForm=new FormGroup({
-    nomUtilisateur: new FormControl('claire.petit', Validators.required),
-    motDePasse: new FormControl('claire.petit', Validators.required)
+    nomUtilisateur: new FormControl('JBo', Validators.required),
+    motDePasse: new FormControl('root', Validators.required)
   });
-  error=signal('');
+  erreur=signal('');
   router=inject(Router);
   login(){
-    const nomUtilisateur:string=this.loginForm.value.nomUtilisateur?this.loginForm.value.nomUtilisateur:'';
-    const motDePasse:string=this.loginForm.value.motDePasse?this.loginForm.value.motDePasse:'';
-    const user:Auth={
-      nom_utilisateur:nomUtilisateur,
-      mot_de_passe:motDePasse
-    };
-    this.loginService.login(user).subscribe(res => {
-      this.loginService.storeUserToLocalStorage(res.body as User);
-      this.loginService.getMecanicien(res.body as User).subscribe({
-        next: (data)=>{
-          localStorage.setItem("idmecanicien", data._id);
-          this.router.navigate(["mecanicien"]);
-        }
-      })
-    });
+    const utilisateurToSend={
+      nomUtilisateur:this.loginForm.value.nomUtilisateur,
+      motDePasse:this.loginForm.value.motDePasse,
+      profil:environment.PROFIL_MECANICIEN
+    }
+    this.mecanicienService.connexion(this.router,utilisateurToSend,this.erreur);
   }
 }

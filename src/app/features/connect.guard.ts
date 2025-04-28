@@ -19,13 +19,6 @@ export const isAuthConnected: CanActivateFn =  async (route, state) => {
 export const isAuthClient: CanActivateFn = async (route, state) => {
   const router = inject(Router)
   const authService: AuthService = inject(AuthService);
-  // try {
-  //   return await lastValueFrom(authService.checkAuthClient());
-  // } catch (e) {
-  //   console.error(e);
-  //   await router.navigateByUrl("/login");
-  //   return false;
-  // }
   const promise=authService.checkAuthClient();
   return await promise
     .catch(function (error){
