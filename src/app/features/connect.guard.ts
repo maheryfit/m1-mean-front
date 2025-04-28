@@ -32,13 +32,14 @@ export const isAuthClient: CanActivateFn = async (route, state) => {
 export const isAuthMecanicien: CanActivateFn =  async (route, state) => {
   const router = inject(Router)
   const authService: AuthService = inject(AuthService);
-  try {
-    return await lastValueFrom(authService.checkAuthMecanicien())
-  } catch (e: any) {
-    console.error(e);
-    await router.navigateByUrl("/login");
-    return false;
-  }
+  const promise=authService.checkAuthMecanicien();
+  return await promise
+    .catch(function (error){
+        alert(error);
+        router.navigate(["login"]);
+        return false;
+      }
+    );
 };
 
 export const isAuthManager: CanActivateFn =  async (route, state) => {

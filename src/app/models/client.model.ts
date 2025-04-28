@@ -81,9 +81,13 @@ export class Client{
     this.date_inscription=obj.date_inscription;
     this.telephone=obj.telephone;
     this.abonnement=new Abonnement();
-    this.abonnement.init(obj.abonnement);
+    if(obj.abonnement!==undefined){
+      this.abonnement.init(obj.abonnement);
+    }
     this.statut=new Statut();
-    this.statut.init(obj.statut);
+    if(obj.statut!==undefined){
+      this.statut.init(obj.statut);
+    }
     this.utilisateur=obj.utilisateur;
   }
 }

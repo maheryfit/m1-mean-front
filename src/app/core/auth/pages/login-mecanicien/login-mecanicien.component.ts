@@ -17,7 +17,7 @@ import {MecanicienService} from '../../../../services/mecanicien.service';
 export class LoginMecanicienComponent {
   mecanicienService=inject(MecanicienService);
   loginForm=new FormGroup({
-    nomUtilisateur: new FormControl('JBo', Validators.required),
+    nomUtilisateur: new FormControl('Marc', Validators.required),
     motDePasse: new FormControl('root', Validators.required)
   });
   erreur=signal('');
