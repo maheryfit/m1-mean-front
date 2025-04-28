@@ -21,11 +21,11 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
+              "./src/favicon.ico",
+              "./src/assets",
               {
                 "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images/",
+                "input": "./node_modules/leaflet/dist/images/",
                 "output": "./assets/"
               },
               {
@@ -34,7 +34,7 @@
               }
             ],
             "styles": [
-              "node_modules/leaflet/dist/css/leaflet.css"
+              "./node_modules/leaflet/dist/css/leaflet.css"
             ],
             "scripts": [
             ]
