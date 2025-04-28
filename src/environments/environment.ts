@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   HOST_URL: "http://localhost:4200",
   // API_URL: "http://46.101.29.136:3000",
-  API_URL: "http://backend.me:3000",
+  API_URL: "https://backend.me:3000",
   WEBSOCKET_URL: "ws://localhost:3000",
   FOOTER: "HERILALAO Ny Avo Lucas - Mahery",
   BRAND: "HandyMan",
