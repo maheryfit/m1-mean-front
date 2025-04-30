@@ -1,0 +1,9 @@
+<div id="{{station._id}}" class="row">
+    <div>
+        <p class="my-text-title fs-6"><b>{{station.nom}} - {{station.lieu}}</b></p>
+    </div>
+    <div class="d-flex flex-row justify-content-around">
+        <button (click)="removeStation(station._id)" class="btn btn-outline-danger">Supprimer</button>
+        <button class="btn btn-outline-light">Modifier</button>
+    </div>
+</div>
