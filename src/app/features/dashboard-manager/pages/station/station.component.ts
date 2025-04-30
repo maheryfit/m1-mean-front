@@ -23,7 +23,7 @@ export class StationComponent implements AfterViewInit, OnDestroy {
         iconAnchor: [20, 25]
     });
 
-    constructor(private stationService: StationService,  private appRef: ApplicationRef, private _viewContainerRef: ViewContainerRef) {
+    constructor(private stationService: StationService, private _viewContainerRef: ViewContainerRef) {
     }
 
 
