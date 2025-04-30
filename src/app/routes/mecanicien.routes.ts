@@ -33,7 +33,7 @@ export const mecanicienRoutes: Routes = [
         canActivate:[isAuthMecanicien]
       },
       {
-        path:"details/:idrdv",
+        path:"details/:page/:idrdv",
         component:DetailsRdvComponent,
         canActivate:[isAuthMecanicien]
       }

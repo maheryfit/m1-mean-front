@@ -2,6 +2,7 @@
   <div class="row g-4">
     <div class="col">
       <div class="bg-secondary rounded p-4">
+        <p><a class="link-primary" [routerLink]="'/mecanicien/rdvs/liste/'+pageListeRdv"><i class="bi-arrow-left me-2"></i>Retour</a></p>
         <h3>Rendez-vous et maintenance</h3>
         <table class="table table-dark">
           <tbody>
@@ -86,14 +87,24 @@
                     id="floatingTextarea" style="height: 150px;" [formControl]="evaluationInput"></textarea>
           <label for="floatingTextarea">Évaluation</label>
         </div>
-        <button class="btn btn-primary" type="button" (click)="ajouterDiagnostic()">Ajouter évaluation</button>
+        <p><button class="btn btn-primary" type="button" (click)="ajouterDiagnostic()">Ajouter évaluation</button></p>
         <p style="color: red">{{ erreurDiagnostic() }}</p>
         <br>
         <h4>Mécanicien en charge:</h4>
         @if(rdv().mecanicien===null){
-          <button class="btn btn-primary" type="button" (click)="prendreChargeRdv()">Prendre en charge</button>
+          <p><button class="btn btn-primary" type="button" (click)="prendreChargeRdv()">Prendre en charge</button></p>
+          <p style="color: red">{{ erreurPriseCharge() }}</p>
         }@else{
           <p>{{ rdv().mecanicien?.utilisateur?.nom_utilisateur }}</p>
+        }
+        <hr>
+        @switch(rdv().etat){
+          @case(environment.ETAT_RDV_CLOS){
+            <p>La maintenance est clôturée et en attente de paiement.</p>
+          }
+          @default{
+            <button class="btn btn-primary" type="button" (click)="cloturerRdv()">Clôturer</button>
+          }
         }
       </div>
     </div>

@@ -5,9 +5,10 @@ import {VoituresComponent} from '../dashboard-client/voitures/liste/voitures.com
 import {CreerVoitureComponent} from '../dashboard-client/voitures/creer-voiture/creer-voiture.component';
 import {ListeStationsComponent} from '../dashboard-client/stations/liste-stations/liste-stations.component';
 import {CreerRdvComponent} from '../dashboard-client/rdv/creer-rdv/creer-rdv.component';
-import {isAuthClient} from '../features/connect.guard';
+import {isAuthClient, isAuthMecanicien} from '../features/connect.guard';
 import {ListeRdvComponent} from '../dashboard-client/rdv/liste-rdv/liste-rdv.component';
 import {environment} from '../../environments/environment';
+import {DetailsRdvComponent} from '../dashboard-client/rdv/details-rdv/details-rdv.component';
 
 export const clientRoutes:Routes=[
   {
@@ -81,6 +82,11 @@ export const clientRoutes:Routes=[
       {
         path:"liste/:page",
         component:ListeRdvComponent,
+        canActivate:[isAuthClient]
+      },
+      {
+        path:"details/:page/:idrdv",
+        component:DetailsRdvComponent,
         canActivate:[isAuthClient]
       }
     ]

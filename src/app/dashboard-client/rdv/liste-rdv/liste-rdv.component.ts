@@ -1,11 +1,13 @@
 import {Component, computed, effect, inject, signal} from '@angular/core';
 import {Rdv} from '../../../models/rdv.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ClientService} from '../../../services/client.service';
 
 @Component({
   selector: 'app-liste-rdv',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './liste-rdv.component.html',
   styleUrl: './liste-rdv.component.css'
 })

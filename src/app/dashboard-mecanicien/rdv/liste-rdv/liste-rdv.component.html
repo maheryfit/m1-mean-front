@@ -22,7 +22,7 @@
                 <td>{{ rdv.station.nom }}</td>
                 <td>{{ rdv.dateheure }}</td>
                 <td>{{ rdv.reste_a_payer }}</td>
-                <td><a [routerLink]="'/mecanicien/rdvs/details/'+rdv.idrdv">Détails</a></td>
+                <td><a [routerLink]="'/mecanicien/rdvs/details/'+currentIndex()+'/'+rdv.idrdv">Détails</a></td>
               </tr>
             }
           </tbody>

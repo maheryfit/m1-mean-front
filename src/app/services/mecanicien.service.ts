@@ -134,4 +134,26 @@ export class MecanicienService{
     });
     return promise;
   }
+  cloturerRdv(idrdv:string){
+    const url=`${environment.API_URL}/mecanicien/cloturer-rdv/${idrdv}`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<void>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve();
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("PUT", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
+  }
 }

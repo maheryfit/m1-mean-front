@@ -10,6 +10,7 @@
             <th>Station</th>
             <th>Dateheure</th>
             <th>Reste à payer</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -19,6 +20,7 @@
               <td>{{ rdv.station.nom }}</td>
               <td>{{ rdv.dateheure }}</td>
               <td>{{ rdv.reste_a_payer }}</td>
+              <td><a [routerLink]="'/client/rdvs/details/'+currentIndex()+'/'+rdv.idrdv">Détails</a></td>
             </tr>
           }
           </tbody>

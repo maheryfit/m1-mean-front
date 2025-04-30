@@ -2,7 +2,7 @@
   <div class="row g-4">
     <div class="col">
       <div class="bg-secondary rounded p-4 vh-75 overflow-scroll">
-        <a class="link-primary" [routerLink]="'/client/stations/liste/'+lastPageStation"><i class="bi-arrow-left me-2"></i>Retour</a>
+        <p><a class="link-primary" [routerLink]="'/client/stations/liste/'+lastPageStation"><i class="bi-arrow-left me-2"></i>Retour</a></p>
         <h3>Demander un rendez-vous</h3>
         <form [formGroup]="rdvForm" (ngSubmit)="creerRdv()">
         <hr>
