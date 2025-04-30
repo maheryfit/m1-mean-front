@@ -60,4 +60,52 @@ export class MecanicienService{
     });
     return promise;
   }
+  getDetailsRdv(idrdv:string){
+    const url=`${environment.API_URL}/mecanicien/details-rdv/${idrdv}`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<Rdv>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              const response=JSON.parse(this.response);
+              const rdv=new Rdv();
+              rdv.init(response);
+              resolve(rdv);
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
+  }
+  ajouterDiagnostic(idrdv:string,diagnostic:any){
+    const url=`${environment.API_URL}/mecanicien/ajouter-diagnostic/${idrdv}`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<void>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve();
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("PUT", url, true);
+      xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
+      xhr.withCredentials=true;
+      xhr.send(JSON.stringify(diagnostic));
+    });
+    return promise;
+  }
 }

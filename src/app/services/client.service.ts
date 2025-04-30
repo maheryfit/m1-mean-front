@@ -164,7 +164,7 @@ export class ClientService{
   creerRdv(rdvToSend:any){
     const url=`${environment.API_URL}/client/creer-rdv`;
     const xhr=new XMLHttpRequest();
-    const promise=new Promise<void>(function (resolve,reject){
+    const promise=new Promise<any>(function (resolve,reject){
       xhr.onreadystatechange=function(){
         if(this.readyState===4){
           switch(this.status){

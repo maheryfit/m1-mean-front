@@ -1,6 +1,6 @@
 import { Component, inject, Renderer2, signal } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import {MecanicienService} from '../../../../services/mecanicien.service';
 
@@ -8,8 +8,7 @@ import {MecanicienService} from '../../../../services/mecanicien.service';
   selector: 'app-login',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    RouterLink
+    ReactiveFormsModule
   ],
   templateUrl: './login-mecanicien.component.html',
   styleUrl: './login-mecanicien.component.css'

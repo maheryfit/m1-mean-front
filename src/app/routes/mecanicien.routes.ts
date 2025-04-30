@@ -4,6 +4,7 @@ import {RouteService} from '../services/utils/route.service';
 import {environment} from '../../environments/environment';
 import {ListeRdvComponent} from '../dashboard-mecanicien/rdv/liste-rdv/liste-rdv.component';
 import {isAuthMecanicien} from '../features/connect.guard';
+import {DetailsRdvComponent} from '../dashboard-mecanicien/rdv/details-rdv/details-rdv.component';
 
 export const mecanicienRoutes: Routes = [
   {
@@ -29,6 +30,11 @@ export const mecanicienRoutes: Routes = [
       {
         path:"liste/:page",
         component:ListeRdvComponent,
+        canActivate:[isAuthMecanicien]
+      },
+      {
+        path:"details/:idrdv",
+        component:DetailsRdvComponent,
         canActivate:[isAuthMecanicien]
       }
     ]

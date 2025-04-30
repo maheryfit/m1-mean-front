@@ -7,7 +7,6 @@ import { inject } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-mecanicien.component';
 import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
-import { ListeDemandeRdvMecanicienComponent } from './dashboard-mecanicien/liste-demande-rdv/liste-demande-rdv.component';
 import { DetailDemandeRdvMecanicienComponent } from './dashboard-mecanicien/detail-demande-rdv/detail-demande-rdv.component';
 import { CreerDevisComponent } from './dashboard-mecanicien/creer-devis/creer-devis.component';
 import {RouteService} from './services/utils/route.service';

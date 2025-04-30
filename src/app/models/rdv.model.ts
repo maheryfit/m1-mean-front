@@ -2,6 +2,7 @@ import {ClasseService} from './service.model';
 import {ClasseVoiture} from './voiture.model';
 import {ClasseStation} from './station.model';
 import {Client} from './client.model';
+import {ClasseMecanicien} from './mecanicien.model';
 
 export class Rdv{
   private _idrdv:string="";
@@ -17,6 +18,15 @@ export class Rdv{
   private _diagnostics:{evaluation:string,dateheure:Date}[]=[];
   private _etat:number=0;
   private _client:Client=new Client();
+  private _mecanicien:ClasseMecanicien|null=null;
+
+  get mecanicien(): ClasseMecanicien|null {
+    return this._mecanicien;
+  }
+
+  set mecanicien(value: ClasseMecanicien) {
+    this._mecanicien = value;
+  }
 
   get client(): Client {
     return this._client;
@@ -134,11 +144,11 @@ export class Rdv{
     this.voiture=new ClasseVoiture(obj.voiture);
     this.remises=obj.remises;
     this.station=new ClasseStation(obj.station);
+    this.diagnostics=obj.diagnostics;
     this.client=new Client();
     if(obj.client!==undefined){
       this.client.init(obj.client);
     }
-    this.diagnostics=obj.diagnostics;
     if(obj.services===undefined){
       return;
     }
