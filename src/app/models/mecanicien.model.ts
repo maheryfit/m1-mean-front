@@ -89,4 +89,20 @@ export class ClasseMecanicien{
   set role(value: Role) {
     this._role = value;
   }
+
+  init(obj:any){
+    this.idmecanicien = obj._id;
+    this.nom = obj.nom;
+    this.prenom = obj.prenom;
+    this.telephone = obj.telephone;
+    this.niveau=new Niveau();
+    if(obj.niveau!==undefined){
+      this.niveau.init(obj.niveau);
+    }
+    this.role=new Role();
+    if(obj.role!==undefined){
+      this.role.init(obj.role);
+    }
+    this.utilisateur=obj.utilisateur;
+  }
 }

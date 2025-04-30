@@ -19,6 +19,7 @@ export class DetailsRdvComponent {
   rdv=signal<Rdv>(new Rdv());
   evaluationInput=new FormControl("", Validators.required);
   erreurDiagnostic=signal("");
+  erreurPriseCharge=signal("");
   constructor(){
     this.mecanicienService.getDetailsRdv(this.idrdv)
       .then((data)=>{
@@ -42,5 +43,14 @@ export class DetailsRdvComponent {
       }).catch((err)=>{
         this.erreurDiagnostic.set(err);
     })
+  }
+  prendreChargeRdv(){
+    this.mecanicienService.prendreChargeRdv(this.idrdv)
+      .then((data)=>{
+        this.rdv().mecanicien=data;
+      })
+      .catch((error)=>{
+        this.erreurPriseCharge.set(error);
+      })
   }
 }

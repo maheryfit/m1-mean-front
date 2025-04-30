@@ -91,7 +91,7 @@
         <br>
         <h4>Mécanicien en charge:</h4>
         @if(rdv().mecanicien===null){
-          <button class="btn btn-primary" type="button">Prendre en charge</button>
+          <button class="btn btn-primary" type="button" (click)="prendreChargeRdv()">Prendre en charge</button>
         }@else{
           <p>{{ rdv().mecanicien?.utilisateur?.nom_utilisateur }}</p>
         }

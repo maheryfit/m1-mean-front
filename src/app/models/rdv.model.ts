@@ -149,11 +149,14 @@ export class Rdv{
     if(obj.client!==undefined){
       this.client.init(obj.client);
     }
-    if(obj.services===undefined){
-      return;
+    if(obj.mecanicien!==undefined&&obj.mecanicien!==null){
+      this.mecanicien=new ClasseMecanicien();
+      this.mecanicien.init(obj.mecanicien);
     }
-    for(let i=0;i<obj.services.length;i++){
-      this.services.push(new ClasseService(obj.services[i]));
+    if(obj.services!==undefined){
+      for(let i=0;i<obj.services.length;i++){
+        this.services.push(new ClasseService(obj.services[i]));
+      }
     }
   }
 }

@@ -19,7 +19,7 @@ export class DashboardMecanicienComponent {
       lien:"/mecanicien/rdvs/liste",
       icon:"fa fa-car-alt me-2",
       active:"active",
-      label:"Voitures",
+      label:"Rendez-vous",
     }
   ]);
   activeMenuIndex=signal(0);

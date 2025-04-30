@@ -26,4 +26,10 @@ export class Role{
   set salaire_mensuel(value: number) {
     this._salaire_mensuel = value;
   }
+
+  init(obj:any){
+    this.idrole=obj._id;
+    this.nom=obj.nom;
+    this.salaire_mensuel=obj.salaire_mensuel;
+  }
 }

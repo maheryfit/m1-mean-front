@@ -26,4 +26,9 @@ export class Niveau{
   set nom(value: string) {
     this._nom = value;
   }
+  init(obj:any){
+    this.idniveau=obj._id;
+    this.nom=obj.nom;
+    this.coefficient_salarial=obj.coefficient_salarial;
+  }
 }
