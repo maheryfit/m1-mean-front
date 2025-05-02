@@ -28,7 +28,7 @@
           <div class="btn-group" role="group">
             <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
             <button type="button" [disabled]="disabledPrevious()" class="btn btn-dark border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
-            <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
+            <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndex() }}</button>
             <button type="button" [disabled]="disabledNext()" class="btn btn-dark border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
             <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
           </div>

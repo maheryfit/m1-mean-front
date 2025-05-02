@@ -89,7 +89,7 @@
         <div class="d-flex justify-content-around">
           <div class="btn-group" role="group">
             <button type="button" [disabled]="disabledPreviousService()" class="btn btn-dark border-light" (click)="changePageService(previousIndexService())">{{ previousIndexService() }}</button>
-            <button type="button" class="btn btn-primary border-light">{{ currentIndexService() }}</button>
+            <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndexService() }}</button>
             <button type="button" [disabled]="disabledNextService()" class="btn btn-dark border-light" (click)="changePageService(nextIndexService())">{{ nextIndexService() }}</button>
           </div>
         </div>
@@ -127,6 +127,79 @@
             <p>La maintenance est en attente de traitement.</p>
           }
         }
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded p-4">
+        <h3>Payer</h3>
+        <table class="table table-dark">
+          <tbody>
+          <tr>
+            <th>Montant</th>
+            <td>{{ rdv().montant }}</td>
+          </tr>
+          <tr>
+            <th>Reste à payer</th>
+            <td>{{ rdv().reste_a_payer }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <br>
+        <h4>Remises</h4>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Libellé</th>
+            <th>Pourcentage de réduction</th>
+          </tr>
+          </thead>
+          <tbody>
+          @for(remise of rdv().remises;track $index){
+            <tr>
+              <td>{{ remise.nom }}</td>
+              <td>{{ remise.pourcentage }}</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <br>
+        <div class="row mb-3">
+          <label for="payerInput" class="col-sm-2 col-form-label">Payer</label>
+          <div class="col-sm-10">
+            <input type="number" step="0.01" class="form-control" [formControl]="montantInput" id="payerInput">
+          </div>
+        </div>
+        <button class="btn btn-primary" type="button" (click)="payer()">Payer</button>
+        <p style="color: red">{{ erreurPayer() }}</p>
+        <br>
+        <h4>Paiements effectués</h4>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Montant</th>
+            <th>Date et heure</th>
+          </tr>
+          </thead>
+          <tbody>
+          @for(paiement of paiements();track paiement.idpaiement){
+            <tr>
+              <td>{{ paiement.montant }}</td>
+              <td>{{ paiement.dateheure }}</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <br>
+        <div class="d-flex justify-content-around">
+          <div class="btn-group" role="group">
+            <button type="button" [disabled]="disabledPreviousPaiement()" class="btn btn-dark border-light" (click)="changePagePaiement(previousIndexPaiement())">{{ previousIndexPaiement() }}</button>
+            <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndexPaiement() }}</button>
+            <button type="button" [disabled]="disabledNextPaiement()" class="btn btn-dark border-light" (click)="changePagePaiement(nextIndexPaiement())">{{ nextIndexPaiement() }}</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -30,7 +30,7 @@
           <div class="d-flex justify-content-around">
             <div class="btn-group" role="group">
               <button type="button" [disabled]="disabledPreviousVoiture()" class="btn btn-dark border-light" (click)="changePageVoiture(previousIndexVoiture())">{{ previousIndexVoiture() }}</button>
-              <button type="button" class="btn btn-primary border-light">{{ currentIndexVoiture() }}</button>
+              <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndexVoiture() }}</button>
               <button type="button" [disabled]="disabledNextVoiture()" class="btn btn-dark border-light" (click)="changePageVoiture(nextIndexVoiture())">{{ nextIndexVoiture() }}</button>
             </div>
           </div>
@@ -91,7 +91,7 @@
           <div class="d-flex justify-content-around">
             <div class="btn-group" role="group">
               <button type="button" [disabled]="disabledPreviousService()" class="btn btn-dark border-light" (click)="changePageService(previousIndexService())">{{ previousIndexService() }}</button>
-              <button type="button" class="btn btn-primary border-light">{{ currentIndexService() }}</button>
+              <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndexService() }}</button>
               <button type="button" [disabled]="disabledNextService()" class="btn btn-dark border-light" (click)="changePageService(nextIndexService())">{{ nextIndexService() }}</button>
             </div>
           </div>

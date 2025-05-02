@@ -36,6 +36,10 @@ export class DashboardClientComponent {
   ]);
   activeMenuIndex=signal(0);
   constructor() {
+    if(localStorage.getItem("menuIndex")===undefined){
+      localStorage.setItem("menuIndex","0");
+    }
+    this.activeMenuIndex.set(Number(localStorage.getItem("menuIndex")));
     const utilisateur=localStorage.getItem('utilisateur');
     this.nomUtilisateur = utilisateur===null?"Visiteur":JSON.parse(utilisateur).nom_utilisateur;
   }

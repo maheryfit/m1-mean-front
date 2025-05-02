@@ -3,6 +3,7 @@ import {ClasseVoiture} from './voiture.model';
 import {ClasseStation} from './station.model';
 import {Client} from './client.model';
 import {ClasseMecanicien} from './mecanicien.model';
+import {Paiement} from './paiement.model';
 
 export class Rdv{
   private _idrdv:string="";
