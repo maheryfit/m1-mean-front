@@ -4,6 +4,8 @@
     </div>
     <div class="d-flex flex-row justify-content-around">
         <button (click)="removeStation(station._id)" class="btn btn-outline-danger">Supprimer</button>
-        <button class="btn btn-outline-light">Modifier</button>
+        <button (click)="showModalForm()" class="btn btn-outline-light">Modifier</button>
     </div>
 </div>
+
+<app-station-form />

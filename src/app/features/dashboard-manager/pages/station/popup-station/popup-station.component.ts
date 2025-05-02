@@ -1,15 +1,21 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {Station} from '../../../../../models/station.model';
 import {StationService} from '../../../../../services/station.service';
+import {StationComponent} from '../station.component';
+import {StationFormComponent} from './station-form/station-form.component';
+import {PaginationComponent} from '../../../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-popup-station',
-  imports: [],
+  imports: [
+    StationFormComponent
+  ],
   templateUrl: './popup-station.component.html',
   styleUrl: './popup-station.component.css'
 })
 export class PopupStationComponent {
     @Input() station!: Station;
+    @Input() stationComponent!: StationComponent;
 
     constructor(private stationService: StationService) {
     }
@@ -20,6 +26,8 @@ export class PopupStationComponent {
         if(resp) {
             this.stationService.deleteById(id).subscribe({
                 next: resp => {
+                    this.stationComponent.ngOnDestroy()
+                    this.stationComponent.ngAfterViewInit().then(r => console.log(r));
                     console.log(resp);
                 },
                 error: err => {
@@ -27,5 +35,9 @@ export class PopupStationComponent {
                 }
             })
         }
+    }
+    @ViewChild(StationFormComponent) stationForm!: StationFormComponent;
+    showModalForm() {
+        this.stationForm.cssOpen.set("open");
     }
 }

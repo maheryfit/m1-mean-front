@@ -44,7 +44,7 @@ export class StationComponent implements AfterViewInit, OnDestroy {
         }).addTo(this.map);
     }
 
-    private fillMapWithStations() {
+    fillMapWithStations() {
         this.stations.forEach(station => {
             const latitude = station.coordonnees.coordinates[0]
             const longitude = station.coordonnees.coordinates[1]
@@ -61,6 +61,7 @@ export class StationComponent implements AfterViewInit, OnDestroy {
     private createPopup(station: Station) {
         const component : ComponentRef<PopupStationComponent> = this._viewContainerRef.createComponent(PopupStationComponent);
         component.instance.station = station;
+        component.instance.stationComponent = this;
         return L.popup()
           .setLatLng([station.coordonnees.coordinates[0], station.coordonnees.coordinates[1]])
           .setContent(component.location.nativeElement)
