@@ -87,6 +87,9 @@ export class DetailsRdvComponent {
     this.clientService.ajouterServiceRdv(this.idrdv,serviceToAdd)
       .then(()=>{
         this.rdv().services.push(serviceToAdd);
+        this.rdv().montant=this.rdv().montant+serviceToAdd.tarif;
+        this.rdv().reste_a_payer=this.rdv().reste_a_payer+serviceToAdd.tarif;
+        this.rdv().duree=this.rdv().duree+serviceToAdd.duree;
       }).catch(err=>{
         this.erreurService.set(err);
     })
