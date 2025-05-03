@@ -18,7 +18,7 @@ export class DashboardClientComponent {
     {
       lien:"/client/voitures",
       icon:"fa fa-car-alt me-2",
-      active:"active",
+      active:"",
       label:"Voitures",
     },
     {
@@ -36,19 +36,16 @@ export class DashboardClientComponent {
   ]);
   activeMenuIndex=signal(0);
   constructor() {
-    if(localStorage.getItem("menuIndex")===undefined){
-      localStorage.setItem("menuIndex","0");
+    if(sessionStorage.getItem("menuIndex")===null){
+      sessionStorage.setItem("menuIndex","0");
     }
-    this.activeMenuIndex.set(Number(localStorage.getItem("menuIndex")));
+    this.activeMenuIndex.set(Number(sessionStorage.getItem("menuIndex")));
     const utilisateur=localStorage.getItem('utilisateur');
     this.nomUtilisateur = utilisateur===null?"Visiteur":JSON.parse(utilisateur).nom_utilisateur;
   }
   navigateMenu(index:number){
-    const newMenu=this.menuItems();
-    newMenu[this.activeMenuIndex()].active="";
-    newMenu[index].active="active";
-    this.menuItems.set(newMenu);
     this.activeMenuIndex.set(index);
+    sessionStorage.setItem("menuIndex",index.toString());
   }
   async logout(){
     await this.authService.deconnexion(this.router);
