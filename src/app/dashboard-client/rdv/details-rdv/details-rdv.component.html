@@ -93,7 +93,7 @@
         <div class="d-flex justify-content-around">
           <div class="btn-group" role="group">
             <button type="button" [disabled]="disabledPreviousService()" class="btn btn-dark border-light" (click)="changePageService(previousIndexService())">{{ previousIndexService() }}</button>
-            <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndexService() }}</button>
+            <button type="button" class="btn btn-primary border-light">{{ currentIndexService() }}</button>
             <button type="button" [disabled]="disabledNextService()" class="btn btn-dark border-light" (click)="changePageService(nextIndexService())">{{ nextIndexService() }}</button>
           </div>
         </div>
@@ -200,7 +200,7 @@
         <div class="d-flex justify-content-around">
           <div class="btn-group" role="group">
             <button type="button" [disabled]="disabledPreviousPaiement()" class="btn btn-dark border-light" (click)="changePagePaiement(previousIndexPaiement())">{{ previousIndexPaiement() }}</button>
-            <button type="button" class="btn btn-primary border-light" disabled>{{ currentIndexPaiement() }}</button>
+            <button type="button" class="btn btn-primary border-light">{{ currentIndexPaiement() }}</button>
             <button type="button" [disabled]="disabledNextPaiement()" class="btn btn-dark border-light" (click)="changePagePaiement(nextIndexPaiement())">{{ nextIndexPaiement() }}</button>
           </div>
         </div>
