@@ -315,4 +315,27 @@ export class ClientService{
     });
     return promise;
   }
+  changerAbonnement(abonnement:any){
+    const url=`${environment.API_URL}/client/changer-abonnement`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<void>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve();
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
+      xhr.withCredentials=true;
+      xhr.send(JSON.stringify(abonnement));
+    });
+    return promise;
+  }
 }
