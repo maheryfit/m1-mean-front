@@ -55,7 +55,7 @@ export class CreerRdvComponent {
   erreur=signal("");
   duree=signal(0);
   montant=signal(0);
-  montantReduction=computed(()=>this.montant()*(this.abonnement.pourcentage_reduction+this.statut.pourcentage_reduction));
+  montantReduction=computed(()=>this.montant()*(this.abonnement.pourcentage_reduction+this.statut.pourcentage_reduction)/100);
   montantFinal=computed(()=>this.montant()-this.montantReduction());
 
   router=inject(Router);
@@ -154,7 +154,7 @@ export class CreerRdvComponent {
     }
     this.clientService.creerRdv(rdvToSend)
       .then(async (data)=>{
-        await this.router.navigate(["client","stations","liste",this.lastPageStation]);
+        await this.router.navigate(["client","rdvs","details",this.lastPageStation,data._id]);
       }).catch(error => {
         this.erreur.set(error);
       })

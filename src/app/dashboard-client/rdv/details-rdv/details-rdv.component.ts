@@ -50,6 +50,7 @@ export class DetailsRdvComponent {
   erreurService=signal("");
   erreurPayer=signal("");
   constructor(){
+    sessionStorage.setItem("menuIndex","2");
     this.clientService.getDetailsRdv(this.idrdv)
       .then((data)=>{
         this.rdv.set(data);
