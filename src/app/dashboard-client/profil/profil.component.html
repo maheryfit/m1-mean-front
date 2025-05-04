@@ -42,30 +42,14 @@
             </tr>
             </thead>
             <tbody>
+            @for(abonnement of abonnements;track $index){
             <tr>
-              <td>Simple</td>
-              <td>0</td>
-              <td>0</td>
+              <td>{{ abonnement.nom }}</td>
+              <td>{{ abonnement.prix }}</td>
+              <td>{{ abonnement.pourcentage_reduction }}</td>
               <td><input type="radio" class="form-check-input" name="abonnement" checked></td>
             </tr>
-            <tr>
-              <td>Simple</td>
-              <td>0</td>
-              <td>0</td>
-              <td><input type="radio" class="form-check-input" name="abonnement"></td>
-            </tr>
-            <tr>
-              <td>Simple</td>
-              <td>0</td>
-              <td>0</td>
-              <td><input type="radio" class="form-check-input" name="abonnement"></td>
-            </tr>
-            <tr>
-              <td>Simple</td>
-              <td>0</td>
-              <td>0</td>
-              <td><input type="radio" class="form-check-input" name="abonnement"></td>
-            </tr>
+            }
             </tbody>
           </table>
         </div>
