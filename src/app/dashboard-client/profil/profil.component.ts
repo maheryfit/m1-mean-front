@@ -26,16 +26,16 @@ export class ProfilComponent {
   erreurAbonnement=signal("");
   constructor(){
     this.clientService.detailsProfil()
-      .then(response => this.client.set(response))
+      .then(response => {
+        this.client.set(response);
+        this.abonnementForm.patchValue({
+          abonnement:response.abonnement.idabonnement
+        })
+      })
       .catch(error => alert(error));
     this.abonnementService.getAbonnements()
       .then(response => {
         this.abonnements = response;
-        if (response.length > 0) {
-          this.abonnementForm.patchValue({
-            abonnement:this.abonnements[0].idabonnement
-          })
-        }
       })
       .catch(error => alert(error));
   }
