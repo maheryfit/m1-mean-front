@@ -2,19 +2,20 @@ import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth.service';
+import {SidebarComponent} from '../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard-client',
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet, SidebarComponent],
   templateUrl: './dashboard-client.component.html',
   styleUrl: './dashboard-client.component.css'
 })
-export class DashboardClientComponent {
+export class DashboardClientComponent extends SidebarComponent{
   router=inject(Router);
   authService=inject(AuthService);
   brand=environment.BRAND;
   nomUtilisateur;
-  menuItems=signal([
+  override menuItems=signal([
     {
       lien:"/client/voitures",
       icon:"fa fa-car-alt me-2",
@@ -34,18 +35,10 @@ export class DashboardClientComponent {
       label:"Maintenances",
     }
   ]);
-  activeMenuIndex=signal(0);
   constructor() {
-    if(sessionStorage.getItem("menuIndex")===null){
-      sessionStorage.setItem("menuIndex","0");
-    }
-    this.activeMenuIndex.set(Number(sessionStorage.getItem("menuIndex")));
+    super();
     const utilisateur=localStorage.getItem('utilisateur');
     this.nomUtilisateur = utilisateur===null?"Visiteur":JSON.parse(utilisateur).nom_utilisateur;
-  }
-  navigateMenu(index:number){
-    this.activeMenuIndex.set(index);
-    sessionStorage.setItem("menuIndex",index.toString());
   }
   async logout(){
     sessionStorage.removeItem("menuIndex");
