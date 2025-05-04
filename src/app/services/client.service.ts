@@ -331,7 +331,7 @@ export class ClientService{
           }
         }
       }
-      xhr.open("POST", url, true);
+      xhr.open("PUT", url, true);
       xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
       xhr.withCredentials=true;
       xhr.send(JSON.stringify(abonnement));

@@ -48,11 +48,7 @@
                 <td>{{ abonnement.nom }}</td>
                 <td>{{ abonnement.prix }}</td>
                 <td>{{ abonnement.pourcentage_reduction }}</td>
-                @if($first){
-                  <td><input type="radio" class="form-check-input" name="abonnement" [value]="abonnement.idabonnement" formControlName="abonnement" checked></td>
-                }@else{
-                  <td><input type="radio" class="form-check-input" name="abonnement" [value]="abonnement.idabonnement" formControlName="abonnement"></td>
-                }
+                <td><input type="radio" class="form-check-input" [value]="abonnement.idabonnement" formControlName="abonnement" [checked]="$first"></td>
               </tr>
               }
               </tbody>

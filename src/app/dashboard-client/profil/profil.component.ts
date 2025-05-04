@@ -31,6 +31,11 @@ export class ProfilComponent {
     this.abonnementService.getAbonnements()
       .then(response => {
         this.abonnements = response;
+        if (response.length > 0) {
+          this.abonnementForm.patchValue({
+            abonnement:this.abonnements[0].idabonnement
+          })
+        }
       })
       .catch(error => alert(error));
   }

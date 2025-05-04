@@ -47,7 +47,11 @@ export class DashboardClientComponent {
     this.activeMenuIndex.set(index);
     sessionStorage.setItem("menuIndex",index.toString());
   }
+  profil(){
+    this.activeMenuIndex.set(-1);
+  }
   async logout(){
+    sessionStorage.removeItem("menuIndex");
     await this.authService.deconnexion(this.router);
   }
 }
