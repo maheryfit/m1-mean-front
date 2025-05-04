@@ -10,12 +10,12 @@ import {SidebarComponent} from '../../components/sidebar/sidebar.component';
   templateUrl: './dashboard-client.component.html',
   styleUrl: './dashboard-client.component.css'
 })
-export class DashboardClientComponent extends SidebarComponent{
+export class DashboardClientComponent{
   router=inject(Router);
   authService=inject(AuthService);
   brand=environment.BRAND;
   nomUtilisateur;
-  override menuItems=signal([
+  menuItems=signal([
     {
       lien:"/client/voitures",
       icon:"fa fa-car-alt me-2",
@@ -33,10 +33,15 @@ export class DashboardClientComponent extends SidebarComponent{
       icon:"bi-list me-2",
       active:"",
       label:"Maintenances",
+    },
+    {
+      lien:"/client/profil",
+      icon:"bi-person me-2",
+      active:"",
+      label:"Profil",
     }
   ]);
   constructor() {
-    super();
     const utilisateur=localStorage.getItem('utilisateur');
     this.nomUtilisateur = utilisateur===null?"Visiteur":JSON.parse(utilisateur).nom_utilisateur;
   }

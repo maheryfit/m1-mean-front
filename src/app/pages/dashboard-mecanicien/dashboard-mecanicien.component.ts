@@ -10,12 +10,12 @@ import {SidebarComponent} from '../../components/sidebar/sidebar.component';
   templateUrl: './dashboard-mecanicien.component.html',
   styleUrl: './dashboard-mecanicien.component.css'
 })
-export class DashboardMecanicienComponent extends SidebarComponent{
+export class DashboardMecanicienComponent{
   router=inject(Router);
   authService=inject(AuthService);
   brand=environment.BRAND;
   nomUtilisateur;
-  override menuItems=signal([
+  menuItems=signal([
     {
       lien:"/mecanicien/rdvs/liste",
       icon:"fa fa-car-alt me-2",
@@ -24,7 +24,6 @@ export class DashboardMecanicienComponent extends SidebarComponent{
     }
   ]);
   constructor() {
-    super();
     const utilisateur=localStorage.getItem('utilisateur');
     this.nomUtilisateur = utilisateur===null?"Visiteur":JSON.parse(utilisateur).nom_utilisateur;
   }
