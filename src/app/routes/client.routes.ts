@@ -1,15 +1,15 @@
 import {Routes} from '@angular/router';
 import {inject} from '@angular/core';
 import {RouteService} from '../services/utils/route.service';
-import {VoituresComponent} from '../dashboard-client/voitures/liste/voitures.component';
-import {CreerVoitureComponent} from '../dashboard-client/voitures/creer-voiture/creer-voiture.component';
-import {ListeStationsComponent} from '../dashboard-client/stations/liste-stations/liste-stations.component';
-import {CreerRdvComponent} from '../dashboard-client/rdv/creer-rdv/creer-rdv.component';
+import {VoituresComponent} from '../pages/dashboard-client/voitures/liste/voitures.component';
+import {CreerVoitureComponent} from '../pages/dashboard-client/voitures/creer-voiture/creer-voiture.component';
+import {ListeStationsComponent} from '../pages/dashboard-client/stations/liste-stations/liste-stations.component';
+import {CreerRdvComponent} from '../pages/dashboard-client/rdv/creer-rdv/creer-rdv.component';
 import {isAuthClient, isAuthMecanicien} from '../features/connect.guard';
-import {ListeRdvComponent} from '../dashboard-client/rdv/liste-rdv/liste-rdv.component';
+import {ListeRdvComponent} from '../pages/dashboard-client/rdv/liste-rdv/liste-rdv.component';
 import {environment} from '../../environments/environment';
-import {DetailsRdvComponent} from '../dashboard-client/rdv/details-rdv/details-rdv.component';
-import {ProfilComponent} from '../dashboard-client/profil/profil.component';
+import {DetailsRdvComponent} from '../pages/dashboard-client/rdv/details-rdv/details-rdv.component';
+import {ProfilComponent} from '../pages/dashboard-client/profil/profil.component';
 
 export const clientRoutes:Routes=[
   {

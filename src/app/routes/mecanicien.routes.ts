@@ -2,9 +2,9 @@ import {Routes} from '@angular/router';
 import {inject} from '@angular/core';
 import {RouteService} from '../services/utils/route.service';
 import {environment} from '../../environments/environment';
-import {ListeRdvComponent} from '../dashboard-mecanicien/rdv/liste-rdv/liste-rdv.component';
+import {ListeRdvComponent} from '../pages/dashboard-mecanicien/rdv/liste-rdv/liste-rdv.component';
 import {isAuthMecanicien} from '../features/connect.guard';
-import {DetailsRdvComponent} from '../dashboard-mecanicien/rdv/details-rdv/details-rdv.component';
+import {DetailsRdvComponent} from '../pages/dashboard-mecanicien/rdv/details-rdv/details-rdv.component';
 
 export const mecanicienRoutes: Routes = [
   {

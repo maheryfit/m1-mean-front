@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import {isAuthClient, isAuthMecanicien, logout} from './features/connect.guard';
-import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
-import { LoginComponent } from './core/auth/pages/login/login.component';
-import { SignupComponent } from './core/auth/pages/signup/signup.component';
+import { DashboardClientComponent } from './pages/dashboard-client/dashboard-client.component';
+import { LoginComponent } from './pages/core/auth/pages/login/login.component';
+import { SignupComponent } from './pages/core/auth/pages/signup/signup.component';
 import { inject } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
-import { DashboardMecanicienComponent } from './dashboard-mecanicien/dashboard-mecanicien.component';
-import { LoginMecanicienComponent } from './core/auth/pages/login-mecanicien/login-mecanicien.component';
+import { DashboardMecanicienComponent } from './pages/dashboard-mecanicien/dashboard-mecanicien.component';
+import { LoginMecanicienComponent } from './pages/core/auth/pages/login-mecanicien/login-mecanicien.component';
 import {RouteService} from './services/utils/route.service';
 import {clientRoutes} from './routes/client.routes';
 import {mecanicienRoutes} from './routes/mecanicien.routes';

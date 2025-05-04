@@ -1,6 +1,6 @@
 import { Injectable, WritableSignal } from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Auth, MyHttpError, User} from '../core/auth/auth.model';
+import {Auth, MyHttpError, User} from '../pages/core/auth/auth.model';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {ChattingService} from '../features/chatting/chatting.service';
