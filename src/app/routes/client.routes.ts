@@ -9,6 +9,7 @@ import {isAuthClient, isAuthMecanicien} from '../features/connect.guard';
 import {ListeRdvComponent} from '../dashboard-client/rdv/liste-rdv/liste-rdv.component';
 import {environment} from '../../environments/environment';
 import {DetailsRdvComponent} from '../dashboard-client/rdv/details-rdv/details-rdv.component';
+import {ProfilComponent} from '../dashboard-client/profil/profil.component';
 
 export const clientRoutes:Routes=[
   {
@@ -90,5 +91,10 @@ export const clientRoutes:Routes=[
         canActivate:[isAuthClient]
       }
     ]
+  },
+  {
+    path:"profil",
+    title:"Profil - Client",
+    component:ProfilComponent
   }
 ];
