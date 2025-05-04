@@ -8,6 +8,7 @@ import {Statut} from '../models/statut.model';
 import {Rdv} from '../models/rdv.model';
 import {ClasseService} from '../models/service.model';
 import {Paiement} from '../models/paiement.model';
+import {Client} from '../models/client.model';
 
 @Injectable({
   providedIn: "root",
@@ -286,6 +287,31 @@ export class ClientService{
       xhr.setRequestHeader("Content-type","application/json;charset=utf-8");
       xhr.withCredentials=true;
       xhr.send(JSON.stringify(paiement));
+    });
+    return promise;
+  }
+  detailsProfil(){
+    const url=`${environment.API_URL}/client/details-profil`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<Client>(function (resolve,reject){
+      xhr.onreadystatechange=function(){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              const response=JSON.parse(this.response);
+              const client=new Client();
+              client.init(response);
+              resolve(client);
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
     });
     return promise;
   }

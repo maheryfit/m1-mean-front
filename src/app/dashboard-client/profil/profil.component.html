@@ -7,25 +7,29 @@
           <tbody>
           <tr>
             <th>Nom</th>
-            <td></td>
+            <td>{{ client?.nom }}</td>
           </tr>
           <tr>
             <th>Prénom</th>
-            <td></td>
+            <td>{{ client?.prenom }}</td>
+          </tr>
+          <tr>
+            <th>Nom d'utilisateur</th>
+            <td>{{ client?.utilisateur?.nom_utilisateur }}</td>
           </tr>
           <tr>
             <th>Date d'inscription</th>
-            <td></td>
+            <td>{{ client?.date_inscription }}</td>
           </tr>
           <tr>
             <th>Statut</th>
-            <td></td>
+            <td>{{ client?.statut?.nom }}</td>
           </tr>
           </tbody>
         </table>
         <br>
         <h4>Abonnement en cours</h4>
-        <p></p>
+        <p>{{ client?.abonnement }}</p>
         <h5>Changer d'abonnement</h5>
         <div class="col-6">
           <table class="table">
