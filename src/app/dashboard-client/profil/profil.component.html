@@ -15,7 +15,7 @@
           </tr>
           <tr>
             <th>Nom d'utilisateur</th>
-            <td>{{ client().utilisateur?.nom_utilisateur }}</td>
+            <td>{{ client().utilisateur.nom_utilisateur }}</td>
           </tr>
           <tr>
             <th>Date d'inscription</th>
@@ -23,13 +23,13 @@
           </tr>
           <tr>
             <th>Statut</th>
-            <td>{{ client().statut?.nom }}</td>
+            <td>{{ client().statut.nom }}</td>
           </tr>
           </tbody>
         </table>
         <br>
         <h4>Abonnement en cours</h4>
-        <p>{{ client().abonnement?.nom }}</p>
+        <p>{{ client().abonnement.nom }}</p>
         <h5>Changer d'abonnement</h5>
         <form [formGroup]="abonnementForm" (ngSubmit)="changerAbonnement()">
           <div class="col-6">

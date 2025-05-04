@@ -22,6 +22,9 @@ export class SignupComponent {
   });
   erreur=signal("");
   clientService=inject(ClientService );
+  constructor() {
+    sessionStorage.removeItem("menuIndex");
+  }
   inscription(){
     const utilisateurToSend={
       nom:this.signupForm.value.nom,

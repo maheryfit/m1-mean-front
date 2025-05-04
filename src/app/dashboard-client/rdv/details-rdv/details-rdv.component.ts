@@ -95,6 +95,19 @@ export class DetailsRdvComponent {
         this.erreurService.set(err);
     })
   }
+  retirerService(event:Event,index:number){
+    event.preventDefault();
+    const serviceToRemove=this.rdv().services[index];
+    this.clientService.retirerServiceRdv(this.idrdv,serviceToRemove)
+      .then(()=>{
+        this.rdv().services.splice(index,1);
+        this.rdv().montant=this.rdv().montant-serviceToRemove.tarif;
+        this.rdv().reste_a_payer=this.rdv().reste_a_payer-serviceToRemove.tarif;
+        this.rdv().duree=this.rdv().duree-serviceToRemove.duree;
+      }).catch(err=>{
+      this.erreurService.set(err);
+    })
+  }
   payer(){
     if(!this.montantInput.valid){
       this.erreurPayer.set("Veuillez saisir un montant correct (min: 100Ar)");

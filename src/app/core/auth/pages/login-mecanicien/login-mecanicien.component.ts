@@ -21,6 +21,9 @@ export class LoginMecanicienComponent {
   });
   erreur=signal('');
   router=inject(Router);
+  constructor() {
+    sessionStorage.removeItem("menuIndex");
+  }
   login(){
     const utilisateurToSend={
       nomUtilisateur:this.loginForm.value.nomUtilisateur,
