@@ -1,0 +1,63 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded p-4">
+        <h3>Profil</h3>
+        <table class="table table-dark">
+          <tbody>
+          <tr>
+            <th>Nom</th>
+            <td>{{ client().nom }}</td>
+          </tr>
+          <tr>
+            <th>Prénom</th>
+            <td>{{ client().prenom }}</td>
+          </tr>
+          <tr>
+            <th>Nom d'utilisateur</th>
+            <td>{{ client().utilisateur.nom_utilisateur }}</td>
+          </tr>
+          <tr>
+            <th>Date d'inscription</th>
+            <td>{{ client().date_inscription }}</td>
+          </tr>
+          <tr>
+            <th>Statut</th>
+            <td>{{ client().statut.nom }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <br>
+        <h4>Abonnement en cours</h4>
+        <p>{{ client().abonnement.nom }}</p>
+        <h5>Changer d'abonnement</h5>
+        <form [formGroup]="abonnementForm" (ngSubmit)="changerAbonnement()">
+          <div class="col-6">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Abonnement</th>
+                <th>Prix</th>
+                <th>Pourcentage de réduction</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              @for(abonnement of abonnements;track $index){
+              <tr>
+                <td>{{ abonnement.nom }}</td>
+                <td>{{ abonnement.prix }}</td>
+                <td>{{ abonnement.pourcentage_reduction }}</td>
+                <td><input type="radio" class="form-check-input" [value]="abonnement.idabonnement" formControlName="abonnement"></td>
+              </tr>
+              }
+              </tbody>
+            </table>
+          </div>
+          <p><button class="btn btn-primary" type="submit">Choisir</button></p>
+          <p style="color: red">{{ erreurAbonnement() }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

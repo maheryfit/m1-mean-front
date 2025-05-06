@@ -1,7 +1,0 @@
-<div class="p-3">
-  <input type="radio" class="btn-check" name="abonnement" [id]="'abonnement'+id" autocomplete="off" [checked]="checked">
-  <label [class]="'btn hstack py-3 pe-3 ps-4 '+couleur" [for]="'abonnement'+id">
-    <span class="fs-4">{{ nom | titlecase }}</span>
-    <span class="fs-6 fw-bold ms-auto">{{ prix | currency : 'MGA' : 'symbol-narrow' : '3.2-2' }}</span>
-  </label>
-</div>
