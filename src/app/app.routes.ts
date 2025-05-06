@@ -11,6 +11,11 @@ import {RouteService} from './services/utils/route.service';
 import {clientRoutes} from './routes/client.routes';
 import {mecanicienRoutes} from './routes/mecanicien.routes';
 
+import {isAuthManager} from './features/connect.guard';
+import {LoginManagerComponent} from './core/auth/pages/login-manager/login-manager.component';
+import {DashboardManagerComponent} from './dashboard-manager/dashboard-manager.component';
+import {RevenueComponent} from './dashboard-manager/revenue/revenue.component';
+
 export const routes: Routes = [
   {
     path: 'login',
@@ -72,6 +77,25 @@ export const routes: Routes = [
       // }
     // ],
     // canActivate:[isAuthMecanicien]
+  },
+  // Login manager
+  {
+    path:"login-manager",
+    component:LoginManagerComponent,
+    title:"Connexion - Manager"
+  },
+  {
+    path:"manager",
+    component:DashboardManagerComponent,
+    title:"Tableau de bord - Manager",
+    children:[
+      {
+        path:"",
+        component: RevenueComponent,
+        pathMatch:"full"
+      }
+    ],
+    canActivate:[isAuthManager]
   },
   {
     path: 'chatting',
