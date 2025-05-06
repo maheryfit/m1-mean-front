@@ -1,0 +1,112 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded p-4">
+        <p><a class="link-primary" [routerLink]="'/mecanicien/rdvs/liste/'+pageListeRdv"><i class="bi-arrow-left me-2"></i>Retour</a></p>
+        <h3>Rendez-vous et maintenance</h3>
+        <table class="table table-dark">
+          <tbody>
+          <tr>
+            <th>Client</th>
+            <td>{{ rdv().client.utilisateur.nom_utilisateur }}</td>
+          </tr>
+          <tr>
+            <th>Date et heure</th>
+            <td>{{ rdv().dateheure }}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{{ rdv().description }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <br>
+        <h4>Voiture</h4>
+        <table class="table table-dark">
+          <tbody>
+            <tr>
+              <th>Description</th>
+              <td>{{ rdv().voiture.description }}</td>
+            </tr>
+            <tr>
+              <th>Immatriculation</th>
+              <td>{{ rdv().voiture.immatriculation }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>Caractéristiques</h5>
+        <table class="table">
+          <tbody>
+          @for(carac of rdv().voiture.caracteristiques;track $index){
+            <th>{{ carac.nom }}</th>
+            <td>{{ carac.valeur }}</td>
+          }
+          </tbody>
+        </table>
+        <br>
+        <h4>Services</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Tarif</th>
+              <th>Durée</th>
+            </tr>
+          </thead>
+          <tbody>
+          @for(service of rdv().services;track service.idservice){
+            <tr>
+              <td>{{ service.nom }}</td>
+              <td>{{ service.tarif }}</td>
+              <td>{{ service.duree }}</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <h4>Diagnostic</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Évaluation</th>
+              <th>Date et heure</th>
+            </tr>
+          </thead>
+          <tbody>
+          @for(diag of rdv().diagnostics;track $index){
+            <tr>
+              <td>{{ diag.evaluation }}</td>
+              <td>{{ diag.dateheure }}</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <br>
+        <h5>Ajouter un diagnostic</h5>
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here"
+                    id="floatingTextarea" style="height: 150px;" [formControl]="evaluationInput"></textarea>
+          <label for="floatingTextarea">Évaluation</label>
+        </div>
+        <p><button class="btn btn-primary" type="button" (click)="ajouterDiagnostic()">Ajouter évaluation</button></p>
+        <p style="color: red">{{ erreurDiagnostic() }}</p>
+        <br>
+        <h4>Mécanicien en charge:</h4>
+        @if(rdv().mecanicien===null){
+          <p><button class="btn btn-primary" type="button" (click)="prendreChargeRdv()">Prendre en charge</button></p>
+          <p style="color: red">{{ erreurPriseCharge() }}</p>
+        }@else{
+          <p>{{ rdv().mecanicien?.utilisateur?.nom_utilisateur }}</p>
+        }
+        <hr>
+        @switch(rdv().etat){
+          @case(environment.ETAT_RDV_CLOS){
+            <p>La maintenance est clôturée et en attente de paiement.</p>
+          }
+          @default{
+            <button class="btn btn-primary" type="button" (click)="cloturerRdv()">Clôturer</button>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</div>

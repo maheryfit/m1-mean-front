@@ -1,0 +1,43 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded p-4">
+        <h3>Rendez-vous en cours: {{ countRdv() }}</h3>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Client</th>
+            <th>Voiture</th>
+            <th>Station</th>
+            <th>Dateheure</th>
+            <th>Reste à payer</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for(rdv of rdvs();track rdv.idrdv){
+              <tr>
+                <td>{{ rdv.client.utilisateur.nom_utilisateur }}</td>
+                <td>{{ rdv.voiture.description }}</td>
+                <td>{{ rdv.station.nom }}</td>
+                <td>{{ rdv.dateheure }}</td>
+                <td>{{ rdv.reste_a_payer }}</td>
+                <td><a [routerLink]="'/mecanicien/rdvs/details/'+currentIndex()+'/'+rdv.idrdv">Détails</a></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br>
+        <div class="d-flex justify-content-around">
+          <div class="btn-group" role="group">
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
+            <button type="button" [disabled]="disabledPrevious()" class="btn btn-dark border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+            <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
+            <button type="button" [disabled]="disabledNext()" class="btn btn-dark border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

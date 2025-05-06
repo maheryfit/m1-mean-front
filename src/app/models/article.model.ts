@@ -16,3 +16,8 @@ export interface QteArticle{
   article:string,
   quantite:number
 }
+export interface QteArticleDetails{
+  _id:string,
+  article:Article,
+  quantite:number
+}

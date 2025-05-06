@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal } from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Auth, MyHttpError, User} from '../core/auth/auth.model';
+import {Auth, MyHttpError, User} from '../pages/core/auth/auth.model';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {ChattingService} from '../features/chatting/chatting.service';
@@ -12,14 +12,14 @@ import { MecanicienDetails } from '../models/mecanicien.model';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private chattingService: ChattingService, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(user: Auth): Observable<HttpResponse<User|MyHttpError>> {
     return this.http.post<User>(`${environment.API_URL}/user/login`, user, {observe:'response'});
   }
 
   logout(): Observable<any> {
-    this.chattingService.emitOffline();
+    // this.chattingService.emitOffline();
     localStorage.removeItem("id")
     localStorage.removeItem("nom_utilisateur")
     localStorage.removeItem("profil")
@@ -30,13 +30,13 @@ export class AuthService {
     return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthConnected`);
   }
 
-  checkAuthClient(): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthClient`);
-  }
+  // checkAuthClient(): Observable<boolean> {
+  //   return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthClient`);
+  // }
 
-  checkAuthMecanicien(): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthMecanicien`);
-  }
+  // checkAuthMecanicien(): Observable<boolean> {
+  //   return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthMecanicien`);
+  // }
 
   checkAuthManager(): Observable<boolean> {
     return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthManager`);
@@ -59,6 +59,76 @@ export class AuthService {
 
   getMecanicien(user:User){
     return this.http.get<MecanicienDetails>(`${environment.API_URL}/mecaniciens/findByUser/${user.id}`);
+  }
+
+  // ========================================================================================================================
+
+  checkAuthClient(){
+    const url=`${environment.API_URL}/utilisateur/checkAuthClient`;
+    const promise=new Promise<boolean>(function (resolve,reject){
+      const xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function (){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve(JSON.parse(this.response));
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
+  }
+  checkAuthMecanicien(){
+    const url=`${environment.API_URL}/utilisateur/checkAuthMecanicien`;
+    const promise=new Promise<boolean>(function (resolve,reject){
+      const xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function (){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              resolve(JSON.parse(this.response));
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
+  }
+  deconnexion(router:Router){
+    const url=`${environment.API_URL}/utilisateur/deconnexion`;
+    const xhr=new XMLHttpRequest();
+    const promise=new Promise<void>(function (){
+      xhr.onreadystatechange=async function (){
+        if(this.readyState===4){
+          switch(this.status){
+            case 200:
+              localStorage.removeItem(environment.UTILISATEUR_STORAGE_KEY);
+              break;
+            case 500:
+              alert(JSON.parse(this.response).message);
+              break;
+          }
+          await router.navigate(["login"]);
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials=true;
+      xhr.send();
+    });
+    return promise;
   }
 
 }

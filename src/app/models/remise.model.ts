@@ -1,4 +1,5 @@
 export interface Remise{
+  _id:string,
   nomRemise:string,
-  valeurRemise:string
+  valeurRemise:number
 }

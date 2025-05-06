@@ -1,0 +1,39 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded p-4">
+        <h3>Voitures</h3>
+        <p class="fw-bold fs-4 text-white mt-4">Vos voitures: {{ countVoitures() }}</p>
+        <a [routerLink]="'/client/voitures/creer/'+currentIndex()" class="btn-primary btn"><i class="bi-plus me-2"></i>Ajouter</a>
+        <table class="table mt-4">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Immatriculation</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(voiture of voitures();track voiture.idvoiture){
+              <tr>
+                <td>{{ voiture.description }}</td>
+                <td>{{ voiture.immatriculation }}</td>
+                <td class="text-center"><a class="link-primary" href="" (click)="supprimer($event,voiture.idvoiture)"><i class="bi-trash me-2"></i>Supprimer</a></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br>
+        <div class="d-flex justify-content-around">
+          <div class="btn-group" role="group">
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-left"></i></button> -->
+            <button type="button" [disabled]="disabledPrevious()" class="btn btn-dark border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+            <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
+            <button type="button" [disabled]="disabledNext()" class="btn btn-dark border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+            <!-- <button type="button" class="btn btn-secondary border-light"><i class="bi-chevron-double-right"></i></button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
