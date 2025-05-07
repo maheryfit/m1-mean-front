@@ -1,8 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '../../../../services/auth.service';
 import {Router} from '@angular/router';
-import {Auth, User} from '../../../../pages/core/auth/auth.model';
 import {environment} from '../../../../../environments/environment';
 import {AuthManagerService} from '../../services/auth-manager.service';
 
@@ -64,7 +62,8 @@ export class LoginManagerComponent {
   login(){
     const utilisateurToSend={
       nomUtilisateur:this.loginForm.value.nomUtilisateur,
-      motDePasse:this.loginForm.value.motDePasse
+      motDePasse:this.loginForm.value.motDePasse,
+      profil: environment.PROFIL_MANAGER
     }
     this.loginService.connexion(this.router,utilisateurToSend,this.erreur);
   }

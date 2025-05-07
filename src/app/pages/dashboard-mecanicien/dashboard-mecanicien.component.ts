@@ -6,7 +6,7 @@ import {SidebarComponent} from '../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard-mecanicien',
-  imports: [RouterLink, RouterOutlet, SidebarComponent],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: './dashboard-mecanicien.component.html',
   styleUrl: './dashboard-mecanicien.component.css'
 })
