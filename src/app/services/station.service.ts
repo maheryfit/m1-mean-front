@@ -16,7 +16,7 @@ export class StationService {
   }
 
   getAll() {
-      return this.http.get<Station[]>(`${environment.API_URL}/stations`);
+      return this.http.get<Station[]>(`${environment.API_URL}/station`);
   }
 
   getStations(page:number,limit:number){
