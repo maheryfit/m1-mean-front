@@ -49,10 +49,10 @@ export class ServicesService {
     }
 
     getAllPaginate(index:number, pageLimit: number){
-        return this.http.get<Service[]>(`${environment.API_URL}/services/${index}/${pageLimit}`);
+        return this.http.get<Service[]>(`${environment.API_URL}/service/${index}/${pageLimit}`);
     }
 
     getCount(){
-        return this.http.get<number>(`${environment.API_URL}/services/count`);
+        return this.http.get<number>(`${environment.API_URL}/service/count`);
     }
 }

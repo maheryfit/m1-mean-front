@@ -18,14 +18,14 @@ export class MecanicienService {
     }
 
     deleteById(id: string) {
-        return this.http.delete<any>(`${this.API_URL}/mecaniciens/${id}`)
+        return this.http.delete<any>(`${this.API_URL}/mecanicien/${id}`)
     }
 
     getAllPaginate(index:number, pageLimit: number){
-        return this.http.get<MecanicienDetails[]>(`${this.API_URL}/mecaniciens/${index}/${pageLimit}`);
+        return this.http.get<MecanicienDetails[]>(`${this.API_URL}/mecanicien/${index}/${pageLimit}`);
     }
 
     getCount(){
-        return this.http.get<number>(`${this.API_URL}/mecaniciens/count`);
+        return this.http.get<number>(`${this.API_URL}/mecanicien/count`);
     }
 }
