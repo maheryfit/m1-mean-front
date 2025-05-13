@@ -1,8 +1,6 @@
-import {Component, computed, OnInit, signal, ViewChild} from '@angular/core';
-import {MecanicienDetails} from '../../../../models/mecanicien.model';
+import {Component, computed, signal, ViewChild} from '@angular/core';
+import {ClasseMecanicien} from '../../../../models/mecanicien.model';
 import {MecanicienService} from '../../services/mecanicien.service';
-import {Service} from '../../../../models/service.model';
-import {ServicesService} from '../../../../services/services.service';
 import {PaginationComponent} from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
@@ -20,7 +18,7 @@ export class MecanicienComponent{
     }
 
     countSignal = signal(0)
-    mecaniciensSignal = signal<MecanicienDetails[]>([])
+    mecaniciensSignal = signal<ClasseMecanicien[]>([])
 
     mecaniciens = computed(() => {
         return this.mecaniciensSignal()

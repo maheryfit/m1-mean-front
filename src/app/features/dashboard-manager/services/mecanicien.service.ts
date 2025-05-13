@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {lastValueFrom} from 'rxjs';
-import {MecanicienDetails} from '../../../models/mecanicien.model';
+import {ClasseMecanicien, MecanicienDetails} from '../../../models/mecanicien.model';
 import {Service} from '../../../models/service.model';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class MecanicienService {
     }
 
     getAllPaginate(index:number, pageLimit: number){
-        return this.http.get<MecanicienDetails[]>(`${this.API_URL}/mecanicien/${index}/${pageLimit}`);
+        return this.http.get<ClasseMecanicien[]>(`${this.API_URL}/mecanicien/${index}/${pageLimit}`);
     }
 
     getCount(){

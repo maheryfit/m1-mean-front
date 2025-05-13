@@ -11,8 +11,6 @@
                             <th>Rôle</th>
                             <th>Niveau</th>
                             <th>Téléphone</th>
-                            <th>Date d'ajout</th>
-                            <th>Date de dernière modification</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -20,13 +18,11 @@
                         @for (mecanicien of mecaniciens(); track $index) {
                             <tr>
                                 <td>{{ mecanicien.utilisateur.nom_utilisateur }}</td>
-                                <td>{{ mecanicien.role.titre }}</td>
-                                <td>{{ mecanicien.niveau.titre }}</td>
+                                <td>{{ mecanicien.role }}</td>
+                                <td>{{ mecanicien.niveau }}</td>
                                 <td>{{ mecanicien.telephone }}</td>
-                                <td>{{ mecanicien.createdAt }}</td>
-                                <td>{{ mecanicien.updatedAt }}</td>
                                 <td>
-                                    <button (click)="removeMecanicien(mecanicien._id)" class="btn btn-outline-primary m-2">Supprimer</button>
+                                    <button (click)="removeMecanicien(mecanicien.idmecanicien)" class="btn btn-outline-primary m-2">Supprimer</button>
                                     <a class="btn btn-warning m-2">Modifier</a>
                                 </td>
                             </tr>
