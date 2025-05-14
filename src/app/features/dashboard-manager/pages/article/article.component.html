@@ -1,0 +1,45 @@
+<article class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h3 class="mb-3">Articles</h3>
+        <p class="fw-bold fs-4 text-white mt-4">Nombres d'articles: {{ count() }}</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Marque</th>
+            <th>Unité</th>
+            <th>Prix unitaire</th>
+            <th>Type</th>
+            <th>Date d'ajout</th>
+            <th>Date de dernière modification</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (article of articles(); track $index) {
+              <tr>
+                <td>{{ article.nom }}</td>
+                <td>{{ article.description }}</td>
+                <td>{{ article.marque.nom }}</td>
+                <td>{{ article.unite }}</td>
+                <td>{{ article.prix_unitaire.$numberDecimal }}</td>
+                <td>{{ article.type }}</td>
+                <td>{{ article.createdAt }}</td>
+                <td>{{ article.updatedAt }}</td>
+                <td>
+                  <button (click)="removeArticle(article._id)" class="btn btn-outline-primary m-2">Supprimer</button>
+                  <a class="btn btn-warning m-2">Modifier</a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br />
+        <app-pagination [count]="countSignal" [list]="articlesSignal" [getAllPaginate]="articleService.getAllPaginate.bind(articleService)" [getCount]="articleService.getCount.bind(articleService)" />
+      </div>
+    </div>
+  </div>
+</article>

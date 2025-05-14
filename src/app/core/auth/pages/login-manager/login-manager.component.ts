@@ -1,11 +1,8 @@
-import { Component, inject, Renderer2, signal } from '@angular/core';
-import {Auth, MyHttpError, User} from '../../auth.model';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '../../../../services/auth.service';
+import { Component, inject, signal } from '@angular/core';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ChattingService} from '../../../../features/chatting/chatting.service';
-import { environment } from '../../../../../environments/environment.development';
-import { NgOptimizedImage } from '@angular/common';
+import {environment} from '../../../../../environments/environment';
+import {AuthManagerService} from '../../services/auth-manager.service';
 
 @Component({
   selector: 'app-login',
@@ -37,14 +34,14 @@ export class LoginManagerComponent {
   //     }
   //   })
   // }
-  loginService=inject(AuthService);
+  loginService=inject(AuthManagerService);
   loginForm=new FormGroup({
     nomUtilisateur: new FormControl('Fitahiana Mahery', Validators.required),
     motDePasse: new FormControl('Fitahiana Mahery', Validators.required)
   });
   erreur=signal('');
   router=inject(Router);
-  login(){
+  /*login(){
     const nomUtilisateur:string=this.loginForm.value.nomUtilisateur?this.loginForm.value.nomUtilisateur:'';
     const motDePasse:string=this.loginForm.value.motDePasse?this.loginForm.value.motDePasse:'';
     const user:Auth={
@@ -60,5 +57,14 @@ export class LoginManagerComponent {
         this.erreur.set(error.error.message);
       }
     });
+  }*/
+
+  login(){
+    const utilisateurToSend={
+      nomUtilisateur:this.loginForm.value.nomUtilisateur,
+      motDePasse:this.loginForm.value.motDePasse,
+      profil: environment.PROFIL_MANAGER
+    }
+    this.loginService.connexion(this.router,utilisateurToSend,this.erreur);
   }
 }

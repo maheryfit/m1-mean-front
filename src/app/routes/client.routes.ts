@@ -5,7 +5,7 @@ import {VoituresComponent} from '../pages/dashboard-client/voitures/liste/voitur
 import {CreerVoitureComponent} from '../pages/dashboard-client/voitures/creer-voiture/creer-voiture.component';
 import {ListeStationsComponent} from '../pages/dashboard-client/stations/liste-stations/liste-stations.component';
 import {CreerRdvComponent} from '../pages/dashboard-client/rdv/creer-rdv/creer-rdv.component';
-import {isAuthClient, isAuthMecanicien} from '../features/connect.guard';
+import {isAuthClient} from '../features/connect.guard';
 import {ListeRdvComponent} from '../pages/dashboard-client/rdv/liste-rdv/liste-rdv.component';
 import {environment} from '../../environments/environment';
 import {DetailsRdvComponent} from '../pages/dashboard-client/rdv/details-rdv/details-rdv.component';

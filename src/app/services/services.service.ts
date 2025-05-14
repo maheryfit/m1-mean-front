@@ -43,4 +43,16 @@ export class ServicesService {
     });
     return promise;
   }
+
+    deleteById(id: string) {
+        return this.http.delete<void>(`${environment.API_URL}/services/${id}`)
+    }
+
+    getAllPaginate(index:number, pageLimit: number){
+        return this.http.get<Service[]>(`${environment.API_URL}/service/${index}/${pageLimit}`);
+    }
+
+    getCount(){
+        return this.http.get<number>(`${environment.API_URL}/service/count`);
+    }
 }

@@ -1,11 +1,10 @@
-import { Injectable, WritableSignal } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Auth, MyHttpError, User} from '../pages/core/auth/auth.model';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {ChattingService} from '../features/chatting/chatting.service';
-import { Router } from '@angular/router';
-import { MecanicienDetails } from '../models/mecanicien.model';
+import {Router} from '@angular/router';
+import {MecanicienDetails} from '../models/mecanicien.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +37,9 @@ export class AuthService {
   //   return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthMecanicien`);
   // }
 
-  checkAuthManager(): Observable<boolean> {
+  /*checkAuthManager(): Observable<boolean> {
     return this.http.get<boolean>(`${environment.API_URL}/user/checkAuthManager`);
-  }
+  }*/
 
   storeUserToLocalStorage(user: User) {
     localStorage.setItem("id", user.id);
@@ -106,6 +105,27 @@ export class AuthService {
       xhr.send();
     });
     return promise;
+  }
+  checkAuthManager(){
+    const url=`${environment.API_URL}/utilisateur/checkAuthManager`;
+    return new Promise<boolean>(function (resolve, reject) {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          switch (this.status) {
+            case 200:
+              resolve(JSON.parse(this.response));
+              break;
+            case 500:
+              reject(JSON.parse(this.response).message);
+              break;
+          }
+        }
+      }
+      xhr.open("GET", url, true);
+      xhr.withCredentials = true;
+      xhr.send();
+    });
   }
   deconnexion(router:Router){
     const url=`${environment.API_URL}/utilisateur/deconnexion`;

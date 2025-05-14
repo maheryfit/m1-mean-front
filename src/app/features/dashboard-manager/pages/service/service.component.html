@@ -1,0 +1,41 @@
+<article class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h3 class="mb-3">Services</h3>
+        <p class="fw-bold fs-4 text-white mt-4">Nombres de service: {{ count() }}</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Durée estimée</th>
+            <th>Tarif</th>
+            <th>Date d'ajout</th>
+            <th>Date de dernière modification</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (service of services(); track $index) {
+              <tr>
+                <td>{{ service.nom }}</td>
+                <td>{{ service.description }}</td>
+                <td>{{ service.duree_estimee }} jours</td>
+                <td>{{ service.tarif.$numberDecimal }} Ariary</td>
+                <td>{{ service.createdAt }}</td>
+                <td>{{ service.updatedAt }}</td>
+                <td>
+                  <button (click)="removeService(service._id)" class="btn btn-outline-primary m-2">Supprimer</button>
+                  <a class="btn btn-warning m-2">Modifier</a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <br>
+        <app-pagination [count]="countSignal" [list]="servicesSignal" [getAllPaginate]="servicesService.getAllPaginate.bind(servicesService)" [getCount]="servicesService.getCount.bind(servicesService)" />
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-around">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-secondary border-light" (click)="changePage(previousIndex())">{{ previousIndex() }}</button>
+        <button type="button" class="btn btn-primary border-light">{{ currentIndex() }}</button>
+        <button type="button" class="btn btn-secondary border-light" (click)="changePage(nextIndex())">{{ nextIndex() }}</button>
+    </div>
+</div>

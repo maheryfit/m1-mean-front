@@ -15,5 +15,6 @@ export const environment = {
   ETAT_RDV_PAYE:7,
   ETAT_RDV_SUPPRIME:10,
 
-  UTILISATEUR_STORAGE_KEY:"utilisateur"
+  UTILISATEUR_STORAGE_KEY:"utilisateur",
+  BASE_MAP_URL: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 };

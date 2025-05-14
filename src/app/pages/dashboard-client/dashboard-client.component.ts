@@ -6,7 +6,7 @@ import {SidebarComponent} from '../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard-client',
-  imports: [RouterLink, RouterOutlet, SidebarComponent],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: './dashboard-client.component.html',
   styleUrl: './dashboard-client.component.css'
 })
