@@ -63,7 +63,7 @@ export class AuthService {
   // ========================================================================================================================
 
   checkAuthClient(){
-    const url=`${environment.API_URL}/utilisateur/checkAuthClient`;
+    const url=`${environment.API_URL}/user/checkAuthClient`;
     const promise=new Promise<boolean>(function (resolve,reject){
       const xhr=new XMLHttpRequest();
       xhr.onreadystatechange=function (){

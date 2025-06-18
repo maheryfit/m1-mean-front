@@ -15,7 +15,7 @@ import {Client} from '../models/client.model';
 })
 export class ClientService{
   inscription(router:Router,utilisateurToSend:any,erreur:WritableSignal<string>){
-    const url=`${environment.API_URL}/client/inscription`;
+    const url=`${environment.API_URL}/user/register`;
     const xhr=new XMLHttpRequest();
     xhr.onreadystatechange=async function(){
       if(this.readyState===4){
@@ -35,7 +35,7 @@ export class ClientService{
   }
 
   connexion(router:Router,utilisateurToSend:any,erreur:WritableSignal<string>){
-    const url=`${environment.API_URL}/client/connexion`;
+    const url=`${environment.API_URL}/user/login`;
     const xhr=new XMLHttpRequest();
     xhr.onreadystatechange=async function(){
       if(this.readyState===4){

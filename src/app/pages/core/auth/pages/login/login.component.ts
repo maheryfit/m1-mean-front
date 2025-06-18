@@ -27,9 +27,9 @@ export class LoginComponent {
   }
   login(){
     const utilisateurToSend={
-      nomUtilisateur:this.loginForm.value.nomUtilisateur,
-      motDePasse:this.loginForm.value.motDePasse,
-      profil:environment.PROFIL_CLIENT
+      nom_utilisateur:this.loginForm.value.nomUtilisateur,
+      mot_de_passe:this.loginForm.value.motDePasse,
+      // profil:environment.PROFIL_CLIENT
     }
     this.clientService.connexion(this.router,utilisateurToSend,this.erreur);
   }

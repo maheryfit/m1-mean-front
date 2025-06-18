@@ -23,14 +23,18 @@
                       <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="nomUtilisateur">
                       <label for="floatingInput">Nom d'utilisateur</label>
                   </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="telephone">
-                    <label for="floatingInput">Téléphone</label>
-                  </div>
+<!--                  <div class="form-floating mb-3">-->
+<!--                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="telephone">-->
+<!--                    <label for="floatingInput">Téléphone</label>-->
+<!--                  </div>-->
                   <div class="form-floating mb-4">
                       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="motDePasse">
                       <label for="floatingPassword">Mot de passe</label>
                   </div>
+                <div class="form-floating mb-4">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Confirmer mot de passe" formControlName="confirmMotDePasse">
+                  <label for="floatingPassword">Confirmer mot de passe</label>
+                </div>
                   <button type="submit" class="btn btn-primary py-3 w-100 mb-4" [disabled]="!signupForm.valid">S'inscrire</button>
                   <p style="color: red;">{{ erreur() }}</p>
                   <p class="text-center mb-0">Vous avez déjà un compte? <a [routerLink]="'/login'">Se connecter</a></p>

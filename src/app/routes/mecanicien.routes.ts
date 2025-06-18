@@ -7,26 +7,26 @@ import {isAuthMecanicien} from '../features/connect.guard';
 import {DetailsRdvComponent} from '../pages/dashboard-mecanicien/rdv/details-rdv/details-rdv.component';
 
 export const mecanicienRoutes: Routes = [
-  {
-    path: "",
-    redirectTo:()=>{
-      const routeService=inject(RouteService);
-      return routeService.filtrePathProfil(environment.PROFIL_MECANICIEN,"/mecanicien/rdvs");
-    },
-    pathMatch: "full"
-  },
+  // {
+  //   path: "",
+  //   redirectTo:()=>{
+  //     const routeService=inject(RouteService);
+  //     return routeService.filtrePathProfil(environment.PROFIL_MECANICIEN,"/mecanicien/rdvs");
+  //   },
+  //   pathMatch: "full"
+  // },
   {
     path: "rdvs",
     title: "Liste des rendez-vous",
     children:[
-      {
-        path:"",
-        redirectTo:()=>{
-          const routeService=inject(RouteService);
-          return routeService.filtrePathProfil(environment.PROFIL_MECANICIEN,"/mecanicien/rdvs/liste/1");
-        },
-        pathMatch: "full"
-      },
+      // {
+      //   path:"",
+      //   redirectTo:()=>{
+      //     const routeService=inject(RouteService);
+      //     return routeService.filtrePathProfil(environment.PROFIL_MECANICIEN,"/mecanicien/rdvs/liste/1");
+      //   },
+      //   pathMatch: "full"
+      // },
       {
         path:"liste/:page",
         component:ListeRdvComponent,

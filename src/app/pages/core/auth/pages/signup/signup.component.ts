@@ -18,7 +18,8 @@ export class SignupComponent {
     prenom:new FormControl("Beau",Validators.required),
     nomUtilisateur:new FormControl("JBo",Validators.required),
     motDePasse:new FormControl("root",Validators.required),
-    telephone:new FormControl("XXX",Validators.required)
+    // telephone:new FormControl("XXX",Validators.required)
+    confirmMotDePasse:new FormControl("root",Validators.required),
   });
   erreur=signal("");
   clientService=inject(ClientService );
@@ -29,9 +30,10 @@ export class SignupComponent {
     const utilisateurToSend={
       nom:this.signupForm.value.nom,
       prenom:this.signupForm.value.prenom,
-      nomUtilisateur:this.signupForm.value.nomUtilisateur,
-      motDePasse:this.signupForm.value.motDePasse,
-      telephone:this.signupForm.value.telephone
+      nom_utilisateur:this.signupForm.value.nomUtilisateur,
+      mot_de_passe:this.signupForm.value.motDePasse,
+      // telephone:this.signupForm.value.telephone
+      confirm_mot_de_passe:this.signupForm.value.confirmMotDePasse,
     }
     this.clientService.inscription(this.router,utilisateurToSend,this.erreur);
   }

@@ -20,7 +20,7 @@ export class RouteService{
         return "/login";
     }
   }
-  filtrePathProfil(targetProfil:number,targetUrl:string){
+  filtrePathProfil(targetProfil:string,targetUrl:string){
     const utilisateur=localStorage.getItem(environment.UTILISATEUR_STORAGE_KEY);
     if(utilisateur===null){
       return "/login";

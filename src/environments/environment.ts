@@ -8,7 +8,7 @@ export const environment = {
   BRAND: "HandyMan",
   ETAT_DEMANDE_RDV_DIAG: ["en attente de confirmation", "accepté", "rejeté"],
 
-  PROFIL_CLIENT:1,
+  PROFIL_CLIENT:'client',
   PROFIL_MECANICIEN:5,
   PROFIL_MANAGER:10,
   ETAT_RDV_CREE:1,
